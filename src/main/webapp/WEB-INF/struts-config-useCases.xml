@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "struts-config_1_3.dtd">
+
+<!-- Configuración de los Actions para cada Caso de Uso -->
+<struts-config>
+  <action-mappings>
+    <!-- USE CASES -->
+<!--     <action path="/login" name="DynamicForm" type="scs.server.useCases.login.LoginCase" scope="request" /> -->
+<!--     <action path="/inicio" name="DynamicForm" type="scs.server.useCases.inicio.InicioCase" scope="request" /> -->
+  </action-mappings>
+</struts-config>
+

@@ -1,0 +1,69 @@
+<!-- Archivo de Configuracion General del Framework -->
+<GeneralConfig>
+
+	<!-- Configuracion General -->
+	<Application name= "SCS" description="Seleccion de comision"/>
+	<ApplicationUser>net.latin.server.persistence.user.LnwDefaultUser</ApplicationUser>
+	<StrutsConfigUseCasesPath>webapp/WEB-INF/struts-config-useCases.xml</StrutsConfigUseCasesPath>
+	<ClientPackagePath>src/scs/client</ClientPackagePath>
+	<ServerPackagePath>src/scs/server</ServerPackagePath>
+
+	<!-- Configuracion de Reports -->
+	<ReportsClasspath>reports</ReportsClasspath>
+	<ReportsTestingOutputFolder>c:/reports</ReportsTestingOutputFolder>
+	<ReportsPassword>EverythingIsNothing</ReportsPassword>
+
+	<!-- Configuracion del Servlet de upload de archivos -->
+	<fileSizeMaxUploadServlet>1024000000</fileSizeMaxUploadServlet>
+	<fileSizeInMemoryMaxUploadServlet>4096</fileSizeInMemoryMaxUploadServlet>
+
+	<!-- Implementacion especifica de la parte server del CommonsUseCase -->
+	<CommonUseCaseImpl>net.latin.server.commonUseCase.DefaultCommonUseCaseClientImpl</CommonUseCaseImpl>
+
+	<!-- ENTRADAS DE MENU -->
+	<Groups>
+
+		<!-- 	INICIO -->
+		<Group id='inicio' title='Inicio'>
+			<UseCase id='inicio'  title='Inicio'/>
+		</Group>
+
+		 
+	</Groups>
+
+	<!-- Accesos comunes -->
+	<CommonAccess>
+		<Access id="CommonUseCase"/>
+		<Access id="inicio"/>
+
+		
+		<Access id="__suggestQuote"/>
+	</CommonAccess>
+
+
+	<!-- Urls excluidas del filtro: con endWidth() -->
+	<FilterExcludedUrls>
+		<url>/sessionExpired.jsp</url>
+		<url>/__reportViewer</url>
+		<url>/__fileUploader</url>
+		<url>/__fileDownloader</url>
+		<url>/LogoutPage.do</url>
+		<url>/Logout.do</url>
+		<url>/Login.do</url>
+		<url>/gwtInit.gwt</url>
+		<url>/hosted.html</url>
+		<url>.cache.html</url>
+		<url>.cache.js</url>
+		<url>/LnwFramework_v3</url>
+		<url>/LnwFramework_v3/</url>
+		<url>/LnwFramework_v3.html</url>
+		<url>/LnwFramework_v3/LNWFramework_v3.html</url>
+		<url>/scs/</url>
+		<url>/securityServer.gwt</url>
+		<url>/__suggestQuote.gwt</url>
+		<url>/__suggestQuoteInstitucion.gwt</url>
+		<url>/multipleFileUploader</url>
+		<url>/fotoRecover</url>
+	</FilterExcludedUrls>
+
+</GeneralConfig>

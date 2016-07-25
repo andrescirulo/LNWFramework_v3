@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="struts-default.xml" />
+
+	<!-- Form Beans -->
+	<!-- <form-beans> -->
+	<!-- <form-bean name="DynamicForm" type="org.apache.struts.action.DynaActionForm" 
+		/> -->
+	<!-- </form-beans> -->
+
+	<!-- Global Forward -->
+	<!-- <global-forwards> -->
+	<!-- </global-forwards> -->
+
+	<package name="struts2" extends="struts-default" namespace="/">
+
+		<action name="login" class="scs.server.sauLogin.LnwLoginSauRegisterUser">
+			<result type="redirect">/RemoteLogout.do</result>
+		</action>
+
+		<action name="RemoteLogout" class="scs.server.sauLogin.LnwRemoteLogout">
+			<result type="redirect">/gwtInit.do</result>
+		</action>
+		
+	</package>
+
+
+
+</struts>

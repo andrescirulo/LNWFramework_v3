@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+	"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- Configuracion de Actions genéricos del Framework -->
+<struts-config>
+
+  <!-- Form Beans -->
+  <form-beans>
+  	<form-bean name="DynamicForm" type="org.apache.struts.action.DynaActionForm"/>
+  </form-beans>
+
+  <!-- Global Forward -->
+  <global-forwards>
+  </global-forwards>
+
+  <!-- Action Mappings -->
+  <action-mappings>
+
+	<!-- Login SAU para ver los usuarios online -->
+	<action path="/Login"
+		type="scs.server.sauLogin.LnwLoginSauRegisterUser"
+		scope="request">
+		<forward name="success" path="/RemoteLogout.do"/>
+	</action>
+	
+	<!-- Remote Logout -->
+	<action path="/RemoteLogout"
+		    type="scs.server.sauLogin.LnwRemoteLogout"
+			name="DynamicForm"
+		    scope="request"
+			validate="false">
+		<forward name="success" path="/gwtInit.do"/>
+	</action>
+	
+	<!-- Action para cerrar session -->
+	<action path="/LogoutPage"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/sessionExpired.jsp" />
+
+	<!-- Acceso inicial GWT -->
+	<action path="/gwtInit"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/scs.Scs/Gwt.jsp" />
+
+	<!-- Logout Server -->
+	<action path="/Logout"
+			name="DynamicForm"
+			type="scs.server.sauLogin.LnwLogout"
+			scope="request">
+		<forward name="login" path="/sauInicio.do"/>
+	</action>
+	
+	<action path="/sauInicio"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/index.jsp" />
+
+	<!-- Common Use Case, Securiy Server -->
+	<action path="/securityServer"
+			name="DynamicForm"
+			type="net.latin.server.commonUseCase.CommonUseCase"
+			scope="request">
+	</action>
+	
+	<!-- Suggest Oracle -->
+	
+	<action path="/__suggestQuoteInstitucion"
+			name="DynamicForm"
+			type="scs.server.fwkscs.suggest.SuggestQuoteService"
+			scope="request">
+	</action>
+	
+	<action path="/__suggestQuote"
+			name="DynamicForm"
+			type="com.net.latin.navigation.gwt.server.suggest.oracle.SuggestQuoteService"
+			scope="request">
+	</action>
+
+  </action-mappings>
+
+</struts-config>

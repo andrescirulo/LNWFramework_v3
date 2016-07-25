@@ -1,0 +1,32 @@
+package net.latin.client.widget.dialog;
+
+import net.latin.client.widget.GwtWidgetUtils;
+import net.latin.client.widget.confirm.GwtConfirm;
+import net.latin.client.widget.confirm.GwtConfirmListener;
+
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+
+public class GwtConfirmDialog extends GwtConfirm {
+
+	public GwtConfirmDialog(GwtConfirmListener listener, String title, String question) {
+		super(listener, title, question, ORDENBOTONES_SI_NO);
+	}
+
+	public GwtConfirmDialog(GwtConfirmListener listener, String title) {
+		super(listener, title, "", ORDENBOTONES_SI_NO);
+	}
+
+	public void center() {
+		close();
+		setVisible(true);
+		show();
+
+	    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			public void execute() {
+				GwtWidgetUtils.setFocus(buttonSi);
+			}
+		});
+	}
+
+}
