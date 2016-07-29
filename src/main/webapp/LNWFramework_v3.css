@@ -69,3 +69,7 @@ body{
 	padding:8px 0px;
 	font-size: 16px;	
 }
+
+paper-radio-group,paper-checkbox{
+	padding:12px;
+}
