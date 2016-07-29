@@ -3,6 +3,9 @@ package net.latin.client.widget.radioButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -21,6 +24,11 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 
 	private List<PaperRadioButton> childs = new ArrayList<PaperRadioButton>();
 
+	private static final int HORIZONTAL=0; 
+	private static final int VERTICAL=1;
+	
+	private int modo=HORIZONTAL;
+	
 	/**
 	 * Constructor del GwtRadioButton. 
 	 * @param name
@@ -45,6 +53,10 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 			setColor(child,color);
 		}
 		childs.add(child);
+		
+		if (modo==VERTICAL){
+			setEstiloVertical(child);
+		}
 		this.add(child);
 	}
 	
@@ -167,5 +179,17 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 		return selected.getValue();
 	}
 
+	public void setModoVertical(){
+		modo=VERTICAL;
+		for (PaperRadioButton child:childs){
+			setEstiloVertical(child);
+		}
+	}
 
+	private void setEstiloVertical(PaperRadioButton child) {
+		Style childStyle = child.getElement().getStyle();
+		childStyle.setDisplay(Display.BLOCK);
+		childStyle.setPaddingTop(5, Unit.PX);
+		childStyle.setPaddingBottom(5, Unit.PX);
+	}
 }
