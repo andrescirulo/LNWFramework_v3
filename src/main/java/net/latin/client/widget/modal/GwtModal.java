@@ -29,10 +29,4 @@ public class GwtModal {
 		GwtController.instance.unblockScreen();
 	}
 
-	/**
-	 * Setea el zIndex de la proxima vez que se muestra el Modal. Una vez que se usa se setea nuevamente en el valor por defecto
-	 */
-	public static void setNextModalZIndex(Integer zIndex){
-		GwtController.instance.setNextModalZIndex(zIndex);
-	}
 }

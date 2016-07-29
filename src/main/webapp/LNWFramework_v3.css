@@ -84,3 +84,17 @@ body{
 paper-radio-group,paper-checkbox{
 	padding:12px;
 }
+.dialog-toolbar{
+	color:white;
+	background-color: #3377cc;
+	height: 36px; 
+	line-height: 36px;
+    margin-top: 0px !important;
+}
+.modal-popup-text{
+    display: inline-block;
+    line-height: 28px;
+    vertical-align: text-bottom;
+    font-size: 18px;
+    padding-left: 10px;
+}
