@@ -1,10 +1,9 @@
 package net.latin.client.widget.button;
 
-import net.latin.client.widget.GwtWidgetUtils;
-import net.latin.client.widget.base.LnwWidget;
-
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.vaadin.polymer.paper.widget.PaperButton;
+
+import net.latin.client.widget.base.LnwWidget;
 
 /**
  * Button con estilo predefinido
@@ -40,7 +39,7 @@ public class GwtButton extends PaperButton implements LnwWidget {
 	}
 
 	public void setFocus() {
-		GwtWidgetUtils.setFocus(this);
+		setFocused(true);
 	}
 
 	public String getText() {
