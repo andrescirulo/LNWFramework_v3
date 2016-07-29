@@ -57,7 +57,7 @@ public class LnwI18nImpl extends LnwI18n {
 		/**
 		 * GwtForm
 		 */
-		GwtForm_mainPanel_width = "90%";
+		GwtForm_mainPanel_width = "100%";
 		GwtForm_title_separation = "10px";
 		GwtForm_title_element_spacing_horizontal = 2;
 		GwtForm_title_element_spacing_vertical = 5;

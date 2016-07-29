@@ -12,26 +12,26 @@ import net.latin.client.widget.menu.data.MenuItem;
 
 public class GwtMenuBar extends FlowPanel {
 
-	private List<GwtMenu> menues;
+	private List<GwtMenuElement> menues;
 	private GwtController controller;
 	private List<GwtMenuBarListener> listeners;
 	
 	public GwtMenuBar(GwtController controller) {
 		this.listeners=new ArrayList<GwtMenuBarListener>();
-		this.menues=new ArrayList<GwtMenu>();
+		this.menues=new ArrayList<GwtMenuElement>();
 		this.controller = controller;
 		this.getElement().setAttribute("drawer", "");
 		this.getElement().setAttribute("mode", "seamed");
 	}
 
 	public void resetWidget() {
-		for(GwtMenu menu:menues){
-			this.remove(menu);
+		for(GwtMenuElement menu:menues){
+			this.remove(menu.getWidget());
 		}
 	}
 
 	public void hideAll() {
-		for(GwtMenu menu:menues){
+		for(GwtMenuElement menu:menues){
 			menu.hide();
 		}
 	}
@@ -68,31 +68,38 @@ public class GwtMenuBar extends FlowPanel {
 		MenuItem menu;
 		for (int i = 0; i < childs.size(); i++) {
 			menu = (MenuItem) childs.get( i );
-			GwtMenu gwtMenu = new GwtMenu( menu.getName(),this);
-			if( !menu.isLeaf() ) {
+			if( menu.isLeaf() ) {
+				LeafMenuItem leaf = (LeafMenuItem)menu;
+				menues.add( buildMenuItem(null,leaf,"paper-item-menu") );
+			}
+			else {
+				GwtMenu gwtMenu = new GwtMenu( menu.getName(),this);
 				for (int j = 0; j < menu.getChilds().size(); j++) {
 					LeafMenuItem leaf = (LeafMenuItem)menu.getChilds().get( j );
-					gwtMenu.addMenuItem( buildMenuItem( leaf ) );
+					gwtMenu.addMenuItem( buildMenuItem(gwtMenu, leaf ,"paper-item-submenu") );
 				}
+				menues.add( gwtMenu );
 			}
-			menues.add( gwtMenu );
+		}
+		for (GwtMenuElement gwtMenu:menues){
+			this.add(gwtMenu.getWidget());
 		}
 	}
 	
 	/**
 	 * Creates the correct GwtMenuItem
 	 */
-	private GwtMenuItem buildMenuItem( LeafMenuItem leaf  ) {
+	private GwtMenuItem buildMenuItem(GwtMenu menu, LeafMenuItem leaf ,String style) {
 		//it's an external link
 		if( leaf.isExternal() ) {
-			GwtExternalMenuItem item = new GwtExternalMenuItem();
+			GwtExternalMenuItem item = new GwtExternalMenuItem(this,menu,style);
 			item.setTitle( leaf.getName() );
 			item.setUrl( leaf.getUrl() );
 			return item;
 
 		//it's an internal link
 		} else {
-			GwtInternalMenuItem item = new GwtInternalMenuItem( leaf.getName(), leaf.getUrl() );
+			GwtInternalMenuItem item = new GwtInternalMenuItem(this,menu, leaf.getName(), leaf.getUrl() ,style);
 			return item;
 		}
 	}
@@ -109,5 +116,9 @@ public class GwtMenuBar extends FlowPanel {
 	 */
 	public void showExternalPage(String target, String url) {
 		this.controller.showExternalLink( url );
+	}
+
+	public void showOrHide() {
+		setMenuBarVisible(!this.isVisible());
 	}
 }

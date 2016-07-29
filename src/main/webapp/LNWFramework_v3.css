@@ -1,8 +1,71 @@
 
 body{
 	margin:0px !important;
+	font-family: 'Roboto', 'Noto', sans-serif;
 }
 
 .paper-drawer-panel-0{
 	top:64px !important;
+}
+
+.paper-item-menu{
+	background-color: #4488dd;
+    color: white;
+    cursor:pointer;
+    border-bottom:1px solid #aaccff;
+}
+.paper-item-menu:hover{
+	background-color: #5599ee;
+}
+
+.paper-item-submenu{
+	background-color: white;
+    cursor:pointer;
+    border-bottom:1px solid #aaccff;
+}
+.paper-item-submenu:hover{
+	background-color: #eeeeee;
+}
+
+.toolbar{
+	color:white;
+	background-color: #3377cc;
+	width: 100%;
+	position: relative;
+	top:0px;
+	left:0px;
+	height: 64px; 
+}
+.toolbar > paper-icon-button > iron-icon{
+	vertical-align:initial;
+}
+
+.page-style{
+	text-align: left;
+	background-color:#FCFCFC;
+	padding: 10px;
+}
+
+.form-main{
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+.form-titulo{
+	background-color: #3377cc;
+	color:white;
+	padding:10px;
+    font-size: 16px;
+}
+.form-buttons-panel{
+	width: 100%;
+}
+.form-contenido{
+	padding:10px;
+}
+.form-elements-panel{
+	width: 100%;
+}
+
+.form-element-label-text{
+	padding:8px 0px;
+	font-size: 16px;	
 }

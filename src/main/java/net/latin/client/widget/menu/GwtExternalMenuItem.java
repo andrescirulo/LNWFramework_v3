@@ -5,6 +5,9 @@ public class GwtExternalMenuItem extends GwtMenuItem {
 	private String url;
 	private String target;
 
+	public GwtExternalMenuItem(GwtMenuBar menuBar,GwtMenu menu,String style) {
+		super(menuBar,menu,style);
+	}
 
 	public void showPage() {
 		this.getMenu().showExternalPage( this.target, this.url );

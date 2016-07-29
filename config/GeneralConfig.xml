@@ -51,6 +51,7 @@
 		<url>/Logout.do</url>
 		<url>/Login.do</url>
 		<url>/gwtInit.gwt</url>
+		<url>/inicio.gwt</url>
 		<url>/hosted.html</url>
 		<url>.cache.html</url>
 		<url>.cache.js</url>

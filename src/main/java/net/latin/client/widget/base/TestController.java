@@ -13,11 +13,12 @@ public class TestController extends GwtController{
 
 	@Override
 	protected GwtGroupLoader createGroupLoader() {
-		return null;
+		return new TestGroupLoader();
 	}
 
 	@Override
 	protected void registerPageGroups() {
+		
 	}
 
 	@Override

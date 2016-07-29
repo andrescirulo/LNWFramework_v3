@@ -2,7 +2,8 @@ package net.latin.client.widget.base;
 
 import java.util.Iterator;
 
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
@@ -13,13 +14,13 @@ import com.google.gwt.user.client.ui.WidgetCollection;
  * @author Matias Leone
  *
  */
-public class GwtVisualComponent extends VerticalPanel implements LnwWidget {
+public class GwtVisualComponent extends FlowPanel implements LnwWidget {
 
 	public GwtVisualComponent() {
 		this.setVisible(false);
-		this.setWidth("100%");
-		this.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-		this.setSpacing(0);
+//		this.setWidth("100%");
+//		this.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+//		this.setSpacing(0);
 	}
 
 	private GwtVisualComponent renderComponent() {
@@ -53,4 +54,11 @@ public class GwtVisualComponent extends VerticalPanel implements LnwWidget {
 		//FIXME delegar foco!
 	}
 
+	/**
+	 * Metodo de retrocompatibilidad para setear el alineado horizontal
+	 * @param align
+	 */
+	public void setHorizontalAlignment(HorizontalAlignmentConstant align){
+		this.getElement().getStyle().setProperty("text-align", align.getTextAlignString());
+	}
 }

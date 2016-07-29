@@ -34,7 +34,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesL
 	 * Initialize default settings for all pages
 	 */
 	public GwtPage() {
-		this.setWidth("100%");
+		this.setStyleName("page-style");
 		onVisibleListeners = new ArrayList<GwtOnVisibleListener>();
 		onExitListeners = new ArrayList<GwtBeforeUseCaseExitListener>();
 	}

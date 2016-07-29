@@ -8,6 +8,9 @@ import java.util.Set;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Position;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -27,9 +30,10 @@ import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.vaadin.polymer.paper.widget.PaperButton;
+import com.vaadin.polymer.Polymer;
+import com.vaadin.polymer.elemental.Function;
 import com.vaadin.polymer.paper.widget.PaperDrawerPanel;
-import com.vaadin.polymer.paper.widget.PaperToolbar;
+import com.vaadin.polymer.paper.widget.PaperIconButton;
 
 import net.latin.client.i18n.LnwI18n;
 import net.latin.client.i18n.LnwI18nImpl;
@@ -155,15 +159,9 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	
 	private GwtGroupLoader groupLoader;
 
-	private PaperToolbar toolbar;
+	private FlowPanel toolbar;
 
 	public GwtController() {
-		// TODO hacer un metodo marcar menu
-		// set static instance
-		GwtController.instance = this;
-
-		configure();
-
 		// final variables initialization
 		pageGroups = new HashMap<String, GwtPageGroup>();
 		applicationContext = new HashMap<String, Object>();
@@ -176,9 +174,15 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		errorHandler = new DefaultGwtCallbackErrorHandler();
 		groupLoader = createGroupLoader();
 		
+		// TODO hacer un metodo marcar menu
+		// set static instance
+		GwtController.instance = this;
+	
+		configure();
+	
 		// manage I18n config
 		createI18n();
-
+	
 		this.basePath = registerServerBasePath();
 		// register and render error page
 		this.errorPage = registerErrorPage();
@@ -191,8 +195,8 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		registerWindowListener();
 		registerPageGroups();
 		loadLoginGroup();
-
 	}
+
 
 
 	protected abstract GwtGroupLoader createGroupLoader();
@@ -357,7 +361,6 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 //		mainComponent.setStyleName(CSS_MAIN_COMPONENT);
 
 //		mainComponent.getElement().getStyle().setProperty( "overflowY", "scroll");
-
 		// menu
 		menu = new GwtMenuBar(this);
 		mainComponent.add(menu);
@@ -368,17 +371,12 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		componentsPanel.setStyleName(CSS_PAGES_PANEL);
 		mainComponent.add(componentsPanel);
 
-		// modal panel
-		componentsPanel.add(modalPopup);
-		PaperButton btn = new PaperButton("HOLA");
-		btn.setRaised(true);
-		componentsPanel.add(btn);
-
-		toolbar = new PaperToolbar();
+		toolbar = new FlowPanel();
+		toolbar.addStyleName("toolbar");
 		
 		// header panel
 		VerticalPanel headerPanel = new VerticalPanel();
-		headerPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
+//		headerPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
 		headerPanel.setSize("100%", "0px");
 		componentsPanel.add(headerPanel);
 
@@ -467,6 +465,16 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	}
 
 	public void onModuleLoad() {
+		Polymer.importHref("iron-icons/iron-icons.html", new Function() {
+	        public Object call(Object arg) {
+	            // The app is executed when all imports succeed.
+	            startApplication();
+	            return null;
+	        }
+	    });
+	}
+	
+	protected void startApplication() {
 //		RootPanel.get(GWT_APPLICATION_PANEL).add(mainComponent);
 		RootPanel.get().add(toolbar);
 		RootPanel.get().add(mainComponent);
@@ -623,11 +631,28 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 			public void onSuccess(Object result) {
 				InitialInfo info = (InitialInfo) result;
 				buildMenuCallback(info);
-				HTMLPanel elem=new HTMLPanel("h1",info.getAplicacionDescripcion());
-				toolbar.add(elem);
+				initToolbar(info.getAplicacionDescripcion());
 			}
 		});
 	}
+
+	protected void initToolbar(String appDescripcion) {
+		PaperIconButton menuBtn=new PaperIconButton();
+		menuBtn.setIcon("icons:menu");
+		menuBtn.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				mainComponent.togglePanel();
+			}
+		});
+		
+		HTMLPanel h1=new HTMLPanel("h1",appDescripcion);
+		h1.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		
+		toolbar.add(menuBtn);
+		toolbar.add(h1);
+	}
+
+
 
 	/**
 	 * Async answer for asking the menu info to the security server. We build
@@ -795,7 +820,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	}
 
 	/**
-	 * Correct answer for the security acces.
+	 * Correct answer for the security access.
 	 *
 	 * @param boolean1
 	 */
@@ -1158,7 +1183,12 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	 * Programatic shows or hides the menuBar
 	 */
 	public void setMenuBarVisible(boolean visible) {
-		menu.setMenuBarVisible(visible);
+		if (visible){
+			mainComponent.openDrawer();
+		}
+		else{
+			mainComponent.closeDrawer();
+		}
 	}
 
 	/**

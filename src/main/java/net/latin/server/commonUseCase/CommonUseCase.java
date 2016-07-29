@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import net.latin.client.rpc.commonUseCase.CommonUseCaseClient;
 import net.latin.client.rpc.commonUseCase.InitialInfo;
 import net.latin.client.rpc.commonUseCase.LnwTableDocumentData;
+import net.latin.client.widget.menu.data.CompositeMenuItem;
+import net.latin.client.widget.menu.data.LeafMenuItem;
 import net.latin.server.GwtUseCase;
 import net.latin.server.persistence.UserContext;
 import net.latin.server.persistence.user.LnwUser;
@@ -50,6 +52,27 @@ public class CommonUseCase extends GwtUseCase implements CommonUseCaseClient {
 			//cargar entradas de menu segun lo que indica la implementacion de cada proyecto
 			info.setMenu(impl.getGwtMenu());
 		}
+		else{
+			CompositeMenuItem gwtMenu = new CompositeMenuItem();
+			LeafMenuItem menuItem1 = new LeafMenuItem();
+			menuItem1.setName("Inicio");
+			menuItem1.setUrl("InicioTestCase");
+			
+			CompositeMenuItem cmenu1=new CompositeMenuItem();
+			cmenu1.setName("Menu compuesto");
+			
+			LeafMenuItem menuItem2 = new LeafMenuItem();
+			menuItem2.setName("Link hijo 1");
+			LeafMenuItem menuItem3 = new LeafMenuItem();
+			menuItem3.setName("Link hijo 2");
+			
+			cmenu1.addChild(menuItem2);
+			cmenu1.addChild(menuItem3);
+			
+			gwtMenu.addChild(menuItem1);
+			gwtMenu.addChild(cmenu1);
+			info.setMenu(gwtMenu);
+		}
 		return info;
 	}
 
@@ -59,7 +82,9 @@ public class CommonUseCase extends GwtUseCase implements CommonUseCaseClient {
 		final LnwUser user = UserContext.getInstance().getUser();
 		if (user == null) {
 			getLog().info( "No se pudo chequear el acceso porque el usuario no se encuentra registrado en la session. Caso: " + serviceName);
-			return false;
+//			return false;
+			//FIXME TEMPORAL PARA NO NECESITAR USUARIO
+			return true;
 		}
 
 		final long userId = user.getId();

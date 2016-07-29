@@ -45,11 +45,14 @@
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/com/lowagie/itext/2.1.7/itext-2.1.7.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/com/oracle/ojdbc7/12.1.0.2/ojdbc7-12.1.0.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/com/vaadin/polymer/vaadin-gwt-polymer-elements/1.2.3.1-SNAPSHOT/vaadin-gwt-polymer-elements-1.2.3.1-SNAPSHOT.jar</webClassPathEntry>
+        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-beanutils/commons-beanutils/1.9.0/commons-beanutils-1.9.0.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-digester/commons-digester/2.1/commons-digester-2.1.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-io/commons-io/2.2/commons-io-2.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/javax/inject/javax.inject/1/javax.inject-1.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar</webClassPathEntry>
@@ -57,6 +60,7 @@
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/junit/junit/4.11/junit-4.11.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/net/sf/jasperreports/jasperreports/6.2.0/jasperreports-6.2.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/ognl/ognl/3.0.17/ognl-3.0.17.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/commons/commons-lang3/3.2/commons-lang3-3.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/logging/log4j/log4j-api/2.6.2/log4j-api-2.6.2.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/logging/log4j/log4j-core/2.6.2/log4j-core-2.6.2.jar</webClassPathEntry>
@@ -66,9 +70,6 @@
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/lucene/lucene-queries/4.5.1/lucene-queries-4.5.1.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/lucene/lucene-queryparser/4.5.1/lucene-queryparser-4.5.1.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/lucene/lucene-sandbox/4.5.1/lucene-sandbox-4.5.1.jar</webClassPathEntry>
-        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/struts/struts2-convention-plugin/2.3.29/struts2-convention-plugin-2.3.29.jar</webClassPathEntry>
-        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/struts/struts2-core/2.3.29/struts2-core-2.3.29.jar</webClassPathEntry>
-        <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/apache/struts/xwork/xwork-core/2.3.29/xwork-core-2.3.29.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar</webClassPathEntry>
         <webClassPathEntry>C:/development/apache-maven-2.0.10/repository2/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar</webClassPathEntry>

@@ -3,6 +3,7 @@ import net.latin.client.utils.SupportUtils;
 import net.latin.client.widget.base.GwtController;
 
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.vaadin.polymer.paper.widget.PaperDialog;
 
 /**
@@ -29,13 +30,16 @@ public class GwtModalPopup extends PaperDialog {
 	}
 
 	public void showPopup( String msg ) {
+		this.resetFit();
 		if (SupportUtils.supportsCssAnimation()){
 			msg = "<span class=\"fa fa-spinner fa-lg fa-pulse\"></span>&nbsp;" + msg;
 		}
 		msgLabel.setHTML( msg );
 		this.getElement().getStyle().setProperty( "zIndex", nextZIndex+"");
 		nextZIndex=DEFAULT_ZINDEX;
-		center();
+		this.fit();
+//		this.open();
+		this.center();
 	}
 
 	public void showPopup() {
