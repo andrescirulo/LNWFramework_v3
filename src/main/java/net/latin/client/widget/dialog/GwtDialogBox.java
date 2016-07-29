@@ -1,9 +1,10 @@
 package net.latin.client.widget.dialog;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.polymer.paper.widget.PaperDialog;
-import com.vaadin.polymer.paper.widget.PaperToolbar;
 
 /**
  * Dialog Box de LNW.
@@ -19,8 +20,7 @@ public class GwtDialogBox extends PaperDialog {
 	private static final String CSS_BODY = "GwtDialogBoxBody";
 	private VerticalPanel mainPanel;
 	protected boolean alreadyVisible;
-	protected PaperToolbar toolbar;
-//	private boolean modal;
+	protected FlowPanel toolbar;
 
 	/**
 	 * Creates a new Dialog Box, originally hidden
@@ -32,18 +32,18 @@ public class GwtDialogBox extends PaperDialog {
 	 * Creates a new Dialog Box, originally hidden
 	 */
 	public GwtDialogBox(boolean modal) {
-//		super( false, modal );
 		super();
-//		this.modal = modal;
 		this.alreadyVisible = false;
 		this.mainPanel = new VerticalPanel();
 		this.mainPanel.setHorizontalAlignment( VerticalPanel.ALIGN_CENTER );
 		this.mainPanel.setVerticalAlignment( VerticalPanel.ALIGN_MIDDLE );
 		this.mainPanel.setStyleName( CSS_BODY );
 		this.mainPanel.setWidth( "100%" );
-		this.toolbar=new PaperToolbar();
-		setWithBackdrop(modal);
-		this.getElement().getStyle().setProperty( "zIndex", "11");
+		this.toolbar=new FlowPanel();
+		this.toolbar.setStyleName("dialog-toolbar");
+		setEntryAnimation("fade-in-animation");
+		setExitAnimation("fade-in-animation");
+		setModal(true);
 
 		this.close();
 	}
@@ -69,13 +69,16 @@ public class GwtDialogBox extends PaperDialog {
 		this.clear();
 		super.add(this.toolbar);
 		super.add( this.mainPanel );
+		this.removeFromParent();
+		RootPanel.get().add(this);
 		return this;
 	}
 
 	public void show() {
 		this.onBeforeShow();
 		if( !this.alreadyVisible ) {
-			super.center();
+			super.open();
+			super.fit();
 			this.alreadyVisible = true;
 		}
 		this.onAfterShow();

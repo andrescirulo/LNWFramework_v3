@@ -30,8 +30,6 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 	private Label imagen;
 	private String url = URL_DEFAULT;
 	private int space = 10;
-	private int topPadding = 1;
-	private int bottomPadding = 1;
 	private List<GwtButton> buttons;
 
 	public GwtConfirmDialogAbstract(GwtConfirmAbstractListener listener, String title, String question) {
@@ -49,9 +47,7 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		this.setTitleText(title);
 
 		HorizontalPanel hpPrincipal = new HorizontalPanel();
-		// hpPrincipal.setWidth("100%");
 		hpPrincipal.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
-		// hpPrincipal.setVerticalAlignment(HorizontalPanel.ALIGN_TOP);
 		hpPrincipal.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
 
 		// pregunta
@@ -72,7 +68,6 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		hpPrincipal.add(labelPregunta);
 		hpPrincipal.add(new GwtHorizontalSpace(this.space));
 		hpPrincipal.setCellVerticalAlignment(labelPregunta, HasVerticalAlignment.ALIGN_MIDDLE);
-		this.add(new GwtSpace(this.topPadding));
 		this.add(hpPrincipal);
 		hpPrincipal.add(new GwtHorizontalSpace(this.space));
 
@@ -81,7 +76,6 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		panelButtons.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
 		panelButtons.setSpacing(SPACING_BUTTONS);
 		this.add(panelButtons);
-		this.add(new GwtSpace(this.bottomPadding));
 
 		buttons = new ArrayList<GwtButton>();
 		buildButtons(buttons);
@@ -183,21 +177,6 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		this.space = space;
 	}
 
-	public int getTopPadding() {
-		return topPadding;
-	}
-
-	public void setTopPadding(int topPadding) {
-		this.topPadding = topPadding;
-	}
-
-	public int getBottomPadding() {
-		return bottomPadding;
-	}
-
-	public void setBottomPadding(int bottomPadding) {
-		this.bottomPadding = bottomPadding;
-	}
 
 	public void setFocusBotonSi() {
 		GwtWidgetUtils.setFocus(this.buttons.get(0));
