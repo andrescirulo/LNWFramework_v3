@@ -93,4 +93,14 @@ public class GwtSimpleFormElement implements GwtFormElement {
 		elementPanel.setVisible(flag);
 	}
 
+
+	public String getFooter() {
+		return footer;
+	}
+
+
+	public void setFooter(String footer) {
+		this.footer = footer;
+	}
+
 }

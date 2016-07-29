@@ -375,6 +375,9 @@ public class GwtForm<T> extends GwtVisualComponent {
 		return ( elementList.size() - 1 );
 	}
 	
+	public int addElementWithFooter(Widget widget ,String footer) {
+		return addElementWithFooter( "__randomId_" + Random.nextInt(), widget ,footer);
+	}
 	/**
 	 * Agrega un elemento al formulario del tipo GwtSimpleFormElement con un footer.
 	 * El texto se considera la ID del elemento y debe ser único en
@@ -387,12 +390,8 @@ public class GwtForm<T> extends GwtVisualComponent {
 		GwtSimpleFormElement element = new GwtSimpleFormElement();
 		element.setElementId(texto);
 		element.setWidget(widget);
+		element.setFooter(footer);
 		element.buildElement( this );
-		
-		VerticalPanel vpWidget = new VerticalPanel();
-		vpWidget.setHorizontalAlignment( VerticalPanel.ALIGN_LEFT );
-		vpWidget.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-		vpWidget.add( widget );
 		
 		widgets.add(widget);
 		//agregarlo logicamente

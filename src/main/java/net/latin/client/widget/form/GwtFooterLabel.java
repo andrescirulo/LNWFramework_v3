@@ -4,7 +4,7 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class GwtFooterLabel extends HTML {
 
-	private static final String CSS_FOOTER_LABEL = "GwtFooterLabel";
+	private static final String CSS_FOOTER_LABEL = "form-footer-label";
 
 	public GwtFooterLabel() {
 		super();

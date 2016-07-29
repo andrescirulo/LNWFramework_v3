@@ -76,7 +76,11 @@ body{
     font-size: 14px;
     margin:3px;
 }
-
+.form-footer-label{
+	font-size:9pt;
+	padding-left:10px;
+	color:cadetblue;
+}
 paper-radio-group,paper-checkbox{
 	padding:12px;
 }
