@@ -1,6 +1,7 @@
 package net.latin.client.widget.form;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.latin.client.widget.base.LnwWidget;
@@ -14,6 +15,8 @@ public class GwtSimpleFormElement implements GwtFormElement {
 	 */
 	protected String id;
 
+	protected String footer;
+	
 	/**
 	 * Widget del elemento
 	 */
@@ -25,10 +28,19 @@ public class GwtSimpleFormElement implements GwtFormElement {
 	protected HorizontalPanel elementPanel;
 
 	public void buildElement(GwtForm form) {
+		
+		VerticalPanel vPanel = new VerticalPanel();
+		vPanel.setWidth( "100%" );
+		vPanel.add(widget);
+		
+		if (footer!=null){
+			GwtFooterLabel footerLabel=new GwtFooterLabel(footer);
+			vPanel.add(footerLabel);
+		}
+		
 		elementPanel = new HorizontalPanel();
-//		elementPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_CENTER );
 		elementPanel.setWidth( "100%" );
-		elementPanel.add( widget );
+		elementPanel.add( vPanel );
 	}
 
 

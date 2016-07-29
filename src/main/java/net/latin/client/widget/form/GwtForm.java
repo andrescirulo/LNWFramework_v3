@@ -278,7 +278,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
 	 * 			todo el elemento dentro del formulario)
 	 */
-	public int addElement( String texto, Widget widget ) {
+	public int addElementWithLabel( String texto, Widget widget ) {
 		//crear elemento default
 		GwtDefaultFormElement element = new GwtDefaultFormElement();
 		element.setElementId(texto);
@@ -305,7 +305,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
 	 * 			todo el elemento dentro del formulario)
 	 */
-	public int addElementWithFooter( String texto, Widget widget, String footerText, boolean required ) {
+	public int addElementWithLabelAndFooter( String texto, Widget widget, String footerText, boolean required ) {
 		//crear elemento default
 		GwtDefaultFormElement element = new GwtDefaultFormElement();
 		element.setElementId(texto);
@@ -339,7 +339,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
 	 * 			todo el elemento dentro del formulario)
 	 */
-	public int addRequiredElement( String texto, Widget widget ) {
+	public int addRequiredElementWithLabel( String texto, Widget widget ) {
 		//crear elemento default
 		GwtDefaultFormElement element = new GwtDefaultFormElement();
 		element.setElementId(texto);
@@ -362,7 +362,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
 	 * 			todo el elemento dentro del formulario)
 	 */
-	public int addSimpleElement( String texto, Widget widget ) {
+	public int addElement( String texto, Widget widget ) {
 		GwtSimpleFormElement element = new GwtSimpleFormElement();
 		element.setElementId(texto);
 		element.setWidget(widget);
@@ -372,6 +372,33 @@ public class GwtForm<T> extends GwtVisualComponent {
 		if ( autoFocusElement == null ) { autoFocusElement = element; };
 		elementList.add( element );
 
+		return ( elementList.size() - 1 );
+	}
+	
+	/**
+	 * Agrega un elemento al formulario del tipo GwtSimpleFormElement con un footer.
+	 * El texto se considera la ID del elemento y debe ser único en
+	 * todo el formulario.
+	 *
+	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
+	 * 			todo el elemento dentro del formulario)
+	 */
+	public int addElementWithFooter( String texto, Widget widget ,String footer) {
+		GwtSimpleFormElement element = new GwtSimpleFormElement();
+		element.setElementId(texto);
+		element.setWidget(widget);
+		element.buildElement( this );
+		
+		VerticalPanel vpWidget = new VerticalPanel();
+		vpWidget.setHorizontalAlignment( VerticalPanel.ALIGN_LEFT );
+		vpWidget.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+		vpWidget.add( widget );
+		
+		widgets.add(widget);
+		//agregarlo logicamente
+		if ( autoFocusElement == null ) { autoFocusElement = element; };
+		elementList.add( element );
+		
 		return ( elementList.size() - 1 );
 	}
 
@@ -384,8 +411,8 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * @return Indice dentro del formulario (sirve por ejemplo para ocultar
 	 * 			todo el elemento dentro del formulario)
 	 */
-	public int addSimpleElement(Widget widget) {
-		return addSimpleElement( "__randomId_" + Random.nextInt(), widget );
+	public int addElement(Widget widget) {
+		return addElement( "__randomId_" + Random.nextInt(), widget );
 	}
 
 	/**
@@ -417,7 +444,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 * 			todo el elemento dentro del formulario)
 	 */
 	public int addSubtitle( String title ) {
-		return this.addSimpleElement( title, new GwtFormSubtitle( title ) );
+		return this.addElement( title, new GwtFormSubtitle( title ) );
 	}
 
 	/**
