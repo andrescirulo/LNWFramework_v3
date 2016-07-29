@@ -15,7 +15,7 @@ public class GwtFormSubtitle extends Label implements LnwWidget {
 	}
 
 	public GwtFormSubtitle( String text ) {
-		this.setStyleName( "GwtFormSubtitle" );
+		this.setStyleName( "form-subtitle" );
 		this.setText( text );
 	}
 
