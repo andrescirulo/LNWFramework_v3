@@ -2,11 +2,6 @@ package net.latin.client.widget.dialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.latin.client.widget.GwtWidgetUtils;
-import net.latin.client.widget.button.GwtButton;
-import net.latin.client.widget.separator.GwtHorizontalSpace;
-import net.latin.client.widget.separator.GwtSpace;
-
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,20 +10,25 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.vaadin.polymer.iron.widget.IronIcon;
+
+import net.latin.client.widget.GwtWidgetUtils;
+import net.latin.client.widget.button.GwtButton;
+import net.latin.client.widget.separator.GwtHorizontalSpace;
+import net.latin.client.widget.separator.GwtSpace;
 
 public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements ClickHandler {
 
 	private static final int SPACING_BUTTONS = 3;
 	private static final int SPACING_BETWEEN_BUTTONS = 20;
-	private static final String URL_DEFAULT = "imagenes/icons/alert_small.gif";
+//	private static final String URL_DEFAULT = "imagenes/icons/alert_small.gif";
 
 	protected GwtConfirmAbstractListener listener;
 	private Object dataObj;
 	private String question;
 	private HTML labelPregunta;
-	private Label imagen;
-	private String url = URL_DEFAULT;
+	private IronIcon imagen;
+//	private String url = URL_DEFAULT;
 	private int space = 10;
 	private List<GwtButton> buttons;
 
@@ -54,12 +54,11 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		this.question = question;
 		labelPregunta = new HTML(question);
 		labelPregunta.addStyleName("popUpQuestion");
-		imagen = new Label();
-		// imagen.setWidth("100px");
-		// imagen.setHeight("80px");
-		imagen.setWidth("75px");
-		imagen.setHeight("65px");
-		imagen.addStyleName("gwtConfirmDefaultImageStyle");
+		imagen = new IronIcon();
+		imagen.setIcon("icons:warning");
+//		imagen.setWidth("75px");
+//		imagen.setHeight("65px");
+		imagen.addStyleName("confirm-imagen");
 		//imagen.getElement().getStyle().setProperty( "background", "center center no-repeat " + "url(" + url + ")");
 
 		hpPrincipal.add(new GwtHorizontalSpace(this.space));
@@ -146,20 +145,6 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 			labelPregunta.getElement().getStyle().setProperty( attribute, value);
 	}
 
-	public String getUrlImage() {
-		return url;
-	}
-
-	/**
-	 * Deprecado porque en Internet Explorer 
-	 * usando HTTPS tira un error de seguridad.
-	 * Usar {@link #setImageStyle(String)} en su lugar
-	 */
-	@Deprecated
-	public void setUrlImage(String url) {
-		this.url = url;
-		imagen.getElement().getStyle().setProperty( "background", "center center no-repeat " + "url(" + url + ")");
-	}
 
 	/**
 	 * Setea el estilo de la imagen del dialog
@@ -167,6 +152,10 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 	 */
 	public void setImageStyle(String style){
 		imagen.addStyleName(style);
+	}
+	
+	public void setImageIcon(String iconName){
+		imagen.setIcon(iconName);
 	}
 	
 	public int getSpace() {

@@ -98,3 +98,16 @@ paper-radio-group,paper-checkbox{
     font-size: 18px;
     padding-left: 10px;
 }
+.gwt-panel-titulo{
+	position: absolute;
+    top: -12px;
+    line-height: 24px;
+    font-size: 14px;
+    left: 10px;
+    background-color: white;
+}
+.confirm-imagen{
+	width:75px;
+	height:75px;
+	color:#DDDD55;
+}

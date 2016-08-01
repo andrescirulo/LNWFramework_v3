@@ -41,8 +41,6 @@ public class GwtDialogBox extends PaperDialog {
 		this.mainPanel.setWidth( "100%" );
 		this.toolbar=new FlowPanel();
 		this.toolbar.setStyleName("dialog-toolbar");
-		setEntryAnimation("fade-in-animation");
-		setExitAnimation("fade-in-animation");
 		setModal(true);
 
 		this.close();
