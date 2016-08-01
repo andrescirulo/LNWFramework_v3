@@ -3,20 +3,24 @@ package net.latin.client.widget.button;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.latin.client.widget.panels.GwtHorizontalPanel;
-import net.latin.client.widget.panels.GwtVerticalPanel;
-import net.latin.client.widget.separator.GwtHorizontalSpace;
-
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.polymer.iron.widget.IronIcon;
+import com.vaadin.polymer.paper.widget.PaperButton;
+
+import net.latin.client.widget.panels.GwtHorizontalPanel;
+import net.latin.client.widget.panels.GwtVerticalPanel;
 
 public class GwtButtonPopUp extends GwtHorizontalPanel {
 
@@ -29,13 +33,24 @@ public class GwtButtonPopUp extends GwtHorizontalPanel {
 	private Map<String,Widget> opciones;
 	
 	public GwtButtonPopUp(String buttonText) {
-		this.setVerticalAlignment(ALIGN_MIDDLE);
+//		this.setVerticalAlignment(ALIGN_MIDDLE);
+		PaperButton btn=new PaperButton();
 		
 		Label labelBoton = new Label(buttonText);
-		Image flechaBoton = new Image("imagenes/downArrow.png");
-		this.add(labelBoton);
-		this.add(new GwtHorizontalSpace(2));
-		this.add(flechaBoton);
+		labelBoton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		IronIcon flechaBoton = new IronIcon();
+		flechaBoton.setIcon("icons:expand-more");
+		flechaBoton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		
+		btn.add(labelBoton);
+		btn.add(flechaBoton);
+		btn.setRaised(true);
+		btn.getElement().getStyle().setMargin(0, Unit.PX);
+		btn.getElement().getStyle().setPaddingTop(0.47, Unit.EM);
+		btn.getElement().getStyle().setPaddingBottom(0.47, Unit.EM);
+		btn.getElement().getStyle().setPaddingLeft(0.57, Unit.EM);
+		btn.getElement().getStyle().setPaddingRight(0.57, Unit.EM);
+		this.add(btn);
 		
 		opciones=new HashMap<String, Widget>();
 		panelOpciones=new GwtVerticalPanel();
@@ -43,7 +58,7 @@ public class GwtButtonPopUp extends GwtHorizontalPanel {
 		popUpOpciones.setWidget(panelOpciones);
 		popUpOpciones.addStyleName(PANEL_STYLE);
 		
-		this.addClickHandler(new ClickHandler() {
+		btn.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				popUpOpciones.show();
 				setPosicion();
@@ -60,7 +75,7 @@ public class GwtButtonPopUp extends GwtHorizontalPanel {
 	}
 	
 	protected void setPosicion() {
-		if (ALIGN_RIGHT.equals(popUpAlignment)){
+		if (HasHorizontalAlignment.ALIGN_RIGHT.equals(popUpAlignment)){
 			int left=getAbsoluteLeft()+getOffsetWidth()-popUpOpciones.getOffsetWidth();
 			popUpOpciones.setPopupPosition(left, getAbsoluteTop()+getOffsetHeight());
 		}
