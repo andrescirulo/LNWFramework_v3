@@ -13,11 +13,16 @@ import net.latin.client.utils.ColorUtils;
 import net.latin.client.widget.base.GwtPage;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.button.GwtButton;
+import net.latin.client.widget.button.GwtButtonPopUp;
 import net.latin.client.widget.checkbox.GwtCheckBox;
 import net.latin.client.widget.dialog.GwtConfirmAbstractListener;
 import net.latin.client.widget.dialog.GwtConfirmDialogAceptar;
+import net.latin.client.widget.dialog.GwtConfirmDialogSiNo;
+import net.latin.client.widget.dialog.GwtConfirmDialogSiNoCancelar;
 import net.latin.client.widget.form.GwtForm;
 import net.latin.client.widget.modal.GwtModal;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
+import net.latin.client.widget.panels.GwtVerticalPanel;
 import net.latin.client.widget.radioButton.GwtRadioButton;
 import net.latin.client.widget.textBox.GwtValidateTextBox;
 
@@ -64,17 +69,27 @@ public class InicioTestPage extends GwtPage {
 		form.addSubtitle("Subtitulo para Radios");
 		form.addElement(radio);
 		
-		GwtConfirmDialogAceptar aceptarDialog=new GwtConfirmDialogAceptar(new GwtConfirmAbstractListener() {
-			public void accion(String clickedButton, Object dataObj) {
-			}
-		}, "Dialog de prueba", "Te estoy mostrando un mensaje");
+		agregarDialogs(form);
 		
-		form.addLeftButton(new GwtButton("Dialog Aceptar", new ClickHandler() {
+		
+		GwtButtonPopUp btnPop=new GwtButtonPopUp("Abrir Opciones");
+		btnPop.addOption("Opcion 1", new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				aceptarDialog.showCentered();
 			}
-		}));
-		form.addLeftButton(new GwtButton("Bloquear pantalla", new ClickHandler() {
+		});
+		btnPop.addOption("Opcion 2", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+			}
+		});
+		btnPop.addOption("Opcion 3", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+			}
+		});
+		
+		GwtVerticalPanel panelVarios=new GwtVerticalPanel("Varios (Panel vertical)",true);
+		panelVarios.add(btnPop);
+		
+		panelVarios.add(new GwtButton("Bloquear pantalla", new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				GwtModal.blockScreen("Bloqueando por 5 segundos");
 				Scheduler.get().scheduleFixedDelay(new RepeatingCommand() {
@@ -85,6 +100,7 @@ public class InicioTestPage extends GwtPage {
 				}, 5000);
 			}
 		}));
+		form.addElement(panelVarios);
 		
 		form.addButton(new GwtButton("Aceptar", new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -95,6 +111,40 @@ public class InicioTestPage extends GwtPage {
 		this.add(form.render());
 	}
 	
+	private void agregarDialogs(GwtForm form) {
+		GwtHorizontalPanel panel=new GwtHorizontalPanel("Dialogs (Panel horizontal)",true);
+		GwtConfirmDialogAceptar aceptarDialog=new GwtConfirmDialogAceptar(new GwtConfirmAbstractListener() {
+			public void accion(String clickedButton, Object dataObj) {
+			}
+		}, "Dialog Aceptar de prueba", "Te estoy mostrando un mensaje");
+		panel.add(new GwtButton("Dialog Aceptar", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				aceptarDialog.showCentered();
+			}
+		}));
+		GwtConfirmDialogSiNo siNoDialog=new GwtConfirmDialogSiNo(new GwtConfirmAbstractListener() {
+			public void accion(String clickedButton, Object dataObj) {
+			}
+		}, "Dialog Si/No de prueba", "¿Te estoy mostrando un mensaje?");
+		panel.add(new GwtButton("Dialog Si/No", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				siNoDialog.showCentered();
+			}
+		}));
+		
+		GwtConfirmDialogSiNoCancelar siNoCancelarDialog=new GwtConfirmDialogSiNoCancelar(new GwtConfirmAbstractListener() {
+			public void accion(String clickedButton, Object dataObj) {
+			}
+		}, "Dialog Si/No/Cancelar de prueba", "¿Te estoy mostrando un mensaje?");
+		panel.add(new GwtButton("Dialog Si/No/Cancelar", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				siNoCancelarDialog.showCentered();
+			}
+		}));
+		
+		form.addElement(panel);
+	}
+
 	protected void onVisible() {
 		server.getTextoInicial(new GwtAsyncCallback<SimpleRespuestRPC>() {
 			public void onSuccess(SimpleRespuestRPC result) {
