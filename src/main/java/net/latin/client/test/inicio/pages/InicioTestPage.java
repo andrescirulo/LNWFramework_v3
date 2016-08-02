@@ -8,8 +8,10 @@ import com.google.gwt.user.client.ui.Label;
 
 import net.latin.client.rpc.GwtAsyncCallback;
 import net.latin.client.rpc.GwtRpc;
+import net.latin.client.test.inicio.InicioTestGroup;
 import net.latin.client.test.inicio.rpc.InicioTestClientAsync;
 import net.latin.client.utils.ColorUtils;
+import net.latin.client.widget.base.CustomBean;
 import net.latin.client.widget.base.GwtPage;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.button.GwtButton;
@@ -20,6 +22,8 @@ import net.latin.client.widget.dialog.GwtConfirmDialogAceptar;
 import net.latin.client.widget.dialog.GwtConfirmDialogSiNo;
 import net.latin.client.widget.dialog.GwtConfirmDialogSiNoCancelar;
 import net.latin.client.widget.form.GwtForm;
+import net.latin.client.widget.list.GwtListBox;
+import net.latin.client.widget.list.GwtListBoxAdapter;
 import net.latin.client.widget.modal.GwtModal;
 import net.latin.client.widget.panels.GwtHorizontalPanel;
 import net.latin.client.widget.panels.GwtVerticalPanel;
@@ -100,11 +104,49 @@ public class InicioTestPage extends GwtPage {
 				}, 5000);
 			}
 		}));
+		
+		GwtVerticalPanel panelListbox=new GwtVerticalPanel("ListBox",true);
+		GwtListBox<CustomBean> lstBox = new GwtListBox<CustomBean>();
+		lstBox.setLabel("Listbox de prueba");
+		lstBox.setAdapter(new GwtListBoxAdapter<CustomBean>() {
+			public String getListBoxDescription(CustomBean itemModel) {
+				return itemModel.getString("desc");
+			}
+		});
+		lstBox.addElement((new CustomBean()).put("id", 1).put("desc", "Primer elemento"));
+		lstBox.addElement((new CustomBean()).put("id", 2).put("desc", "Segundo elemento"));
+		lstBox.addElement((new CustomBean()).put("id", 3).put("desc", "Tercer elemento"));
+		lstBox.addElement((new CustomBean()).put("id", 4).put("desc", "Cuarto elemento"));
+		panelListbox.add(lstBox);
+		
+		GwtHorizontalPanel btnsListBox = new GwtHorizontalPanel();
+		btnsListBox.add(new GwtButton("Agregar al final",new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Integer id=lstBox.getAllItems().size()+1;
+				lstBox.addElement((new CustomBean()).put("id", id).put("desc", "Elemento " + id));
+			}
+		}));
+		btnsListBox.add(new GwtButton("Agregar en el medio",new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Integer id=lstBox.getAllItems().size()+1;
+				Integer pos=(int) Math.floor(lstBox.getAllItems().size()/2);
+				lstBox.insertItem("Elemento " + id, (new CustomBean()).put("id", id).put("desc", "Elemento " + id), pos);
+			}
+		}));
+		btnsListBox.add(new GwtButton("Quitar del medio",new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Integer pos=(int) Math.floor(lstBox.getAllItems().size()/2);
+				lstBox.removeItem(pos);
+			}
+		}));
+		panelListbox.add(btnsListBox);
+		
+		form.addElement(panelListbox);
 		form.addElement(panelVarios);
 		
-		form.addButton(new GwtButton("Aceptar", new ClickHandler() {
+		form.addButton(new GwtButton("Ver Tablas", new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
+				showPage(InicioTestGroup.PAGINA_TABLAS);
 			}
 		}));
 		
