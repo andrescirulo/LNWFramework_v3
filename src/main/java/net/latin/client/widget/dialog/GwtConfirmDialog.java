@@ -1,11 +1,11 @@
 package net.latin.client.widget.dialog;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+
 import net.latin.client.widget.GwtWidgetUtils;
 import net.latin.client.widget.confirm.GwtConfirm;
 import net.latin.client.widget.confirm.GwtConfirmListener;
-
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 public class GwtConfirmDialog extends GwtConfirm {
 

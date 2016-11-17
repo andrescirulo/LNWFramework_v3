@@ -3,14 +3,15 @@ package net.latin.client.widget.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.ui.FlowPanel;
-
+import gwt.material.design.client.constants.SideNavType;
+import gwt.material.design.client.ui.MaterialCollapsible;
+import gwt.material.design.client.ui.MaterialSideNav;
 import net.latin.client.rpc.commonUseCase.InitialInfo;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.menu.data.LeafMenuItem;
 import net.latin.client.widget.menu.data.MenuItem;
 
-public class GwtMenuBar extends FlowPanel {
+public class GwtMenuBar extends MaterialSideNav {
 
 	private List<GwtMenuElement> menues;
 	private GwtController controller;
@@ -20,8 +21,11 @@ public class GwtMenuBar extends FlowPanel {
 		this.listeners=new ArrayList<GwtMenuBarListener>();
 		this.menues=new ArrayList<GwtMenuElement>();
 		this.controller = controller;
-		this.getElement().setAttribute("drawer", "");
-		this.getElement().setAttribute("mode", "seamed");
+		this.setType(SideNavType.PUSH);
+		this.setTop(64);
+		this.setId("sidenav");
+		this.setAlwaysShowActivator(true);
+		this.setAllowBodyScroll(true); 
 	}
 
 	public void resetWidget() {
@@ -65,25 +69,31 @@ public class GwtMenuBar extends FlowPanel {
 	
 	@SuppressWarnings("rawtypes")
 	private void buildMenuEntries(List childs) {
+		MaterialCollapsible entriesContainer=new MaterialCollapsible();
 		MenuItem menu;
 		for (int i = 0; i < childs.size(); i++) {
 			menu = (MenuItem) childs.get( i );
 			if( menu.isLeaf() ) {
 				LeafMenuItem leaf = (LeafMenuItem)menu;
-				menues.add( buildMenuItem(null,leaf,"paper-item-menu") );
+//				menues.add( buildMenuItem(null,leaf,"paper-item-menu") );
+				menues.add( buildMenuItem(null,leaf,"mock-style") );
 			}
 			else {
 				GwtMenu gwtMenu = new GwtMenu( menu.getName(),this);
 				for (int j = 0; j < menu.getChilds().size(); j++) {
 					LeafMenuItem leaf = (LeafMenuItem)menu.getChilds().get( j );
-					gwtMenu.addMenuItem( buildMenuItem(gwtMenu, leaf ,"paper-item-submenu") );
+//					gwtMenu.addMenuItem( buildMenuItem(gwtMenu, leaf ,"paper-item-submenu") );
+					gwtMenu.addMenuItem( buildMenuItem(gwtMenu, leaf ,"mock-style") );
 				}
 				menues.add( gwtMenu );
 			}
 		}
+		
 		for (GwtMenuElement gwtMenu:menues){
-			this.add(gwtMenu.getWidget());
+			entriesContainer.add(gwtMenu.getWidget());
+//			this.add(gwtMenu.getWidget());
 		}
+		this.add(entriesContainer);
 	}
 	
 	/**

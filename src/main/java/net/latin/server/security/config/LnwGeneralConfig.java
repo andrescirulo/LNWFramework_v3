@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+
 import net.latin.server.commonUseCase.CommonUseCaseImpl;
 import net.latin.server.commonUseCase.DefaultCommonUseCaseClientImpl;
 import net.latin.server.persistence.user.LnwUser;
 import net.latin.server.security.filter.LnwFilterRule;
 import net.latin.server.utils.exceptions.LnwException;
 import net.latin.server.utils.xml.XmlUtils;
-
-import org.jdom2.Document;
-import org.jdom2.Element;
 
 /**
  * Configuracion general de toda la aplicacion.

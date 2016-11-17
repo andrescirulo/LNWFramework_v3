@@ -1,13 +1,15 @@
 package net.latin.client.widget.modal;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.TextAlign;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.vaadin.polymer.paper.widget.PaperDialog;
-import com.vaadin.polymer.paper.widget.PaperSpinner;
 
+import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialModalContent;
+import gwt.material.design.client.ui.MaterialPreLoader;
+import gwt.material.design.client.ui.MaterialSpinner;
 import net.latin.client.utils.SupportUtils;
 import net.latin.client.widget.base.GwtController;
 
@@ -16,56 +18,55 @@ import net.latin.client.widget.base.GwtController;
  * Ideal para hacer LOADING.
  *
  */
-public class GwtModalPopup extends PaperDialog {
+public class GwtModalPopup extends MaterialModal {
 
 	public final static String CSS_LABEL = "modal-popup-text";
 	public final static Integer DEFAULT_ZINDEX=11;
 
 	private FlowPanel panel;
 	private HTML msgLabel;
-	private PaperSpinner spinner;
+	private MaterialPreLoader spinner;
+	
 	public GwtModalPopup() {
 		super();
+		MaterialModalContent mainContainer = new MaterialModalContent();
 		panel=new FlowPanel();
 		msgLabel = new HTML();
 		msgLabel.setStyleName( CSS_LABEL );
-		spinner = new PaperSpinner();
+
+		MaterialSpinner subSpinner = new MaterialSpinner();
+		spinner = new MaterialPreLoader();
 		spinner.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
+		spinner.add(subSpinner);
+		
 		msgLabel.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
 		panel.add( spinner );
 		panel.add( msgLabel );
-		this.add(panel);
-		this.setModal(true);
+		mainContainer.add(panel);
+		getElement().getStyle().setWidth(350, Unit.PX);
+		getElement().getStyle().setTextAlign(TextAlign.CENTER);
+		this.add(mainContainer);
 	}
 
 	public void showPopup( String msg ) {
-		this.resetFit();
 		panel.clear();
 		if (SupportUtils.supportsCssAnimation()){
 			panel.add( spinner );
-			spinner.setActive(true);
 		}
 		panel.add( msgLabel );
-		
 		msgLabel.setHTML( msg );
-		this.removeFromParent();
+		
 		RootPanel.get().add(this);
 		this.open();
-		
-		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-			public void execute() {
-				refit();
-			}
-		});
 	}
 	
-	@Override
+	
 	public void close() {
 		super.close();
-		if (SupportUtils.supportsCssAnimation()){
-			spinner.setActive(false);
-		}
+		panel.clear();
+		this.removeFromParent();
 	}
+	
 
 	public void showPopup() {
 		showPopup( GwtController.defaultI18n.GwtModalPopup_default_msg );

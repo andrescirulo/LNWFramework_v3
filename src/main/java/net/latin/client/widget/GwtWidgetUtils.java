@@ -1,7 +1,5 @@
 package net.latin.client.widget;
 
-import net.latin.client.widget.base.LnwWidget;
-
 import com.google.gwt.event.dom.client.HasAllMouseHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
@@ -9,6 +7,8 @@ import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import net.latin.client.widget.base.LnwWidget;
 
 public class GwtWidgetUtils {
 

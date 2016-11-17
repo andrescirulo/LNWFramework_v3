@@ -1,9 +1,9 @@
 package net.latin.client.widget.label;
 
+import com.google.gwt.user.client.ui.Label;
+
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.LnwWidget;
-
-import com.google.gwt.user.client.ui.Label;
 
 /**
  * Label de LNW

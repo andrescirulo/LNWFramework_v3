@@ -16,12 +16,12 @@ public class GwtConfirmDialogSiNoCancelar extends GwtConfirmDialogAbstract  {
 
 	@Override
 	protected void buildButtons(List<GwtButton> buttons) {
-		//boton Si
-		buttons.add(new GwtButton( BOTON_SI ));
-		//boton No
-		buttons.add(new GwtButton( BOTON_NO ));
 		//boton cancelar
 		buttons.add(new GwtButton( BOTON_CANCELAR ));
+		//boton No
+		buttons.add(new GwtButton( BOTON_NO ));
+		//boton Si
+		buttons.add(new GwtButton( BOTON_SI ));
 	}
 
 	public static boolean isBotonSi(String clickedButton) {

@@ -145,7 +145,6 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		// creamos el panel para englobar todo
 		elementPanel = new HorizontalPanel();
 		elementPanel.setVerticalAlignment(VerticalPanel.ALIGN_TOP);
-		// elementPanel.setWidth( totalWidth+ horSeparation + "px" );
 		elementPanel.setSpacing(GwtController.defaultI18n.GwtForm_title_element_spacing_vertical);
 
 		// Agregamos el label y el vpWidget
@@ -153,6 +152,8 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		if (required)
 			elementPanel.add(requiredLabel);
 		elementPanel.add(vpWidget);
+		
+		elementPanel.setCellWidth(descriptionLabel,GwtController.defaultI18n.GwtForm_max_label_width - requiredWidth + "px");
 	}
 
 	/**

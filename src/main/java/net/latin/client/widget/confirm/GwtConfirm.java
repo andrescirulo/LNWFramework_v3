@@ -1,14 +1,15 @@
 package net.latin.client.widget.confirm;
-import net.latin.client.widget.button.GwtButton;
-import net.latin.client.widget.dialog.GwtDialogBox;
-import net.latin.client.widget.separator.GwtHorizontalSpace;
-import net.latin.client.widget.separator.GwtSpace;
-
+import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+
+import net.latin.client.widget.button.GwtButton;
+import net.latin.client.widget.dialog.GwtDialogBox;
+import net.latin.client.widget.separator.GwtHorizontalSpace;
+import net.latin.client.widget.separator.GwtSpace;
 
 public class GwtConfirm extends GwtDialogBox implements ClickHandler {
 
@@ -41,7 +42,7 @@ public class GwtConfirm extends GwtDialogBox implements ClickHandler {
 		this.listener = listener;
 
 		//titulo del dialog
-		this.setTitleText(title);
+		this.setTitle(title);
 
 		HorizontalPanel hpPrincipal = new HorizontalPanel();
 		hpPrincipal.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
@@ -68,6 +69,7 @@ public class GwtConfirm extends GwtDialogBox implements ClickHandler {
 		HorizontalPanel panelButtons = new HorizontalPanel();
 		panelButtons.setHorizontalAlignment( HorizontalPanel.ALIGN_CENTER );
 		panelButtons.setSpacing( SPACING_BUTTONS );
+		panelButtons.getElement().getStyle().setTextAlign(TextAlign.CENTER);
 		this.add( panelButtons );
 		this.add(new GwtSpace(this.bottomPadding));
 

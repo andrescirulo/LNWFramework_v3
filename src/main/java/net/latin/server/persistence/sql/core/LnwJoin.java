@@ -1,8 +1,8 @@
 package net.latin.server.persistence.sql.core;
 
-import net.latin.server.persistence.sql.core.exceptions.LnwSqlBadStatementException;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
+
+import net.latin.server.persistence.sql.core.exceptions.LnwSqlBadStatementException;
 
 /**
  * Builder para agregar JOINs a un Query

@@ -2,12 +2,12 @@ package net.latin.client.widget.validation;
 
 import java.util.Date;
 
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyEvent;
+
 import net.latin.client.exceptions.GwtValidationException;
 import net.latin.client.widget.format.GwtFormatUtils;
 import net.latin.client.widget.validation.utils.ISBNValidator;
-
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyEvent;
 
 @SuppressWarnings("deprecation")
 public class GwtValidationUtils {

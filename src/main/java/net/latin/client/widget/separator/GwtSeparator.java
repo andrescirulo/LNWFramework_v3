@@ -1,9 +1,9 @@
 package net.latin.client.widget.separator;
 
+import com.google.gwt.user.client.ui.Label;
+
 import net.latin.client.rpc.GwtBusinessException;
 import net.latin.client.widget.base.LnwWidget;
-
-import com.google.gwt.user.client.ui.Label;
 
 /**
  * Linea separadora Horizontal o Vertical

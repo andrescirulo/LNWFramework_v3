@@ -1,9 +1,9 @@
 package net.latin.server.persistence.sql.sqlServer;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import net.latin.server.persistence.sql.core.LnwInsert;
 import net.latin.server.persistence.sql.core.LnwUpdate;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 /**

@@ -12,6 +12,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.latin.server.persistence.UserContext;
 import net.latin.server.persistence.user.LnwUser;
 import net.latin.server.security.config.CommonAccess;
@@ -19,9 +22,6 @@ import net.latin.server.security.config.LnwFilterRuleData;
 import net.latin.server.security.config.LnwGeneralConfig;
 import net.latin.server.security.config.LnwMenuGroup;
 import net.latin.server.security.config.LnwMenuItem;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
 package net.latin.server.security.config;
 
+import org.jdom2.Element;
+
 import net.latin.client.widget.menu.data.ExternalLeaf;
 import net.latin.client.widget.menu.data.LeafMenuItem;
-
-import org.jdom2.Element;
 
 public class LnwMenuExternal implements LnwMenuItem{
 

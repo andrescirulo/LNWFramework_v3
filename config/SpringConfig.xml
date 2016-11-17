@@ -8,14 +8,73 @@
 		Es
 		utlizado por SpringUtils.java.
 	</description>
-	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="applicationDataSource" lazy-init="default">
-		<property name="jndiName" value="java:comp/env/jdbc/scs"/>
+<!-- 	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="applicationDataSource" lazy-init="default"> -->
+<!-- 		<property name="jndiName" value="java:comp/env/jdbc/scs"/> -->
+<!-- 	</bean> -->
+<!-- 	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="sauDataSource" lazy-init="default"> -->
+<!-- 		<property name="jndiName" value="java:comp/env/jdbc/sau"/> -->
+<!-- 	</bean> -->
+<!-- 	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="snoDataSource" lazy-init="default"> -->
+<!-- 		<property name="jndiName" value="java:comp/env/jdbc/sno"/> -->
+<!-- 	</bean> -->
+	
+	<!-- Configuracion del JDBC para la base default de la aplicacion -->
+	<bean id="applicationDataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url">
+			<value>jdbc:oracle:thin:@oraclesau.pjn.gov.ar:1521:sau</value>
+		</property>
+		<property name="username">
+			<value>sau_consultas</value>
+		</property>
+		<property name="password">
+			<value>SAU$consultas2016</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="validationQuery">
+			<value>select * from dual</value>
+		</property>
 	</bean>
-	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="sauDataSource" lazy-init="default">
-		<property name="jndiName" value="java:comp/env/jdbc/sau"/>
+	<bean id="sauDataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url">
+			<value>jdbc:oracle:thin:@oraclesau.pjn.gov.ar:1521:sau</value>
+		</property>
+		<property name="username">
+			<value>sau_consultas</value>
+		</property>
+		<property name="password">
+			<value>SAU$consultas2016</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="validationQuery">
+			<value>select * from dual</value>
+		</property>
 	</bean>
-	<bean autowire="default" class="org.springframework.jndi.JndiObjectFactoryBean" dependency-check="default" id="snoDataSource" lazy-init="default">
-		<property name="jndiName" value="java:comp/env/jdbc/sno"/>
+	<bean id="snoDataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url">
+			<value>jdbc:oracle:thin:@oraclesau.pjn.gov.ar:1521:sau</value>
+		</property>
+		<property name="username">
+			<value>sau_consultas</value>
+		</property>
+		<property name="password">
+			<value>SAU$consultas2016</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="validationQuery">
+			<value>select * from dual</value>
+		</property>
 	</bean>
 
 

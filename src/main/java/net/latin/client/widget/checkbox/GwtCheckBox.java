@@ -1,44 +1,34 @@
 package net.latin.client.widget.checkbox;
 
-import com.vaadin.polymer.paper.widget.PaperCheckbox;
-
-import net.latin.client.utils.ColorUtils;
+import gwt.material.design.client.ui.MaterialCheckBox;
 import net.latin.client.utils.StylesManager;
 import net.latin.client.widget.base.LnwWidget;
 
 /**
  * CheckBox de LNW
  *
- * @author Matias Leone
  */
-public class GwtCheckBox extends PaperCheckbox implements LnwWidget {
+public class GwtCheckBox extends MaterialCheckBox implements LnwWidget {
 
+	
 	public void resetWidget() {
-		setChecked(false);
+		setValue(false);
 	}
 
 	public void setFocus() {
-		this.setFocused(true);
+		this.setFocus(true);
 	}
 
 	
 	public void setColor(String color){
-		
 		String styleName="checkbox-colored-" + color;
 		if (!color.startsWith("#")){
 			color="#" + color ;
 		}
 		
-		String darkColor=ColorUtils.cambiarColor(color, 0.7);
-		String style="." + styleName + " #checkbox.paper-checkbox{"+
-		"	border-color: " + darkColor +";"+
-		"}"+
-		"." + styleName + " #checkbox.checked.paper-checkbox{"+
-		"	background-color:" + color + ";"+
-		"	border-color: " + color + ";"+
-		"}"+
-		"." + styleName + " #ink[checked].paper-checkbox,.checkbox-orange #ink.paper-checkbox{"+
-		"	color: " + darkColor + ";"+
+		String style="." + styleName + " > [type=\"checkbox\"]:checked + label:before {"+
+		"	border-right: 2px solid " + color +" !important;"+
+		"	border-bottom: 2px solid " + color +" !important;"+
 		"}";
 		
 		StylesManager.injectStyle(styleName, style);

@@ -1,9 +1,9 @@
 package net.latin.client.widget.button;
 
-import net.latin.client.widget.base.GwtPage;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+
+import net.latin.client.widget.base.GwtPage;
 
 /**
  * Boton que vuelve a la page anterior registrada en el stack, cuando

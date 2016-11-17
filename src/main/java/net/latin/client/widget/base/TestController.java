@@ -1,10 +1,10 @@
 package net.latin.client.widget.base;
 
-import net.latin.client.widget.base.errorPage.GwtDefaultErrorPage;
-import net.latin.client.widget.base.errorPage.GwtErrorPage;
-
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.user.client.Window;
+
+import net.latin.client.widget.base.errorPage.GwtDefaultErrorPage;
+import net.latin.client.widget.base.errorPage.GwtErrorPage;
 
 public class TestController extends GwtController{
 

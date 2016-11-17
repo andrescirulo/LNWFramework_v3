@@ -1,8 +1,8 @@
 package net.latin.server.security.config;
 
-import net.latin.client.widget.menu.data.LeafMenuItem;
-
 import org.jdom2.Element;
+
+import net.latin.client.widget.menu.data.LeafMenuItem;
 
 public class LnwMenuUseCase implements LnwMenuItem{
 

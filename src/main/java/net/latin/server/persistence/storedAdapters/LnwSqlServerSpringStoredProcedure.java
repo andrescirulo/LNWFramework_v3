@@ -1,8 +1,8 @@
 package net.latin.server.persistence.storedAdapters;
 
-import net.latin.server.persistence.sql.core.LnwStoredProcedure;
-
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import net.latin.server.persistence.sql.core.LnwStoredProcedure;
 
 
 public class LnwSqlServerSpringStoredProcedure extends

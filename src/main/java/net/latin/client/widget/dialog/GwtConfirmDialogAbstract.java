@@ -4,14 +4,18 @@ import java.util.List;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.vaadin.polymer.iron.widget.IronIcon;
 
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.IconSize;
+import gwt.material.design.client.constants.IconType;
+import gwt.material.design.client.ui.MaterialIcon;
 import net.latin.client.widget.GwtWidgetUtils;
 import net.latin.client.widget.button.GwtButton;
 import net.latin.client.widget.separator.GwtHorizontalSpace;
@@ -21,14 +25,12 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 
 	private static final int SPACING_BUTTONS = 3;
 	private static final int SPACING_BETWEEN_BUTTONS = 20;
-//	private static final String URL_DEFAULT = "imagenes/icons/alert_small.gif";
 
 	protected GwtConfirmAbstractListener listener;
 	private Object dataObj;
 	private String question;
 	private HTML labelPregunta;
-	private IronIcon imagen;
-//	private String url = URL_DEFAULT;
+	private MaterialIcon imagen;
 	private int space = 10;
 	private List<GwtButton> buttons;
 
@@ -44,7 +46,7 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		this.listener = listener;
 
 		// titulo del dialog
-		this.setTitleText(title);
+		this.setTitle(title);
 
 		HorizontalPanel hpPrincipal = new HorizontalPanel();
 		hpPrincipal.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
@@ -54,12 +56,10 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		this.question = question;
 		labelPregunta = new HTML(question);
 		labelPregunta.addStyleName("popUpQuestion");
-		imagen = new IronIcon();
-		imagen.setIcon("icons:warning");
-//		imagen.setWidth("75px");
-//		imagen.setHeight("65px");
-		imagen.addStyleName("confirm-imagen");
-		//imagen.getElement().getStyle().setProperty( "background", "center center no-repeat " + "url(" + url + ")");
+		imagen = new MaterialIcon();
+		imagen.setIconType(IconType.WARNING);
+		imagen.setIconSize(IconSize.LARGE);
+		imagen.setIconColor(Color.YELLOW_DARKEN_2);
 
 		hpPrincipal.add(new GwtHorizontalSpace(this.space));
 		hpPrincipal.add(imagen);
@@ -87,7 +87,9 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 				space.setWidth(SPACING_BETWEEN_BUTTONS + "px");
 				panelButtons.add(space);
 			}
+			button.getElement().getParentElement().getStyle().setTextAlign(TextAlign.CENTER);
 		}
+		
 		// auto-render
 		this.render();
 	}
@@ -154,8 +156,8 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 		imagen.addStyleName(style);
 	}
 	
-	public void setImageIcon(String iconName){
-		imagen.setIcon(iconName);
+	public void setImageIcon(IconType icon){
+		imagen.setIconType(icon);
 	}
 	
 	public int getSpace() {

@@ -12,6 +12,8 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
@@ -27,11 +29,11 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.vaadin.polymer.Polymer;
-import com.vaadin.polymer.elemental.Function;
-import com.vaadin.polymer.paper.widget.PaperDrawerPanel;
-import com.vaadin.polymer.paper.widget.PaperIconButton;
 
+import gwt.material.design.client.ui.MaterialContainer;
+import gwt.material.design.client.ui.MaterialHeader;
+import gwt.material.design.client.ui.MaterialNavBar;
+import gwt.material.design.client.ui.MaterialPanel;
 import net.latin.client.i18n.LnwI18n;
 import net.latin.client.i18n.LnwI18nImpl;
 import net.latin.client.rpc.DefaultGwtCallbackErrorHandler;
@@ -61,7 +63,7 @@ import net.latin.client.widget.msg.GwtMsgNotification;
  * the configuration methods.
  *
  */
-public abstract class GwtController implements EntryPoint, HistoryListener, CloseHandler<Window> {
+public abstract class GwtController implements EntryPoint, HistoryListener, CloseHandler<Window>, ResizeHandler {
 
 	/**
 	 * Html panel which shows a loading dialog
@@ -127,7 +129,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	private final Map<String, Object> applicationContext;
 	private final Map<String, GwtPageGroup> pageGroups;
 	private final HashMap<String, LnwI18n> i18nMap;
-	protected final PaperDrawerPanel mainComponent;
+	protected final MaterialPanel mainComponent;
 	private final FlowPanel pagesPanel;
 	private final GwtMsgNotification msg;
 	private final Frame framePanel;
@@ -156,14 +158,16 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	
 	private GwtGroupLoader groupLoader;
 
-	private FlowPanel toolbar;
+	private MaterialNavBar toolbar;
+
+	private FlowPanel componentsPanel;
 
 	public GwtController() {
 		// final variables initialization
 		pageGroups = new HashMap<String, GwtPageGroup>();
 		applicationContext = new HashMap<String, Object>();
 		i18nMap = new HashMap<String, LnwI18n>();
-		mainComponent = new PaperDrawerPanel();
+		mainComponent = new MaterialPanel();
 		pagesPanel = new FlowPanel();
 		msg = new GwtMsgNotification();
 		framePanel = new Frame();
@@ -174,7 +178,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		// TODO hacer un metodo marcar menu
 		// set static instance
 		GwtController.instance = this;
-	
+
 		configure();
 	
 		// manage I18n config
@@ -354,23 +358,27 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	 */
 	protected void visualInit() {
 		// main component
-//		mainComponent.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
-//		mainComponent.setStyleName(CSS_MAIN_COMPONENT);
-
-//		mainComponent.getElement().getStyle().setProperty( "overflowY", "scroll");
 		// menu
 		menu = new GwtMenuBar(this);
-		mainComponent.add(menu);
 
-		// components panel
-		FlowPanel componentsPanel = new FlowPanel();
+		componentsPanel = new FlowPanel();
 		componentsPanel.getElement().setAttribute("main", "");
 		componentsPanel.setStyleName(CSS_PAGES_PANEL);
-		mainComponent.add(componentsPanel);
+		componentsPanel.setHeight(Window.getClientHeight()-64 + "px");
+		Window.addResizeHandler(this);
 
-		toolbar = new FlowPanel();
+		toolbar = new MaterialNavBar();
 		toolbar.addStyleName("toolbar");
+		toolbar.setActivates("sidenav");
 		
+		
+		MaterialHeader mainHeader = new MaterialHeader();
+		mainHeader.add(toolbar);
+		mainHeader.add(menu);
+		MaterialContainer mainContainer = new MaterialContainer();
+		mainContainer.add(componentsPanel);
+		mainComponent.add(mainHeader);
+		mainComponent.add(mainContainer);
 		// header panel
 		VerticalPanel headerPanel = new VerticalPanel();
 //		headerPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
@@ -462,18 +470,19 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	}
 
 	public void onModuleLoad() {
-		Polymer.importHref("iron-icons/iron-icons.html", new Function() {
-	        public Object call(Object arg) {
-	            // The app is executed when all imports succeed.
-	            startApplication();
-	            return null;
-	        }
-	    });
+//		Polymer.importHref("iron-icons/iron-icons.html", new Function() {
+//	        public Object call(Object arg) {
+//	            // The app is executed when all imports succeed.
+//	            startApplication();
+//	            return null;
+//	        }
+//	    });
+		startApplication();
 	}
 	
 	protected void startApplication() {
 //		RootPanel.get(GWT_APPLICATION_PANEL).add(mainComponent);
-		RootPanel.get().add(toolbar);
+//		RootPanel.get().add(toolbar);
 		RootPanel.get().add(mainComponent);
 
 		initUncaughtExceptionHandler();
@@ -634,18 +643,9 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	}
 
 	protected void initToolbar(String appDescripcion) {
-		PaperIconButton menuBtn=new PaperIconButton();
-		menuBtn.setIcon("icons:menu");
-		menuBtn.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				mainComponent.togglePanel();
-			}
-		});
-		
-		HTMLPanel h1=new HTMLPanel("h1",appDescripcion);
+		HTMLPanel h1=new HTMLPanel("h5",appDescripcion);
 		h1.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
 		
-		toolbar.add(menuBtn);
 		toolbar.add(h1);
 	}
 
@@ -1178,10 +1178,10 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	 */
 	public void setMenuBarVisible(boolean visible) {
 		if (visible){
-			mainComponent.openDrawer();
+			menu.show();
 		}
 		else{
-			mainComponent.closeDrawer();
+			menu.hide();
 		}
 	}
 
@@ -1219,4 +1219,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		menu.unselectAllMenuItems();
 	}
 
+	public void onResize(ResizeEvent event){
+		componentsPanel.setHeight(Window.getClientHeight()-64 + "px");
+	}
 }

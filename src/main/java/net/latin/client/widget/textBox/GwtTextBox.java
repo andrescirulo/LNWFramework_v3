@@ -9,12 +9,11 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.impl.TextBoxImpl;
-import com.vaadin.polymer.paper.widget.PaperInput;
 
-import net.latin.client.widget.GwtWidgetUtils;
+import gwt.material.design.client.ui.MaterialTextBox;
 import net.latin.client.widget.base.LnwWidget;
 
-public class GwtTextBox extends PaperInput implements LnwWidget {
+public class GwtTextBox extends MaterialTextBox implements LnwWidget {
 
 	private static TextBoxImpl impl = GWT.create(TextBoxImpl.class);
 	
@@ -26,21 +25,12 @@ public class GwtTextBox extends PaperInput implements LnwWidget {
 	}
 	
 
-	/**
-	 * Sets the maximum allowable length of the text box and
-	 * sets the number of visible characters in the text box.
-	 * @param length
-	 */
-	public void setLength( int length ) {
-		this.setMaxlength(length);
-	}
-
 	public void resetWidget() {
 		this.setValue("");
 	}
 
 	public void setFocus() {
-		GwtWidgetUtils.setFocus(this);
+		setFocus(true);
 	}
 
 	//REGISTRO LOS EVENTOS DE CORTAR Y PEGAR

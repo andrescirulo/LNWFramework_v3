@@ -3,13 +3,13 @@ package net.latin.client.widget.msg;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.latin.client.widget.base.GwtVisualComponent;
-import net.latin.client.widget.separator.GwtSpace;
-
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import net.latin.client.widget.base.GwtVisualComponent;
+import net.latin.client.widget.separator.GwtSpace;
 
 /**
  * Tool for messages notificacition.

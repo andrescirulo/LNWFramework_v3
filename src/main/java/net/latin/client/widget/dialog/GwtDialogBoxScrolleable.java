@@ -3,18 +3,19 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.polymer.paper.widget.PaperDialog;
-import com.vaadin.polymer.paper.widget.PaperToolbar;
+
+import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialNavBar;
 
 /**
  * Igual al GwtDialogBox, pero con barra de Scroll.
  * En caso de no querer un tamaño fijo, permite setearle un tamaño maximo, y que se ajuste solo en caso de ser más chico
  *
  */
-public class GwtDialogBoxScrolleable extends PaperDialog {
+public class GwtDialogBoxScrolleable extends MaterialModal {
 
 	protected static final String CSS_BODY = "GwtDialogBoxBody";
-	protected PaperToolbar toolbar;
+	protected MaterialNavBar toolbar;
 	protected VerticalPanel mainPanel;
 	protected boolean alreadyVisible;
 //	protected boolean modal;
@@ -35,7 +36,6 @@ public class GwtDialogBoxScrolleable extends PaperDialog {
 	 */
 	public GwtDialogBoxScrolleable(boolean modal) {
 		super();
-		this.setWithBackdrop(modal);
 		this.alreadyVisible = false;
 		this.mainPanel = new VerticalPanel();
 		this.mainPanel.setHorizontalAlignment( VerticalPanel.ALIGN_CENTER );
@@ -80,7 +80,7 @@ public class GwtDialogBoxScrolleable extends PaperDialog {
 	public void show() {
 		this.onBeforeShow();
 		if( !this.alreadyVisible ) {
-			super.center();
+			super.open();
 			this.alreadyVisible = true;
 		}
 		this.onAfterShow();

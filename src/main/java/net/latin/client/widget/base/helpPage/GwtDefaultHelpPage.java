@@ -1,13 +1,13 @@
 package net.latin.client.widget.base.helpPage;
 
-import net.latin.client.widget.button.GwtButton;
-import net.latin.client.widget.dialog.GwtDialogBox;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
+
+import net.latin.client.widget.button.GwtButton;
+import net.latin.client.widget.dialog.GwtDialogBox;
 
 /**
  * Pagina default para visualizacion de contentidos de ayuda
@@ -22,7 +22,7 @@ public class GwtDefaultHelpPage extends GwtDialogBox implements GwtHelpPage {
 	private HTML docPanel;
 
 	public GwtDefaultHelpPage() {
-		setTitleText(TITLE);
+		setTitle(TITLE);
 		setSize(DIALOG_WIDTH + "px", DIALOG_HEIGHT + "px");
 //		setPopupPosition(getCenterX(DIALOG_WIDTH), getCenterY(DIALOG_HEIGHT) - DIALOG_HEIGHT / 2);
 

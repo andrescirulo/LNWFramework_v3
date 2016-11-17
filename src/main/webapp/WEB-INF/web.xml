@@ -43,7 +43,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ApplicationFilter</filter-name>
-		<url-pattern>/multipleFileUploader</url-pattern>
+		<url-pattern>/fileUploader</url-pattern>
 	</filter-mapping>
   
   
@@ -119,6 +119,15 @@
 		<url-pattern>*.gwt</url-pattern>
 	</servlet-mapping>-->
 	
+	<servlet>
+		<servlet-name>fileUploader</servlet-name>
+		<servlet-class>net.latin.server.fileUpload.FileUploaderServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>fileUploader</servlet-name>
+		<url-pattern>/__fileUploader</url-pattern>
+	</servlet-mapping>
 	
   <!-- Default page to serve -->
   <welcome-file-list>

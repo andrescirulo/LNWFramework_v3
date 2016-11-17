@@ -3,128 +3,69 @@ package net.latin.client.widget.button;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.polymer.iron.widget.IronIcon;
-import com.vaadin.polymer.paper.widget.PaperButton;
 
-import net.latin.client.widget.panels.GwtHorizontalPanel;
-import net.latin.client.widget.panels.GwtVerticalPanel;
+import gwt.material.design.client.constants.ButtonType;
+import gwt.material.design.client.constants.IconPosition;
+import gwt.material.design.client.constants.IconType;
+import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialDropDown;
+import gwt.material.design.client.ui.MaterialLink;
 
-public class GwtButtonPopUp extends GwtHorizontalPanel {
+public class GwtButtonPopUp extends FlowPanel {
 
-	private PopupPanel popUpOpciones;
-	private GwtVerticalPanel panelOpciones;
-	private String PANEL_STYLE="GwtButtonPopUpPanelStyle";
-	private String OPTION_STYLE="GwtButtonPopUpOptionStyle";
-	private String OPTION_OVER_STYLE="GwtButtonPopUpOptionOverStyle";
-	private HorizontalAlignmentConstant popUpAlignment;
+	private MaterialDropDown popUpOpciones;
 	private Map<String,Widget> opciones;
 	
+	private String dropDownId;
+	
 	public GwtButtonPopUp(String buttonText) {
-//		this.setVerticalAlignment(ALIGN_MIDDLE);
-		PaperButton btn=new PaperButton();
+		dropDownId = "opt_btn_" + Random.nextInt();
+		MaterialButton btn=new MaterialButton();
 		
-		Label labelBoton = new Label(buttonText);
-		labelBoton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
-		IronIcon flechaBoton = new IronIcon();
-		flechaBoton.setIcon("icons:expand-more");
-		flechaBoton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK);
-		
-		btn.add(labelBoton);
-		btn.add(flechaBoton);
-		btn.setRaised(true);
-		btn.getElement().getStyle().setMargin(0, Unit.PX);
-		btn.getElement().getStyle().setPaddingTop(0.47, Unit.EM);
-		btn.getElement().getStyle().setPaddingBottom(0.47, Unit.EM);
-		btn.getElement().getStyle().setPaddingLeft(0.57, Unit.EM);
-		btn.getElement().getStyle().setPaddingRight(0.57, Unit.EM);
-		this.add(btn);
+		btn.setText(buttonText);
+		btn.setIconType(IconType.ARROW_DROP_DOWN);
+		btn.setIconPosition(IconPosition.RIGHT);
+		btn.setType(ButtonType.RAISED);
 		
 		opciones=new HashMap<String, Widget>();
-		panelOpciones=new GwtVerticalPanel();
-		popUpOpciones=new PopupPanel(true);
-		popUpOpciones.setWidget(panelOpciones);
-		popUpOpciones.addStyleName(PANEL_STYLE);
+		popUpOpciones=new MaterialDropDown();
 		
-		btn.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				popUpOpciones.show();
-				setPosicion();
-				
-			}
-		});
-		Window.addResizeHandler(new ResizeHandler() {
-			public void onResize(ResizeEvent event) {
-				if (popUpOpciones.isVisible()){
-					setPosicion();
-				}
-			}
-		});
+		popUpOpciones.setBelowOrigin(true);
+		popUpOpciones.setActivator(dropDownId);
+		btn.setActivates(dropDownId);
+		this.add(btn);
+		this.add(popUpOpciones);
+		
+		popUpOpciones.reinitialize();
 	}
 	
-	protected void setPosicion() {
-		if (HasHorizontalAlignment.ALIGN_RIGHT.equals(popUpAlignment)){
-			int left=getAbsoluteLeft()+getOffsetWidth()-popUpOpciones.getOffsetWidth();
-			popUpOpciones.setPopupPosition(left, getAbsoluteTop()+getOffsetHeight());
-		}
-		else
-		{
-			popUpOpciones.setPopupPosition(getAbsoluteLeft(), getAbsoluteTop()+getOffsetHeight());
-		}
-	}
 
 	public void addOption(String text,ClickHandler listener){
-		final GwtButton boton=new GwtButton(text);
-		boton.setStyleName(OPTION_STYLE);
-		boton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				boton.removeStyleName(OPTION_OVER_STYLE);
-				popUpOpciones.hide();
-			}
-		});
+		final MaterialLink boton=new MaterialLink(text);
 		boton.addClickHandler(listener);
 		
 		boton.setWidth("100%");
-		panelOpciones.add(boton);
+		popUpOpciones.add(boton);
 		opciones.put(text,boton);
+		popUpOpciones.reinitialize();
 	}
 	
 	public <T extends Widget & HasClickHandlers> void addOpcion(String id,final T widget){
-		widget.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				popUpOpciones.hide();
-			}
-		});
-		
 		widget.setWidth("100%");
-		panelOpciones.add(widget);
+		popUpOpciones.add(widget);
 		opciones.put(id,widget);
+		popUpOpciones.reinitialize();
 	}
 	
 	public void setOptionsWidth(String width){
-		panelOpciones.setWidth(width);
+		popUpOpciones.setWidth(width);
 	}
 	
-	/**
-	 * Setea como se alinea el popup respecto al boton
-	 */
-	 
-	public void setPopUpAlignment(HorizontalAlignmentConstant alignment){
-		this.popUpAlignment = alignment;
-	}
-
 	public void setOptionVisible(String key, boolean visible) {
 		Widget widg=opciones.get(key);
 		if (widg!=null){
@@ -134,7 +75,7 @@ public class GwtButtonPopUp extends GwtHorizontalPanel {
 	
 	public void clearOptions(){
 		opciones.clear();
-		panelOpciones.clear();
+		popUpOpciones.clear();
 	}
 	
 }

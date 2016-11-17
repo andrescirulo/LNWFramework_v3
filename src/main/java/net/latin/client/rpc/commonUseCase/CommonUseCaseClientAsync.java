@@ -1,8 +1,8 @@
 package net.latin.client.rpc.commonUseCase;
 
-import net.latin.client.rpc.GwtRpcInterfaceAsync;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import net.latin.client.rpc.GwtRpcInterfaceAsync;
 
 public interface CommonUseCaseClientAsync extends GwtRpcInterfaceAsync {
 

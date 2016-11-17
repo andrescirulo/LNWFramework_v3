@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
@@ -12,8 +11,8 @@ import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.user.client.Event;
-import com.vaadin.polymer.vaadin.widget.VaadinComboBox;
 
+import gwt.material.design.client.ui.MaterialListBox;
 import net.latin.client.widget.GwtWidgetUtils;
 import net.latin.client.widget.base.LnwWidget;
 import net.latin.client.widget.listener.EnterKeyPressHandler;
@@ -23,7 +22,7 @@ import net.latin.client.widget.listener.EnterKeyPressHandler;
  * the list
  * 
  */
-public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
+public class GwtListBox<T> extends MaterialListBox implements LnwWidget {
 	
 	private List<T> modelList = new ArrayList<T>();
 	private GwtListBoxAdapter<T> adapter;
@@ -32,7 +31,6 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	private LnwWidget nextFocus;
 	
 	public GwtListBox() {
-		setItems(getNativeArray());
 		addDomHandler(new EnterKeyPressHandler(){
 			protected void accionEnter(KeyPressEvent event) {
 				if (nextFocus != null) {
@@ -45,10 +43,6 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 			}} , KeyPressEvent.getType());
 	}
 	
-	private native JsArray getNativeArray()/*-{ 
-		return []; 
-	}-*/;
-	
 	/**
 	 * Add a new item at the end of the list
 	 * 
@@ -59,11 +53,9 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 */
 	public void addElement(String itemText, T itemModel) {
 		this.modelList.add(itemModel);
-		addItem(getItems(),itemText);
+		super.addItem(itemText);
 	}
-	private native void addItem(JsArray items,String valor)/*-{
-		items.push(valor);
-	}-*/;
+	
 	
 	
 	/**
@@ -152,13 +144,9 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 *            : position to add the item
 	 */
 	public void insertItem(String itemText, T itemModel, int index) {
-		this.insertItem(getItems(),itemText, index);
+		this.insertItem(itemText, index);
 		this.modelList.add(index, itemModel);
 	}
-	
-	private native void insertItem(JsArray items,String itemText, int index)/*-{
-		items.splice(index, 0, itemText);
-	}-*/;
 	
 	/**
 	 * Add a new item at a specific index of the list
@@ -172,7 +160,7 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 *            : position to add the item
 	 */
 	public void insertStringItem(String itemText, T itemModel, int index) {
-		this.insertItem(getItems(),itemText, index);
+		this.insertItem(itemText,itemModel, index);
 		this.modelList.add(index, itemModel);
 	}
 	
@@ -192,27 +180,15 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 * @return the selected object in the list
 	 */
 	public T getSelectedElement() {
-		return this.getElement(this.getSelectedIndex(getItems()));
+		return this.getElement(getSelectedIndex());
 	}
-	
-	public native int getSelectedIndex(JsArray items)/*-{
-		for (var i=0;i<items.length;i++){
-			if (items[i]==this.getValue()){
-				return i;
-			}
-		}
-		return -1;
-	}-*/;
 	
 	
 	public void removeItem(int index) {
-		this.removeItemAt(getItems(),index);
+		super.removeItem(index);
 		this.modelList.remove(index);
 	}
 	
-	private native int removeItemAt(JsArray items,int index)/*-{
-		items.splice(index,1);
-	}-*/;
 	
 	/**
 	 * Removes the item at the specified index.
@@ -273,13 +249,9 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 			itemIndex = this.getItemIndex(itemModel);
 		}
 
-		this.setSelectedIndex(getItems(),itemIndex);
+		setSelectedIndex(itemIndex);
 	}
 	
-	private native void setSelectedIndex(JsArray items,int itemIndex)/*-{
-		this.setValue(items[itemIndex]);
-	}-*/;
-
 	/**
 	 * Select the specified item, search with a comparator. El item pasado para
 	 * comparar es el segundo elemento que será pasado como parámetro al
@@ -289,7 +261,7 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 * @param comparator
 	 */
 	public void setSelectedItem(T itemModel, Comparator comparator) {
-		this.setSelectedIndex(getItems(),this.getItemIndex(itemModel, comparator));
+		this.setSelectedIndex(this.getItemIndex(itemModel, comparator));
 	}
 	
 	/**
@@ -336,7 +308,7 @@ public class GwtListBox<T> extends VaadinComboBox implements LnwWidget {
 	 */
 	public void resetWidget() {
 		if (!modelList.isEmpty()) {
-			this.setSelectedIndex(getItems(),0);
+			this.setSelectedIndex(0);
 		}
 	}
 	

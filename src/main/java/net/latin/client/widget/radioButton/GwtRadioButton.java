@@ -12,28 +12,30 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.ui.Label;
-import com.vaadin.polymer.paper.widget.PaperRadioButton;
-import com.vaadin.polymer.paper.widget.PaperRadioGroup;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
+import gwt.material.design.client.ui.MaterialRadioButton;
 import net.latin.client.utils.ColorUtils;
 import net.latin.client.utils.StylesManager;
 import net.latin.client.widget.base.LnwWidget;
 
-public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
+public class GwtRadioButton extends VerticalPanel implements LnwWidget {
 
-	private List<PaperRadioButton> childs = new ArrayList<PaperRadioButton>();
+	private List<MaterialRadioButton> childs = new ArrayList<MaterialRadioButton>();
 
 	private static final int HORIZONTAL=0; 
 	private static final int VERTICAL=1;
 	
 	private int modo=HORIZONTAL;
+
+	private String name;
 	
 	/**
 	 * Constructor del GwtRadioButton. 
 	 * @param name
 	 */
-	public GwtRadioButton() {
+	public GwtRadioButton(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -45,10 +47,10 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 	}
 	
 	public void addChild(String childText,String color){
-		PaperRadioButton child = new PaperRadioButton();
-		child.add(new Label(childText));
-		child.setName(childText);
-		child.setValue(childText);
+		MaterialRadioButton child = new MaterialRadioButton();
+		child.setText(childText);
+		child.setName(name);
+		child.setFormValue(childText);
 		if (color!=null){
 			setColor(child,color);
 		}
@@ -60,28 +62,16 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 		this.add(child);
 	}
 	
-	private void setColor(PaperRadioButton radio,String color){
+	private void setColor(MaterialRadioButton radio,String color){
 		String styleName="radio-colored-" + color;
 		if (!color.startsWith("#")){
 			color="#" + color ;
 		}
 		
 		String darkColor=ColorUtils.cambiarColor(color, 0.7);
-		String style="." + styleName + "[checked] #offRadio.paper-radio-button{" +
-				"border-color:" + color+ ";" +
-				"}";
-		style+="." + styleName + " #offRadio.paper-radio-button{" +
-				"border-color:" + darkColor+ ";" +
-				"}";
-		style+="." + styleName + " #onRadio.paper-radio-button{" +
-				"background-color:" + color+ ";" +
-				"}";
-		
-		style+="." + styleName + " #ink[checked].paper-radio-button{"+
-				"color:" + darkColor+ ";" +
-				"}";
-		style+="." + styleName + " #ink.paper-radio-button{"+
-				"color:" + darkColor+ ";" +
+		String style="." + styleName + " [type=\"radio\"]:checked + label:after{" +
+				"border-color:" + color+ " !important;" +
+				"background-color:" + color+ " !important;" +
 				"}";
 		
 		StylesManager.injectStyle(styleName, style);
@@ -102,9 +92,9 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 	 * Devuelve el PaperRadioButton que esté seleccionado (devuelve un PaperRadioButton, no un GwtRadioButton)
 	 * @return
 	 */
-	public PaperRadioButton getSelectedChild(){
-		for (PaperRadioButton child:childs){
-			if(child.getChecked()){
+	public MaterialRadioButton getSelectedChild(){
+		for (MaterialRadioButton child:childs){
+			if(child.getValue()){
 				return child;
 			}
 		}
@@ -115,18 +105,18 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 	 * Resetea el widget. Ninguna opcion queda seleccionada
 	 */
 	public void resetWidget() {
-		for (PaperRadioButton child:childs){
-			child.setChecked(false);
+		for (MaterialRadioButton child:childs){
+			child.setValue(false);
 		}
 	}
 
 
 	/**
-	 * Devuelve el child (PaperRadioButton) de acuerdo al indice recibido (se respeta el orden en el que fueron agregados)
+	 * Devuelve el child (MaterialRadioButton) de acuerdo al indice recibido (se respeta el orden en el que fueron agregados)
 	 * @param index
 	 * @return
 	 */
-	public PaperRadioButton getChild(int index){
+	public MaterialRadioButton getChild(int index){
 		return childs.get(index);
 	}
 
@@ -135,8 +125,8 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 	 * @return
 	 */
 	public boolean hasChildSelected(){
-		for (PaperRadioButton child:childs){
-			if(child.getChecked()){
+		for (MaterialRadioButton child:childs){
+			if(child.getValue()){
 				return true;
 			}
 		}
@@ -145,22 +135,22 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 
 	public void setFocus() {
 		if(childs.size()>0){
-			this.getChild(0).setFocused(true);
+			this.getChild(0).setFocus(true);
 		}
 	}
 
 	public void addKeyDownHandler(KeyDownHandler listener) {
-		for (PaperRadioButton child:childs){
+		for (MaterialRadioButton child:childs){
 			child.addDomHandler(listener, KeyDownEvent.getType());
 		}
 	}
 	public void addKeyUpHandler(KeyUpHandler listener) {
-		for (PaperRadioButton child:childs){
+		for (MaterialRadioButton child:childs){
 			child.addDomHandler(listener, KeyUpEvent.getType());
 		}
 	}
 	public void addKeyPressHandler(KeyPressHandler listener) {
-		for (PaperRadioButton child:childs){
+		for (MaterialRadioButton child:childs){
 			child.addDomHandler(listener, KeyPressEvent.getType());
 		}
 	}
@@ -170,23 +160,23 @@ public class GwtRadioButton extends PaperRadioGroup implements LnwWidget {
 	 * @return selectedChildText
 	 */
 	public String getSelectedChildText(){
-		PaperRadioButton selected = getSelectedChild();
+		MaterialRadioButton selected = getSelectedChild();
 
 		if(selected == null){
 			return null;
 		}
 
-		return selected.getValue();
+		return selected.getFormValue();
 	}
 
 	public void setModoVertical(){
 		modo=VERTICAL;
-		for (PaperRadioButton child:childs){
+		for (MaterialRadioButton child:childs){
 			setEstiloVertical(child);
 		}
 	}
 
-	private void setEstiloVertical(PaperRadioButton child) {
+	private void setEstiloVertical(MaterialRadioButton child) {
 		Style childStyle = child.getElement().getStyle();
 		childStyle.setDisplay(Display.BLOCK);
 		childStyle.setPaddingTop(5, Unit.PX);

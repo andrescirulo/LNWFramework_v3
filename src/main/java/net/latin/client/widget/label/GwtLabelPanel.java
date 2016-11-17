@@ -3,10 +3,10 @@ package net.latin.client.widget.label;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.latin.client.widget.base.GwtVisualComponent;
-
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+
+import net.latin.client.widget.base.GwtVisualComponent;
 
 /**
  * Panel vertical que muestra una lista de labels, uno debajo del otro

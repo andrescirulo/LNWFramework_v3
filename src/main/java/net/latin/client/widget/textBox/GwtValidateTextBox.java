@@ -120,7 +120,7 @@ public class GwtValidateTextBox extends GwtTextBox implements KeyDownHandler,Blu
 		String currentText = this.getValue();
 		for (GwtTextBoxValidationRule rule : validationRules) {
 			//si la validacion no pasa correctamente, cancelamos la tecla presionada
-			if(!(selLen == this.getMaxlength() && rule.getClass().equals(GwtTextBoxLengthValidation.class))){
+			if(!(selLen == this.getMaxLength() && rule.getClass().equals(GwtTextBoxLengthValidation.class))){
 				result = rule.validateOnKeyDown(currentText, keyCode, event);
 				if(!result) {
 					event.preventDefault();
@@ -143,7 +143,7 @@ public class GwtValidateTextBox extends GwtTextBox implements KeyDownHandler,Blu
 			result = rule.validateOnLostFocus(result);
 			if(result == null) {
 				this.setStyleName( CSS_REQUIRED_FALSE );
-				this.setErrorMessage("error en la validacion");
+//				this.setErrorMessage("error en la validacion");
 				this.setValue(lastResult);
 				return;
 			}
@@ -284,7 +284,7 @@ public class GwtValidateTextBox extends GwtTextBox implements KeyDownHandler,Blu
 	 * El texto ingresado debe tener una longitud menor o igual al maximo especificado
 	 */
 	public void setMaxLength(int maxLength) {
-		super.setMaxlength(maxLength);
+		super.setMaxLength(maxLength);
 		this.addValidationRule( new GwtTextBoxLengthValidation(GwtTextBoxLengthValidation.DEFAULT_MIN, maxLength) );
 	}
 

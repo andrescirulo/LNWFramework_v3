@@ -5,10 +5,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import org.springframework.jdbc.core.RowMapper;
+
 import net.latin.client.widget.base.CustomBean;
 import net.latin.server.utils.exceptions.LnwException;
-
-import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Utilidad para mappear en forma automatica un ResultSet en un CustomBean

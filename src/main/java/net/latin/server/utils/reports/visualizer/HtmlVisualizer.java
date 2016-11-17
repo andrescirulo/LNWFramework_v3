@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.latin.server.utils.exceptions.LnwException;
-import net.latin.server.utils.fileTypes.Html;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import net.latin.server.utils.exceptions.LnwException;
+import net.latin.server.utils.fileTypes.Html;
 
 public class HtmlVisualizer extends HttpServlet {
 

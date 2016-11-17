@@ -1,11 +1,11 @@
 package net.latin.client.rpc;
 
 
-import net.latin.client.exceptions.GwtObjectNotFoundException;
-import net.latin.client.exceptions.LnwTransactionException;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.InvocationException;
+
+import net.latin.client.exceptions.GwtObjectNotFoundException;
+import net.latin.client.exceptions.LnwTransactionException;
 
 /**
  * Callback with some helps for GwtPage

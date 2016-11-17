@@ -8,9 +8,6 @@ import java.util.StringTokenizer;
 
 import javax.sql.DataSource;
 
-import net.latin.server.utils.collections.CollectionFactory;
-import net.latin.server.utils.exceptions.LnwException;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -20,6 +17,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor;
 import org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import net.latin.server.utils.collections.CollectionFactory;
+import net.latin.server.utils.exceptions.LnwException;
 
 /**
  * Utilidades de acceso al contenedor de Spring del archivo config/SpringConfig.xml.

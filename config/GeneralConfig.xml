@@ -2,7 +2,7 @@
 <GeneralConfig>
 
 	<!-- Configuracion General -->
-	<Application name= "SCS" description="Seleccion de comision"/>
+	<Application name= "SCS" description="Sistema de Comisión de Selección"/>
 	<ApplicationUser>net.latin.server.persistence.user.LnwDefaultUser</ApplicationUser>
 	<StrutsConfigUseCasesPath>webapp/WEB-INF/struts-config-useCases.xml</StrutsConfigUseCasesPath>
 	<ClientPackagePath>src/scs/client</ClientPackagePath>
@@ -57,13 +57,13 @@
 		<url>.cache.js</url>
 		<url>/LnwFramework_v3</url>
 		<url>/LnwFramework_v3/</url>
-		<url>/LnwFramework_v3.html</url>
+		<url>/LNWFramework_v3.html</url>
 		<url>/LnwFramework_v3/LNWFramework_v3.html</url>
+		<url>/LNWFramework_v3/LNWFramework_v3.html</url>
 		<url>/scs/</url>
 		<url>/securityServer.gwt</url>
 		<url>/__suggestQuote.gwt</url>
 		<url>/__suggestQuoteInstitucion.gwt</url>
-		<url>/multipleFileUploader</url>
 		<url>/fotoRecover</url>
 	</FilterExcludedUrls>
 

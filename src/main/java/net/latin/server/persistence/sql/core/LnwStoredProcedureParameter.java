@@ -5,9 +5,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import net.latin.server.persistence.sql.core.exceptions.LnwSqlBadStatementException;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
+
+import net.latin.server.persistence.sql.core.exceptions.LnwSqlBadStatementException;
 
 /**
  * Wrapper para guardar varios tipos distintos de parametros

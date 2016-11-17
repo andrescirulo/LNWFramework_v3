@@ -3,9 +3,9 @@ package net.latin.server.security.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.latin.server.utils.exceptions.LnwException;
-
 import org.jdom2.Element;
+
+import net.latin.server.utils.exceptions.LnwException;
 
 public class LnwMenuGroup {
 

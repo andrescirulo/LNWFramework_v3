@@ -1,10 +1,12 @@
 package net.latin.client.widget.dialog;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.vaadin.polymer.paper.widget.PaperDialog;
+
+import gwt.material.design.addins.client.window.MaterialWindow;
 
 /**
  * Dialog Box de LNW.
@@ -15,12 +17,10 @@ import com.vaadin.polymer.paper.widget.PaperDialog;
  *
  *
  */
-public class GwtDialogBox extends PaperDialog {
+public class GwtDialogBox extends MaterialWindow implements ResizeHandler {
 
 	private static final String CSS_BODY = "GwtDialogBoxBody";
 	private VerticalPanel mainPanel;
-	protected boolean alreadyVisible;
-	protected FlowPanel toolbar;
 
 	/**
 	 * Creates a new Dialog Box, originally hidden
@@ -33,19 +33,39 @@ public class GwtDialogBox extends PaperDialog {
 	 */
 	public GwtDialogBox(boolean modal) {
 		super();
-		this.alreadyVisible = false;
+		
 		this.mainPanel = new VerticalPanel();
 		this.mainPanel.setHorizontalAlignment( VerticalPanel.ALIGN_CENTER );
 		this.mainPanel.setVerticalAlignment( VerticalPanel.ALIGN_MIDDLE );
 		this.mainPanel.setStyleName( CSS_BODY );
 		this.mainPanel.setWidth( "100%" );
-		this.toolbar=new FlowPanel();
-		this.toolbar.setStyleName("dialog-toolbar");
-		setModal(true);
-
+		
+		//SACA EL BOTON MAXIMIZAR
+		getToolbar().remove(2);
+		
+		getWindowContainer().getElement().getStyle().setProperty("width", "auto");
+		getWindowContainer().getElement().getStyle().setProperty("left", "initial");
+		getWindowContainer().getElement().getStyle().setProperty("right", "initial");
+		Window.addResizeHandler(this);
+		
+		
 		this.close();
 	}
 
+	protected void centrarHorizontal() {
+		getWindowContainer().getElement().getStyle().setProperty("left", "initial");
+		getWindowContainer().getElement().getStyle().setProperty("right", "initial");
+		int modalWidth = getWindowContainer().getOffsetWidth();
+		float clientWidth = Window.getClientWidth();
+		int left=(int) ((clientWidth-modalWidth)/2);
+		getWindowContainer().getElement().getStyle().setLeft(left,Unit.PX);
+		getWindowContainer().getElement().getStyle().setRight(left,Unit.PX);
+	}
+
+	//CUANDO CAMBIA EL TAMAÑO DE LA VENTANA
+	public void onResize(ResizeEvent event) {
+		centrarHorizontal();
+	}
 	/**
 	 * Add a widget to the Dialog
 	 */
@@ -64,29 +84,23 @@ public class GwtDialogBox extends PaperDialog {
 	 * Render the dialog and let it ready to be shown
 	 */
 	public GwtDialogBox render() {
-		this.clear();
-		super.add(this.toolbar);
 		super.add( this.mainPanel );
-		this.removeFromParent();
-		RootPanel.get().add(this);
 		return this;
 	}
 
 	public void show() {
 		this.onBeforeShow();
-		if( !this.alreadyVisible ) {
+		if( !this.isOpen() ) {
 			super.open();
-			super.fit();
-			this.alreadyVisible = true;
+			centrarHorizontal();
 		}
 		this.onAfterShow();
 	}
 
 	public void close() {
 		this.onClose();
-		if( this.alreadyVisible ) {
+		if( isOpen() ) {
 			super.close();
-			this.alreadyVisible = false;
 		}
 	}
 
@@ -94,7 +108,7 @@ public class GwtDialogBox extends PaperDialog {
 	 * Show or hide the Dialog depending on the current state of it
 	 */
 	public void showHide() {
-		if( this.alreadyVisible ) {
+		if( isOpen() ) {
 			this.close();
 		} else {
 			this.show();
@@ -129,9 +143,6 @@ public class GwtDialogBox extends PaperDialog {
 		this.mainPanel.setHeight(height);
 	}
 
-	public void setTitleText(String titleText){
-		toolbar.add(new Label(titleText));
-	}
 }
 
 

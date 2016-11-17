@@ -12,10 +12,18 @@ public class ColorUtils {
 	public static final String RED="DD4444";
 	public static final String GREEN="44DD44";
 	public static final String BLUE="4444DD";
-	public static final String YELLOW="DDDD44";
+	public static final String YELLOW="EEEE64";
 	public static final String ORANGE = "F5A500";
 	
-	
+	/**
+	 * Modifica un color de acuerdo a un valor.
+	 * Con un valor negativo se oscurece, con un valor positivo se aclara
+	 * <br>
+	 * El valor se suma a cada uno de los componentes RGB
+	 * @param color en formato HTML de 6 caracteres
+	 * @param valor
+	 * @return
+	 */
 	public static String cambiarColor(String color,int valor){
 		if (color.startsWith("#")){
 			color=color.substring(1);
@@ -35,6 +43,16 @@ public class ColorUtils {
 		return "#" + toHexString(rgb);
 	}
 	
+	/**
+	 * Modifica un color de acuerdo a un porcentaje.
+	 * Con un valor menor a 1 se oscurece, con un valor mayor a 1 se aclara
+	 * Ej: 0.7 oscurece un 30%. 1.3 aclara un 30%
+	 * <br>
+	 * Nota: No sirve para el color negro. Utilizar cambiarColor(String color,int valor)
+	 * @param color en formato HTML de 6 caracteres
+	 * @param porcentaje
+	 * @return
+	 */
 	public static String cambiarColor(String color,double porcentaje){
 		if (color.startsWith("#")){
 			color=color.substring(1);
@@ -54,6 +72,14 @@ public class ColorUtils {
 		return "#" + toHexString(rgb);
 	}
 
+	public static int getAvgValue(String color) {
+		if (color.startsWith("#")){
+			color=color.substring(1);
+		}
+		int[] rgb = fromHexString(color);
+		return (int) ((rgb[0] + rgb[1] + rgb[2])/3.0);
+	}
+	
 	private static int[] fromHexString(String s) {
 		
 		int length = s.length() / 2;
@@ -84,4 +110,5 @@ public class ColorUtils {
 		}
 		return sb.toString();
 	}
+
 }

@@ -1,15 +1,15 @@
 package net.latin.server.notificacion;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.latin.server.notificacion.strategies.NoNotificationStrategy;
 import net.latin.server.notificacion.strategies.NotificationStrategy;
 import net.latin.server.notificacion.strategies.SimpleNotificationStrategy;
-import net.latin.server.persistence.LnwPersistenceUtils;
 import net.latin.server.persistence.SpringUtils;
 import net.latin.server.persistence.sql.core.LnwQuery;
 import net.latin.server.persistence.sql.core.RestFcty;
@@ -17,10 +17,6 @@ import net.latin.server.persistence.sql.core.restrictions.LnwMultipleAnd;
 import net.latin.server.persistence.sql.core.restrictions.LnwMultipleOr;
 import net.latin.server.persistence.sql.oracle.LnwQueryOracle;
 import net.latin.server.security.config.LnwGeneralConfig;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.jdbc.core.RowMapper;
 
 
 public class GwtNotificationManager {
@@ -60,29 +56,31 @@ public class GwtNotificationManager {
 			
 			
 			LnwQuery query=new LnwQueryOracle();
-			query.addFrom("MENSAJE");
+			query.addFrom("SAU.MENSAJE");
 			query.setWhere(and);
 			query.selectAll();
-			List<Mensaje> mensajes = LnwPersistenceUtils.query(query, dataSource,new RowMapper() {
-				
-				public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Mensaje mens=new Mensaje();
-					mens.setId(rs.getInt("id"));
-					mens.setTexto(rs.getString("texto"));
-					mens.setTipo(rs.getString("tipo"));
-					if (rs.getTimestamp("fecha_desde")!=null){
-						Calendar desde=Calendar.getInstance();
-						desde.setTime(rs.getTimestamp("fecha_desde"));
-						mens.setFechaDesde(desde);
-					}
-					if (rs.getTimestamp("fecha_hasta")!=null){
-						Calendar hasta=Calendar.getInstance();
-						hasta.setTime(rs.getTimestamp("fecha_hasta"));
-						mens.setFechaHasta(hasta);
-					}
-					return mens;
-				}
-			});
+			//FIXME Fix temporal porque la base no existe
+			List<Mensaje> mensajes = new ArrayList<Mensaje>();
+//			List<Mensaje> mensajes = LnwPersistenceUtils.query(query, dataSource,new RowMapper() {
+//				
+//				public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+//					Mensaje mens=new Mensaje();
+//					mens.setId(rs.getInt("id"));
+//					mens.setTexto(rs.getString("texto"));
+//					mens.setTipo(rs.getString("tipo"));
+//					if (rs.getTimestamp("fecha_desde")!=null){
+//						Calendar desde=Calendar.getInstance();
+//						desde.setTime(rs.getTimestamp("fecha_desde"));
+//						mens.setFechaDesde(desde);
+//					}
+//					if (rs.getTimestamp("fecha_hasta")!=null){
+//						Calendar hasta=Calendar.getInstance();
+//						hasta.setTime(rs.getTimestamp("fecha_hasta"));
+//						mens.setFechaHasta(hasta);
+//					}
+//					return mens;
+//				}
+//			});
 			enableNotifications(mensajes.size()>0);
 			strategy.updateMessages(mensajes);
 		}

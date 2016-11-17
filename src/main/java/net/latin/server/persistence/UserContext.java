@@ -3,10 +3,10 @@ package net.latin.server.persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.transaction.TransactionStatus;
+
 import net.latin.server.GwtContext;
 import net.latin.server.persistence.user.LnwUser;
-
-import org.springframework.transaction.TransactionStatus;
 
 
 

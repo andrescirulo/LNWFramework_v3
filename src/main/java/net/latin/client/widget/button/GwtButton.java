@@ -1,37 +1,43 @@
 package net.latin.client.widget.button;
 
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.vaadin.polymer.paper.widget.PaperButton;
 
+import gwt.material.design.client.constants.ButtonType;
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.WavesType;
+import gwt.material.design.client.ui.MaterialButton;
 import net.latin.client.widget.base.LnwWidget;
 
 /**
  * Button con estilo predefinido
  *
  */
-public class GwtButton extends PaperButton implements LnwWidget {
+public class GwtButton extends MaterialButton implements LnwWidget {
 
-//	public static final String BUTTON_CSS = "GwtButton";
-//	public static final String BUTTON_SELECTED_CSS = "GwtButtonSelected";
-//	public String BUTTON_OVER_CSS = "";
 
 	public GwtButton() {
 		super();
-//		setStyleName(BUTTON_CSS);
-		setRaised(true);
+		setType(ButtonType.RAISED);
+		setWaves(WavesType.DEFAULT);
 	}
 
 	public GwtButton(String html, ClickHandler handler) {
 		super(html);
 		addClickHandler(handler);
-//		setStyleName(BUTTON_CSS);
-		setRaised(true);
+		setType(ButtonType.RAISED);
+		setWaves(WavesType.DEFAULT);
+		setColor(Color.WHITE,Color.BLACK);
+	}
+
+	public void setColor(Color backColor, Color textColor) {
+		setBackgroundColor(backColor);
+		setTextColor(textColor);
 	}
 
 	public GwtButton(String html) {
 		super(html);
-//		setStyleName(BUTTON_CSS);
-		setRaised(true);
+		setType(ButtonType.RAISED);
+		setWaves(WavesType.DEFAULT);
 	}
 	
 
@@ -39,7 +45,7 @@ public class GwtButton extends PaperButton implements LnwWidget {
 	}
 
 	public void setFocus() {
-		setFocused(true);
+		setFocus(true);
 	}
 
 	public String getText() {

@@ -2,50 +2,10 @@
 body{
 	margin:0px !important;
 	font-family: 'Roboto', 'Noto', sans-serif;
-	overflow-y:hidden;
+/* 	overflow-y:hidden; */
 }
 .GwtControllerPagesPanel{
 	overflow-y:auto;
-}
-
-.paper-drawer-panel-0{
-	position: static !important;
-}
-.paper-drawer-panel-0 #main,
-.paper-drawer-panel-0 #drawer{
-	top:64px !important;
-}
-
-.paper-item-menu{
-	background-color: #4488dd;
-    color: white;
-    cursor:pointer;
-    border-bottom:1px solid #aaccff;
-}
-.paper-item-menu:hover{
-	background-color: #5599ee;
-}
-
-.paper-item-submenu{
-	background-color: white;
-    cursor:pointer;
-    border-bottom:1px solid #aaccff;
-}
-.paper-item-submenu:hover{
-	background-color: #eeeeee;
-}
-
-.toolbar{
-	color:white;
-	background-color: #3377cc;
-	width: 100%;
-	/*position: relative;
-	top:0px;
-	left:0px;*/
-	height: 64px; 
-}
-.toolbar > paper-icon-button > iron-icon{
-	vertical-align:initial;
 }
 
 .page-style{
@@ -74,7 +34,8 @@ body{
 }
 
 .form-element-label-text{
-	padding:8px 0px;
+    margin-top: 15px;
+    padding: 5px;
 	font-size: 16px;	
 }
 .form-subtitle{
@@ -82,15 +43,12 @@ body{
 	color:white;
 	padding:5px;
     font-size: 14px;
-    margin:3px;
+    margin-top:15px;
 }
 .form-footer-label{
 	font-size:9pt;
 	padding-left:10px;
 	color:cadetblue;
-}
-paper-radio-group,paper-checkbox{
-	padding:12px;
 }
 .dialog-toolbar{
 	color:white;
@@ -101,8 +59,8 @@ paper-radio-group,paper-checkbox{
 }
 .modal-popup-text{
     display: inline-block;
-    line-height: 28px;
-    vertical-align: text-bottom;
+    line-height: 50px;
+    vertical-align: top;
     font-size: 18px;
     padding-left: 10px;
 }
@@ -118,4 +76,23 @@ paper-radio-group,paper-checkbox{
 	width:75px;
 	height:75px;
 	color:#DDDD55;
+}
+.form-elements-panel td{
+	padding:0px !important;
+}
+.gwt-CheckBox{
+	padding:10px;
+}
+.gwt-CheckBox > label{
+	color:black !important;
+}
+.lean-overlay{
+	z-index:999 !important;
+}
+.window > .content td {
+	padding:5px !important;
+}
+
+.gwt-RadioButton > label {
+	color:black !important;
 }
