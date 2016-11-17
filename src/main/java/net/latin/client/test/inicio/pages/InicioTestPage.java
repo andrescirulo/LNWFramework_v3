@@ -229,11 +229,11 @@ public class InicioTestPage extends GwtPage {
 		}));
 		form.addElement(panelVarios);
 		
-		/*form.addButton(new GwtButton("Ver Tablas", new ClickHandler() {
+		form.addButton(new GwtButton("Ver Tablas", new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				showPage(InicioTestGroup.PAGINA_TABLAS);
 			}
-		}));*/
+		}));
 		form.addButton(new GwtButton("Subir Archivos", new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				showPage(InicioTestGroup.PAGINA_ARCHIVOS);
