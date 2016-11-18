@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tomcatProjectProperties>
-    <rootDir>/target/LNWFramework_v3-1.0-SNAPSHOT</rootDir>
+    <rootDir>/target/LNWFramework_v3</rootDir>
     <workDir>/work</workDir>
     <exportSource>false</exportSource>
     <reloadable>true</reloadable>
@@ -11,7 +11,7 @@
     <webPath>LnwFramework_v3</webPath>
     <webClassPathEntries>
         <webClassPathEntry>/LNWFramework_v3/lib/jsinterop-annotations-1.0.0-20160417.160707-1.jar</webClassPathEntry>
-        <webClassPathEntry>/LNWFramework_v3/target/classes</webClassPathEntry>
+        <webClassPathEntry>/LNWFramework_v3/target/LNWFramework_v3/WEB-INF/classes</webClassPathEntry>
         <webClassPathEntry>/LNWFramework_v3/target/test-classes</webClassPathEntry>
         <webClassPathEntry>C:/Program Files (x86)/Java/jdk1.8.0_51/jre/lib/charsets.jar</webClassPathEntry>
         <webClassPathEntry>C:/Program Files (x86)/Java/jdk1.8.0_51/jre/lib/ext/access-bridge-32.jar</webClassPathEntry>

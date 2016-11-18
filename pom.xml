@@ -147,7 +147,7 @@
 	</dependencies>
 
 	<build>
-
+		<finalName>LNWFramework_v3</finalName>
 		<plugins>
 
 			<!-- GWT Maven Plugin -->
