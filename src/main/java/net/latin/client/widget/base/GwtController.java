@@ -755,6 +755,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	public void showPage(GwtPage page) {
 		hideAllPages();
 		pagesPanel.add(page);
+		componentsPanel.getElement().setScrollTop(0);
 	}
 
 	/**
