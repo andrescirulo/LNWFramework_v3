@@ -4,9 +4,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import gwt.material.design.addins.client.fileuploader.MaterialFileUploader;
 import gwt.material.design.addins.client.fileuploader.MaterialUploadLabel;
-import gwt.material.design.addins.client.fileuploader.base.UploadFile;
-import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent;
-import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent.AddedFileHandler;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.LnwWidget;
 
