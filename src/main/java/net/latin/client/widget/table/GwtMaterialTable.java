@@ -1,8 +1,8 @@
 package net.latin.client.widget.table;
 
-import gwt.material.design.client.data.component.CategoryComponent;
-import gwt.material.design.client.data.component.CategoryComponent.OrphanCategoryComponent;
-import gwt.material.design.client.data.factory.CategoryComponentFactory;
+import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
+
 import gwt.material.design.client.data.factory.RowComponentFactory;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 
@@ -16,11 +16,25 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
  * usar sticky headers (useStickyHeader)
  * 
  */
-public class GwtMaterialTable<T> extends MaterialDataTable<T> {
+public class GwtMaterialTable<T> extends MaterialDataTable<T> implements Handler {
 
-	private GwtTableCategoryFactory categoryFactory;
-	public GwtMaterialTable() {
-		
+	private GwtTableCategoryFactory<T> categoryFactory;
+	private GwtMaterialTableManager<T> manager;
+	private Boolean inicializada;
+	public GwtMaterialTable(GwtMaterialTableManager<T> manager) {
+		this.manager = manager;
+		this.inicializada=false;
+		setCategoryFactory(new GwtDefaultCategoryFactory());
+		addAttachHandler(this);
+	}
+	public GwtMaterialTable(GwtMaterialTableManager<T> manager,GwtTableCategoryFactory<T> catFactory) {
+		this(manager);
+		this.categoryFactory = catFactory;
+		setRowFactory(new RowComponentFactory<T>(){
+			public String getCategory(T obj) {
+				return categoryFactory.getCategory(obj);
+			}
+		});
 	}
 	
 	@Override
@@ -31,14 +45,19 @@ public class GwtMaterialTable<T> extends MaterialDataTable<T> {
 	public void setUseCategories(boolean useCategories) {
 		super.setUseCategories(useCategories);
 	}
-	public void setUseCategories(GwtTableCategoryFactory catFactory) {
+	public void setUseCategories(GwtTableCategoryFactory<T> catFactory) {
 		super.setUseCategories(true);
-		this.categoryFactory = catFactory;
-		setRowFactory(new RowComponentFactory<T>(){
-			public String getCategory(T model) {
-				return categoryFactory.getCategory();
-			}
-		});
-		setCategoryFactory(new GwtDefaultCategoryFactory());
+	}
+
+	@Override
+	public void onAttachOrDetach(AttachEvent event) {
+		if (event.isAttached() && !inicializada){
+			manager.addColumns(this);
+			inicializada=true;
+		}
+	}
+
+	public void setTableTitle(String titulo) {
+		this.getTableTitle().setText(titulo);
 	}
 }
