@@ -15,18 +15,25 @@ body{
 }
 
 #loadingPanel{
-	position:fixed;
+	position:absolute;
 	background-color:rgba(0,0,0,0.5);
-	color:white;
 	text-align:center;
-	vertical-align:middle;
 	height:100%;
 	width:100%;
 	top:0px;
 	bottom:0px;
-	rigth:0px;
+	right:0px;
 	left:0px;
 	z-index:10000;
+	
+}
+#loadingPanel > span{
+	position:absolute;
+	font-size: 18pt;
+	color:white;
+	height:18pt;
+	margin-top:-9pt;
+	top:50%;
 }
 
 .form-main{
