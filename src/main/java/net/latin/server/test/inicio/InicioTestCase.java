@@ -16,6 +16,8 @@ import net.latin.client.test.inicio.rpc.InicioTestClient;
 import net.latin.client.widget.base.RespuestRPC;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.server.GwtUseCase;
+import net.latin.server.utils.fileTypes.Pdf;
+import net.latin.server.utils.reports.visualizer.ReportViewerServlet;
 
 public class InicioTestCase extends GwtUseCase implements InicioTestClient {
 
@@ -28,6 +30,17 @@ public class InicioTestCase extends GwtUseCase implements InicioTestClient {
 	public SimpleRespuestRPC getTextoInicial() {
 		SimpleRespuestRPC res = new SimpleRespuestRPC();
 		res.setMensaje("Este es el mensaje de bienvenida");
+		
+		InputStream pdfIS;
+		try {
+			pdfIS = new FileInputStream(new File(InicioTestCase.class.getClassLoader().getResource("/test.pdf").toURI()));
+			Pdf pdfFile=new Pdf("test.pdf", IOUtils.toByteArray(pdfIS));
+			ReportViewerServlet.setFileToShow(pdfFile);
+		} catch (Exception e) {
+			res.setError("Error al cargar el archivo PDF");
+			LOG.error(res.getMensaje(),e);
+		}
+		
 		return res;
 	}
 	

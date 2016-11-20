@@ -6,7 +6,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.addins.client.window.MaterialWindow;
+import net.latin.client.widget.window.GwtMaterialWindow;
 
 /**
  * Dialog Box de LNW.
@@ -17,7 +17,7 @@ import gwt.material.design.addins.client.window.MaterialWindow;
  *
  *
  */
-public class GwtDialogBox extends MaterialWindow implements ResizeHandler {
+public class GwtDialogBox extends GwtMaterialWindow implements ResizeHandler {
 
 	private static final String CSS_BODY = "GwtDialogBoxBody";
 	private VerticalPanel mainPanel;
@@ -40,15 +40,12 @@ public class GwtDialogBox extends MaterialWindow implements ResizeHandler {
 		this.mainPanel.setStyleName( CSS_BODY );
 		this.mainPanel.setWidth( "100%" );
 		
-		//SACA EL BOTON MAXIMIZAR
-		getToolbar().remove(2);
-		
 		getWindowContainer().getElement().getStyle().setProperty("width", "auto");
 		getWindowContainer().getElement().getStyle().setProperty("left", "initial");
 		getWindowContainer().getElement().getStyle().setProperty("right", "initial");
 		Window.addResizeHandler(this);
 		
-		
+		setNotMaximize();
 		this.close();
 	}
 

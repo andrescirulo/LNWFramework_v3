@@ -10,6 +10,7 @@ import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
 import net.latin.client.rpc.GwtAsyncCallback;
+import net.latin.client.rpc.GwtRespuestAsyncCallback;
 import net.latin.client.rpc.GwtRpc;
 import net.latin.client.test.inicio.InicioTestGroup;
 import net.latin.client.test.inicio.rpc.InicioTestClientAsync;
@@ -25,6 +26,7 @@ import net.latin.client.widget.dialog.GwtConfirmAbstractListener;
 import net.latin.client.widget.dialog.GwtConfirmDialogAceptar;
 import net.latin.client.widget.dialog.GwtConfirmDialogSiNo;
 import net.latin.client.widget.dialog.GwtConfirmDialogSiNoCancelar;
+import net.latin.client.widget.fileviewer.GwtMaterialFileViewer;
 import net.latin.client.widget.form.GwtForm;
 import net.latin.client.widget.form.GwtFormSubtitle;
 import net.latin.client.widget.gwtswitch.GwtSwitch;
@@ -274,12 +276,19 @@ public class InicioTestPage extends GwtPage {
 			}
 		}));
 		
+		GwtMaterialFileViewer fileViewer=new GwtMaterialFileViewer();
+		panel.add(new GwtButton("Ver PDF", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				fileViewer.open();
+			}
+		}));
+		
 		form.addElement(panel);
 	}
 
 	protected void onVisible() {
-		server.getTextoInicial(new GwtAsyncCallback<SimpleRespuestRPC>() {
-			public void onSuccess(SimpleRespuestRPC result) {
+		server.getTextoInicial(new GwtRespuestAsyncCallback<SimpleRespuestRPC>(this) {
+			public void onOk(SimpleRespuestRPC result) {
 				lbl.setText(result.getMensaje());
 			}
 		});

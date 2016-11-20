@@ -47,6 +47,8 @@
 		<url>/__reportViewer</url>
 		<url>/__fileUploader</url>
 		<url>/__fileDownloader</url>
+		<url>/__fileVisualizer</url>
+		<url>__fileVisualizer</url>
 		<url>/LogoutPage.do</url>
 		<url>/Logout.do</url>
 		<url>/Login.do</url>

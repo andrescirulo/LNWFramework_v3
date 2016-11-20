@@ -45,6 +45,10 @@
 		<filter-name>ApplicationFilter</filter-name>
 		<url-pattern>/fileUploader</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ApplicationFilter</filter-name>
+		<url-pattern>/__fileVisualizer</url-pattern>
+	</filter-mapping>
   
   
     
@@ -127,6 +131,15 @@
 	<servlet-mapping>
 		<servlet-name>fileUploader</servlet-name>
 		<url-pattern>/__fileUploader</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>fileVisualizer</servlet-name>
+		<servlet-class>net.latin.server.utils.reports.visualizer.ReportViewerServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>fileVisualizer</servlet-name>
+		<url-pattern>/__fileVisualizer</url-pattern>
 	</servlet-mapping>
 	
   <!-- Default page to serve -->
