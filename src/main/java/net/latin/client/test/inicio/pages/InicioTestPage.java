@@ -9,7 +9,6 @@ import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
-import net.latin.client.rpc.GwtAsyncCallback;
 import net.latin.client.rpc.GwtRespuestAsyncCallback;
 import net.latin.client.rpc.GwtRpc;
 import net.latin.client.test.inicio.InicioTestGroup;
