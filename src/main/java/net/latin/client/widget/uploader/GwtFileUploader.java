@@ -40,7 +40,7 @@ import net.latin.client.widget.uploader.rpc.GwtViewFileClientAsync;
 
 public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidget {
 
-	private static final String DEFAULT_TEXT = "Arrastra los archivos aquí";
+	private static final String DEFAULT_TEXT = "Haz click en el botón o arrastra el archivo aquí";
 	private static final String UPLOAD_URL=GwtController.instance.getBasePath() + "__fileUploader";
 	public static final String DOWNLODER_SERVER_NAME = "__fileDownloader";
 	private static final String DEFAULT_WIDTH = "500px";
