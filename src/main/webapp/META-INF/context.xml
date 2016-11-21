@@ -1,0 +1,7 @@
+<Context path="/LNWFramework_v3">
+	<ResourceLink name="jdbc/sau"
+	                    global="jdbc/sau"
+	                    auth="Container"
+	                    type="javax.sql.DataSource" /> 
+	
+</Context>
