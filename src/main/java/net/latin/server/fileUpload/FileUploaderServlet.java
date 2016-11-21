@@ -65,7 +65,7 @@ public class FileUploaderServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			if (e.getCause()!=null && e.getCause().toString().contains("Stream ended unexpectedly")) {
-				LOG.debug("El usuario canceló la subida", e);
+				LOG.debug("El usuario cancelÃ³ la subida", e);
 			} else {
 				LOG.error("Error al subir un archivo", e);
 			}

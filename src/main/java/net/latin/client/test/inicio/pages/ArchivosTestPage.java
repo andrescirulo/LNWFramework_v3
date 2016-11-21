@@ -17,6 +17,9 @@ public class ArchivosTestPage extends GwtPage {
 		GwtVerticalPanel panel = new GwtVerticalPanel("Subir Archivos",true);
 		panel.add(upload);
 		this.add(panel);
+		
+		upload.setViewServer(server, this);
+		upload.setDownloadServer(server, this);
 	}
 	
 }

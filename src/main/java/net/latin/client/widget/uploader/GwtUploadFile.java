@@ -1,5 +1,7 @@
 package net.latin.client.widget.uploader;
 
+import java.util.Date;
+
 import gwt.material.design.addins.client.fileuploader.base.UploadFile;
 
 public class GwtUploadFile extends UploadFile {
@@ -10,6 +12,13 @@ public class GwtUploadFile extends UploadFile {
 	private static final long serialVersionUID = -5875068400632275366L;
 	private String id;
 
+	public GwtUploadFile(String name, Date lastModified, double fileSize, String type) {
+		setName(name);
+		setLastModified(lastModified);
+		setFileSize(fileSize);
+		setType(type);
+    }
+	
 	public String getId() {
 		return id;
 	}

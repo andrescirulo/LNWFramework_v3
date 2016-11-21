@@ -16,6 +16,9 @@ import net.latin.client.test.inicio.rpc.InicioTestClient;
 import net.latin.client.widget.base.RespuestRPC;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.server.GwtUseCase;
+import net.latin.server.fileUpload.FileContainer;
+import net.latin.server.fileUpload.FileDownloaderServlet;
+import net.latin.server.fileUpload.FileToShowOnClient;
 import net.latin.server.utils.fileTypes.Pdf;
 import net.latin.server.utils.reports.visualizer.ReportViewerServlet;
 
@@ -78,6 +81,43 @@ public class InicioTestCase extends GwtUseCase implements InicioTestClient {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	public SimpleRespuestRPC prepareForDownload(String fileId) {
+		SimpleRespuestRPC rta = new SimpleRespuestRPC();
+		try {
+			FileToShowOnClient file = FileContainer.getFileFromCurrentSession(fileId);
+			if (file == null) {
+				rta.setError("No se pudo descargar el archivo");
+			} else {
+				FileDownloaderServlet.setFileToShow(file);
+				rta.setRespuesta(true);
+			}
+		} catch (Exception e) {
+			rta.setError("No se pudo descargar el archivo");
+			LOG.error(rta.getMensaje(),e);
+		}
+		
+		return rta;
+	}
+
+	public SimpleRespuestRPC prepareForView(String fileId) {
+		SimpleRespuestRPC rta = new SimpleRespuestRPC();
+		try {
+			
+			FileToShowOnClient file = FileContainer.getFileFromCurrentSession(fileId);
+			if (file == null) {
+				rta.setError("No se pudo mostrar el archivo");
+			} else {
+				ReportViewerServlet.setFileToShow(file);
+				rta.setRespuesta(true);
+			}
+		} catch (Exception e) {
+			rta.setError("No se pudo mostrar el archivo");
+			LOG.error(rta.getMensaje(),e);
+		}
+		
+		return rta;
 	}
 
 }

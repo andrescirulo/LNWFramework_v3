@@ -127,19 +127,27 @@
 		<servlet-name>fileUploader</servlet-name>
 		<servlet-class>net.latin.server.fileUpload.FileUploaderServlet</servlet-class>
 	</servlet>
-	
 	<servlet-mapping>
 		<servlet-name>fileUploader</servlet-name>
 		<url-pattern>/__fileUploader</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>fileVisualizer</servlet-name>
 		<servlet-class>net.latin.server.utils.reports.visualizer.ReportViewerServlet</servlet-class>
 	</servlet>
-	
 	<servlet-mapping>
 		<servlet-name>fileVisualizer</servlet-name>
 		<url-pattern>/__fileVisualizer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FileDownloader</servlet-name>
+		<servlet-class>net.latin.server.fileUpload.FileDownloaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileDownloader</servlet-name>
+		<url-pattern>/__fileDownloader</url-pattern>
 	</servlet-mapping>
 	
   <!-- Default page to serve -->
