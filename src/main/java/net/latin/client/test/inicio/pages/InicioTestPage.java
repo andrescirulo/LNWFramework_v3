@@ -45,8 +45,41 @@ public class InicioTestPage extends GwtPage {
 
 	public InicioTestPage() {
 		server = (InicioTestClientAsync)GwtRpc.getInstance().getServer( "InicioTestCase" );
+		
 		lbl = new MaterialLink();
-		this.add(lbl);
+		
+		GwtHorizontalPanel panelMensajes = new GwtHorizontalPanel("Mensajes",true);
+		GwtButton btnError = new GwtButton("Agregar Error", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				addErrorMessage("Este es un mensaje de error de prueba");
+			}
+		});
+		GwtButton btnOk = new GwtButton("Agregar Ok", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				addOkMessage("Este es un mensaje OK de prueba");
+			}
+		});
+		GwtButton btnAlert = new GwtButton("Agregar Alerta", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				addAlertMessage("Este es un mensaje de alerta de prueba");
+			}
+		});
+		GwtButton btnLoading = new GwtButton("Agregar Loading", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				addLoadingMessage("Este es un mensaje de loading de prueba");
+			}
+		});
+		GwtButton btnLimpiar = new GwtButton("Limpiar mensajes", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				clearMessages();
+			}
+		});
+		panelMensajes.add(btnOk);
+		panelMensajes.add(btnAlert);
+		panelMensajes.add(btnError);
+		panelMensajes.add(btnLoading);
+		panelMensajes.add(btnLimpiar);
+		
 		GwtValidateTextBox text=new GwtValidateTextBox();
 		text.setPlaceholder("Texto numerico (sin Label)");
 		text.setNumericNatural();
@@ -85,6 +118,7 @@ public class InicioTestPage extends GwtPage {
 		
 		
 		GwtForm form=new GwtForm("Titulo");
+		form.addElement(panelMensajes);
 		form.addElement(text);
 		form.addElementWithLabel("Elemento con label",text2);
 		form.addElementWithFooter(text3, "Este elemento tiene footer");
@@ -173,7 +207,7 @@ public class InicioTestPage extends GwtPage {
 		GwtDatePicker datePicker = new GwtDatePicker();
 		datePicker.setPlaceholder("Date Picker");
 		panelFechas.add(datePicker);
-		form.addElement(panelFechas);
+		//form.addElement(panelFechas);
 		
 		
 		GwtHorizontalPanel panelSwitch = new GwtHorizontalPanel("Switches",true);
@@ -189,7 +223,7 @@ public class InicioTestPage extends GwtPage {
 		panelSwitch.add(sw2);
 		panelSwitch.add(sw3);
 		panelSwitch.add(sw4);
-		form.addElement(panelSwitch);
+		//form.addElement(panelSwitch);
 		
 		GwtHorizontalPanel panelBotones = new GwtHorizontalPanel("Botones",true);
 		GwtButton btn1=new GwtButton("Boton Rojo");
@@ -212,7 +246,7 @@ public class InicioTestPage extends GwtPage {
 		panelBotones.add(btn4);
 		panelBotones.add(btn5);
 		panelBotones.add(btn6);
-		form.addElement(panelBotones);
+		//form.addElement(panelBotones);
 		
 		GwtVerticalPanel panelVarios=new GwtVerticalPanel("Varios (Panel vertical)",true);
 		panelVarios.add(btnPop);
@@ -228,7 +262,7 @@ public class InicioTestPage extends GwtPage {
 				}, 5000);
 			}
 		}));
-		form.addElement(panelVarios);
+		//form.addElement(panelVarios);
 		
 		form.addButton(new GwtButton("Ver Tablas", new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -241,6 +275,7 @@ public class InicioTestPage extends GwtPage {
 			}
 		}));
 		
+		this.add(lbl);
 		this.add(form.render());
 	}
 	

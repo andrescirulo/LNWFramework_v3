@@ -118,3 +118,28 @@ body{
 .gwt-RadioButton > label {
 	color:black !important;
 }
+
+/****************************/
+/*****GwtMsgNotification*****/
+/****************************/
+
+
+.MessageBoxDiv {
+	width : 100%;
+	font-size: 11pt;
+	line-height:11pt;
+    font-family: "Roboto", sans-serif;
+}
+
+.MessageBoxCeldaImagen {
+	text-align: center;
+	vertical-align: middle;
+	width: 5%;
+}
+.MessageBoxImageError {
+	width: 20px;
+	height: 20px;
+}
+.MessageBoxDiv td{
+	padding:0px;
+} 

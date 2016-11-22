@@ -13,13 +13,13 @@ public class ArchivosTestPage extends GwtPage {
 	public ArchivosTestPage() {
 		server = (InicioTestClientAsync)GwtRpc.getInstance().getServer( "InicioTestCase" );
 		
-		GwtFileUploader upload=new GwtFileUploader();
+		GwtFileUploader upload=new GwtFileUploader(this);
 		GwtVerticalPanel panel = new GwtVerticalPanel("Subir Archivos",true);
 		panel.add(upload);
 		this.add(panel);
-		
-		upload.setViewServer(server, this);
-		upload.setDownloadServer(server, this);
+		upload.setAcceptedFiles("application/pdf");
+		upload.setViewServer(server);
+		upload.setDownloadServer(server);
 	}
 	
 }
