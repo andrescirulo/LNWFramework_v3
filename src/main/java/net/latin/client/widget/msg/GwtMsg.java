@@ -9,7 +9,7 @@ public class GwtMsg {
 	
 	private static final int DEFAULT_TTL = 1;
 	private String text;
-	private int type;
+	private GwtMsgTypeEnum type;
 	
 	/**
 	 * Time to live
@@ -20,12 +20,12 @@ public class GwtMsg {
 	public GwtMsg() {
 	}
 	
-	public GwtMsg( int type,String message) {
+	public GwtMsg( GwtMsgTypeEnum type,String message) {
 		this.type = type;
 		this.text = message;
 		this.ttl = DEFAULT_TTL;
 	}
-	public GwtMsg( int type,String message, int ttl) {
+	public GwtMsg( GwtMsgTypeEnum type,String message, int ttl) {
 		this.type = type;
 		this.text = message;
 		this.ttl = ttl;
@@ -36,10 +36,10 @@ public class GwtMsg {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getType() {
+	public GwtMsgTypeEnum getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(GwtMsgTypeEnum type) {
 		this.type = type;
 	}
 

@@ -10,7 +10,7 @@ import net.latin.client.widget.base.listener.GwtOnVisibleListener;
 import net.latin.client.widget.base.listener.GwtUploadPanelManager;
 import net.latin.client.widget.msg.GwtMensajesListener;
 import net.latin.client.widget.msg.GwtMsg;
-import net.latin.client.widget.msg.GwtMsgNotification;
+import net.latin.client.widget.msg.GwtMsgTypeEnum;
 
 /**
  * 
@@ -169,7 +169,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesL
 	 * change
 	 */
 	public void addLongOkMessage(String text) {
-		controller.addMessage(new GwtMsg(GwtMsgNotification.OK, text, 2));
+		controller.addMessage(new GwtMsg(GwtMsgTypeEnum.OK, text, 2));
 	}
 
 	/**
@@ -177,7 +177,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesL
 	 * change
 	 */
 	public void addLongErrorMessage(String text) {
-		controller.addMessage(new GwtMsg(GwtMsgNotification.ERROR, text, 2));
+		controller.addMessage(new GwtMsg(GwtMsgTypeEnum.ERROR, text, 2));
 	}
 
 	/**
@@ -186,7 +186,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesL
 	 */
 	public void addAllLongErrorMessages(List<String> errors) {
 		for (String error:errors) {
-			controller.addMessage(new GwtMsg(GwtMsgNotification.ERROR, error, 2));
+			controller.addMessage(new GwtMsg(GwtMsgTypeEnum.ERROR, error, 2));
 		}
 	}
 
@@ -195,7 +195,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesL
 	 * change
 	 */
 	public void addLongAlertMessage(String text) {
-		controller.addMessage(new GwtMsg(GwtMsgNotification.ALERT, text, 2));
+		controller.addMessage(new GwtMsg(GwtMsgTypeEnum.ALERT, text, 2));
 	}
 
 	/**
