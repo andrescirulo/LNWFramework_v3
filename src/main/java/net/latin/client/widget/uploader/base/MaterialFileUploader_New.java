@@ -268,7 +268,12 @@ public class MaterialFileUploader_New extends MaterialWidget implements HasFileU
             }
 
             $(file.previewElement).find("#error-message").html(response);
-            ErrorEvent.fire(this, convertUploadFile(file), new UploadResponse(file.xhr.status, file.xhr.statusText, response));
+            if (file.xhr!=null){
+            	ErrorEvent.fire(this, convertUploadFile(file), new UploadResponse(file.xhr.status, file.xhr.statusText, response));
+        	}
+	        else{
+	        	ErrorEvent.fire(this, convertUploadFile(file), new UploadResponse(null, null, response));
+	        }
         });
 
         uploader.on("totaluploadprogress", (progress, file, response) -> {
@@ -295,7 +300,12 @@ public class MaterialFileUploader_New extends MaterialWidget implements HasFileU
         });
 
         uploader.on("complete", file -> {
-            CompleteEvent.fire(this, convertUploadFile(file), new UploadResponse(file.xhr.status, file.xhr.statusText, globalResponse));
+            if (file.xhr!=null){
+            	CompleteEvent.fire(this, convertUploadFile(file), new UploadResponse(file.xhr.status, file.xhr.statusText, globalResponse));
+        	}
+	        else{
+	        	CompleteEvent.fire(this, convertUploadFile(file), new UploadResponse(null, null, globalResponse));
+	        }
         });
 
         uploader.on("canceled", file -> {
@@ -310,6 +320,7 @@ public class MaterialFileUploader_New extends MaterialWidget implements HasFileU
             MaterialToast.fireToast("You have reached the maximum files to be uploaded.");
             MaxFilesExceededEvent.fire(this, convertUploadFile(file));
         });
+        
     }
 
     /**
@@ -611,5 +622,12 @@ public class MaterialFileUploader_New extends MaterialWidget implements HasFileU
     }
     protected native void setFileId(String fileId,JsObject uploader)/*-{
 		return uploader.options.headers={"File-Id": fileId};
+	}-*/;
+    
+    protected void setOptionValue(String option,String value){
+    	setOptionValue(option,value, uploader);
+    }
+    protected native void setOptionValue(String option,String value,JsObject uploader)/*-{
+		return uploader.options[option]=value;
 	}-*/;
 }

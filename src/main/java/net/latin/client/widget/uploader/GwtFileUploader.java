@@ -8,6 +8,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent;
 import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent.AddedFileHandler;
+import gwt.material.design.addins.client.fileuploader.events.ErrorEvent;
+import gwt.material.design.addins.client.fileuploader.events.ErrorEvent.ErrorHandler;
+import gwt.material.design.addins.client.fileuploader.events.MaxFilesReachedEvent;
+import gwt.material.design.addins.client.fileuploader.events.MaxFilesReachedEvent.MaxFilesReachedHandler;
 import gwt.material.design.addins.client.fileuploader.events.SuccessEvent;
 import gwt.material.design.addins.client.fileuploader.events.SuccessEvent.SuccessHandler;
 import gwt.material.design.addins.client.fileuploader.events.TotalUploadProgressEvent;
@@ -62,8 +66,10 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private GwtUploadFile file;
 	private GwtMensajesListener msgHandler;
 	private GwtMaterialFileViewer fileViewPopUp;
+	private int DEFAULT_MAX_FILE_SIZE=5;
 	
-	public GwtFileUploader() {
+	public GwtFileUploader(GwtMensajesListener msgHandler) {
+		this.msgHandler = msgHandler;
 		setUrl(UPLOAD_URL);
 		label = new MaterialLabel();
 		label.setText(DEFAULT_TEXT);
@@ -150,6 +156,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		});
 		this.addAddedFileHandler(new AddedFileHandler<GwtUploadFile>() {
 			public void onAddedFile(AddedFileEvent<GwtUploadFile> event) {
+				msgHandler.clearMessages();
 				label.setText(event.getTarget().getName());
 				file=event.getTarget();
 				file.setId(componentId + "_" + nextId);
@@ -203,9 +210,34 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 			}
 		});
 		
+		addMaxFilesReachHandler(new MaxFilesReachedHandler<GwtUploadFile>() {
+			public void onMaxFilesReached(MaxFilesReachedEvent<GwtUploadFile> event) {
+				msgHandler.addErrorMessage("La cantidad de archivos o el tamaño es incorrecto");
+			}
+		});
+		addErrorHandler(new ErrorHandler<GwtUploadFile>() {
+			public void onError(ErrorEvent<GwtUploadFile> event) {
+				msgHandler.addErrorMessage(event.getResponse().getBody());
+				resetWidget();
+			}
+		});
 		fileViewPopUp= new GwtMaterialFileViewer();
+		setMaxFileSize(DEFAULT_MAX_FILE_SIZE);
 	}
 	
+	@Override
+	public void initDropzone() {
+		super.initDropzone();
+		setOptionValue("dictFallbackMessage","Tu navegador no soporta subir archivos arrastrando archivos.");
+		setOptionValue("dictFallbackText","Por favor utiliza la modalidad antigua para subir archivos.");
+		setOptionValue("dictFileTooBig","El archivo es muy grande ({{filesize}}MiB). Tamaño máximo:{{maxFilesize}}MiB.");
+		setOptionValue("dictInvalidFileType","No puedes subir archivos de ese tipo.");
+		setOptionValue("dictResponseError","El servidor respondió con el código {{statusCode}} .");
+		setOptionValue("dictCancelUpload","Cancelar subida");
+		setOptionValue("dictCancelUploadConfirmation","¿Estas seguro que deseas cancelar la subida?");
+		setOptionValue("dictRemoveFile","Remover archivo");
+		setOptionValue("dictMaxFilesExceeded","No puedes subir más archivos.");
+	}
 
 	protected void accionDescargar() {
 		downloadServer.prepareForDownload(file.getId(), new GwtRespuestAsyncCallback<SimpleRespuestRPC>(msgHandler) {
@@ -279,6 +311,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		btnRemove.setVisible(false);
 		btnView.setVisible(false);
 		btnDownload.setVisible(false);
+		progress.setVisible(false);
 	}
 
 	@Override
@@ -295,15 +328,13 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	}
 
 
-	public void setDownloadServer(GwtDownloadFileClientAsync downloadServer,GwtMensajesListener msgHandler) {
+	public void setDownloadServer(GwtDownloadFileClientAsync downloadServer) {
 		this.downloadServer = downloadServer;
-		this.msgHandler = msgHandler;
 	}
 
 
-	public void setViewServer(GwtViewFileClientAsync viewServer,GwtMensajesListener msgHandler) {
+	public void setViewServer(GwtViewFileClientAsync viewServer) {
 		this.viewServer = viewServer;
-		this.msgHandler = msgHandler;
 	}
 
 	/**
