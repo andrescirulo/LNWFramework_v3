@@ -16,7 +16,7 @@ public class GwtMaterialWindow extends MaterialWindow implements ResizeHandler{
 	
 	protected void centrarHorizontal() {
 		getElement().getStyle().setProperty("left", "initial");
-		getElement().getStyle().setProperty("rigth", "initial");
+		getElement().getStyle().setProperty("right", "initial");
 		int modalWidth = getOffsetWidth();
 		float clientWidth = Window.getClientWidth();
 		int left=(int) ((clientWidth-modalWidth)/2);
