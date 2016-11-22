@@ -15,7 +15,6 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import gwt.material.design.client.ui.MaterialRadioButton;
-import net.latin.client.utils.ColorUtils;
 import net.latin.client.utils.StylesManager;
 import net.latin.client.widget.base.LnwWidget;
 
@@ -25,6 +24,8 @@ public class GwtRadioButton extends VerticalPanel implements LnwWidget {
 
 	private static final int HORIZONTAL=0; 
 	private static final int VERTICAL=1;
+
+	private static final String MAIN_STYLE = "radio-container";
 	
 	private int modo=HORIZONTAL;
 
@@ -36,6 +37,7 @@ public class GwtRadioButton extends VerticalPanel implements LnwWidget {
 	 */
 	public GwtRadioButton(String name) {
 		this.name = name;
+		this.setStyleName(MAIN_STYLE);
 	}
 
 	/**
@@ -68,7 +70,6 @@ public class GwtRadioButton extends VerticalPanel implements LnwWidget {
 			color="#" + color ;
 		}
 		
-		String darkColor=ColorUtils.cambiarColor(color, 0.7);
 		String style="." + styleName + " [type=\"radio\"]:checked + label:after{" +
 				"border-color:" + color+ " !important;" +
 				"background-color:" + color+ " !important;" +

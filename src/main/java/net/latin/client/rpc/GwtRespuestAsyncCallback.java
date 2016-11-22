@@ -2,7 +2,7 @@ package net.latin.client.rpc;
 
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.modal.GwtModal;
-import net.latin.client.widget.msg.GwtMensajesListener;
+import net.latin.client.widget.msg.GwtMensajesHandler;
 
 
 
@@ -12,9 +12,9 @@ import net.latin.client.widget.msg.GwtMensajesListener;
  */
 public abstract class GwtRespuestAsyncCallback<S extends SimpleRespuestRPC> extends GwtAsyncCallback<S>{
 	
-	private GwtMensajesListener msgs;
+	private GwtMensajesHandler msgs;
 
-	public GwtRespuestAsyncCallback(GwtMensajesListener msgs) {
+	public GwtRespuestAsyncCallback(GwtMensajesHandler msgs) {
 		this.msgs = msgs;
 	}
 	

@@ -2,7 +2,6 @@
 body{
 	margin:0px !important;
 	font-family: 'Roboto', 'Noto', sans-serif;
-/* 	overflow-y:hidden; */
 }
 .GwtControllerPagesPanel{
 	overflow-y:auto;
@@ -115,6 +114,9 @@ body{
 	padding:5px !important;
 }
 
+.radio-container td{
+	padding:0px 10px !important;
+}
 .gwt-RadioButton > label {
 	color:black !important;
 }

@@ -12,6 +12,11 @@ import gwt.material.design.client.ui.MaterialToast;
 import net.latin.client.rpc.GwtRespuestAsyncCallback;
 import net.latin.client.rpc.GwtRpc;
 import net.latin.client.test.inicio.InicioTestGroup;
+import net.latin.client.test.inicio.pages.tabs.ArchivosTestTab;
+import net.latin.client.test.inicio.pages.tabs.CheckBoxTab;
+import net.latin.client.test.inicio.pages.tabs.DialogsTab;
+import net.latin.client.test.inicio.pages.tabs.MensajesTab;
+import net.latin.client.test.inicio.pages.tabs.RadioButtonTab;
 import net.latin.client.test.inicio.rpc.InicioTestClientAsync;
 import net.latin.client.utils.ColorUtils;
 import net.latin.client.widget.base.CustomBean;
@@ -19,13 +24,7 @@ import net.latin.client.widget.base.GwtPage;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.button.GwtButton;
 import net.latin.client.widget.button.GwtButtonPopUp;
-import net.latin.client.widget.checkbox.GwtCheckBox;
 import net.latin.client.widget.date.GwtDatePicker;
-import net.latin.client.widget.dialog.GwtConfirmAbstractListener;
-import net.latin.client.widget.dialog.GwtConfirmDialogAceptar;
-import net.latin.client.widget.dialog.GwtConfirmDialogSiNo;
-import net.latin.client.widget.dialog.GwtConfirmDialogSiNoCancelar;
-import net.latin.client.widget.fileviewer.GwtMaterialFileViewer;
 import net.latin.client.widget.form.GwtForm;
 import net.latin.client.widget.form.GwtFormSubtitle;
 import net.latin.client.widget.gwtswitch.GwtSwitch;
@@ -35,7 +34,7 @@ import net.latin.client.widget.list.GwtListBoxAdapter;
 import net.latin.client.widget.modal.GwtModal;
 import net.latin.client.widget.panels.GwtHorizontalPanel;
 import net.latin.client.widget.panels.GwtVerticalPanel;
-import net.latin.client.widget.radioButton.GwtRadioButton;
+import net.latin.client.widget.tabs.GwtMaterialTabs;
 import net.latin.client.widget.textBox.GwtValidateTextBox;
 
 public class InicioTestPage extends GwtPage {
@@ -48,37 +47,6 @@ public class InicioTestPage extends GwtPage {
 		
 		lbl = new MaterialLink();
 		
-		GwtHorizontalPanel panelMensajes = new GwtHorizontalPanel("Mensajes",true);
-		GwtButton btnError = new GwtButton("Agregar Error", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				addErrorMessage("Este es un mensaje de error de prueba");
-			}
-		});
-		GwtButton btnOk = new GwtButton("Agregar Ok", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				addOkMessage("Este es un mensaje OK de prueba");
-			}
-		});
-		GwtButton btnAlert = new GwtButton("Agregar Alerta", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				addAlertMessage("Este es un mensaje de alerta de prueba");
-			}
-		});
-		GwtButton btnLoading = new GwtButton("Agregar Loading", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				addLoadingMessage("Este es un mensaje de loading de prueba");
-			}
-		});
-		GwtButton btnLimpiar = new GwtButton("Limpiar mensajes", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				clearMessages();
-			}
-		});
-		panelMensajes.add(btnOk);
-		panelMensajes.add(btnAlert);
-		panelMensajes.add(btnError);
-		panelMensajes.add(btnLoading);
-		panelMensajes.add(btnLimpiar);
 		
 		GwtValidateTextBox text=new GwtValidateTextBox();
 		text.setPlaceholder("Texto numerico (sin Label)");
@@ -95,41 +63,11 @@ public class InicioTestPage extends GwtPage {
 		text3.setTrim();
 		
 		
-		GwtCheckBox check=new GwtCheckBox();
-		check.setText("Texto del checkbox Azul");
-		check.setColor(ColorUtils.BLUE);
-		GwtCheckBox check1=new GwtCheckBox();
-		check1.setText("Texto del checkbox Rojo");
-		check1.setColor(ColorUtils.RED);
-		GwtCheckBox check2=new GwtCheckBox();
-		check2.setText("Texto del checkbox Amarillo");
-		check2.setColor(ColorUtils.YELLOW);
-		GwtCheckBox check3=new GwtCheckBox();
-		check3.setText("Texto del checkbox Naranja");
-		check3.setColor(ColorUtils.ORANGE);
-		
-		GwtRadioButton radio=new GwtRadioButton("colores");
-		radio.addChild("Negro",ColorUtils.BLACK);
-		radio.addChild("Rojo",ColorUtils.RED);
-		radio.addChild("Azul",ColorUtils.BLUE);
-		radio.addChild("Amarillo",ColorUtils.YELLOW);
-		radio.addChild("Naranja",ColorUtils.ORANGE);
-		radio.setModoVertical();
-		
-		
 		GwtForm form=new GwtForm("Titulo");
-		form.addElement(panelMensajes);
 		form.addElement(text);
 		form.addElementWithLabel("Elemento con label",text2);
 		form.addElementWithFooter(text3, "Este elemento tiene footer");
-		form.addElement(check);
-		form.addElement(check1);
-		form.addElement(check2);
-		form.addElement(check3);
-		form.addSubtitle("Subtitulo para Radios");
-		form.addElement(radio);
-		
-		agregarDialogs(form);
+		form.addSubtitle("Subtitulo de ejemplo");
 		
 		
 		GwtButtonPopUp btnPop=new GwtButtonPopUp("Abrir Opciones");
@@ -269,56 +207,19 @@ public class InicioTestPage extends GwtPage {
 				showPage(InicioTestGroup.PAGINA_TABLAS);
 			}
 		}));
-		form.addButton(new GwtButton("Subir Archivos", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				showPage(InicioTestGroup.PAGINA_ARCHIVOS);
-			}
-		}));
+		
+		GwtMaterialTabs tabs=new GwtMaterialTabs();
+		tabs.addTab("Mensajes",new MensajesTab(this));
+		tabs.addTab("CheckBoxes",new CheckBoxTab(this));
+		tabs.addTab("Radios",new RadioButtonTab(this));
+		tabs.addTab("Form",form.render());
+		tabs.addTab("Archivos",new ArchivosTestTab(this));
+		tabs.addTab("Dialogs",new DialogsTab(this));
 		
 		this.add(lbl);
-		this.add(form.render());
+		this.add(tabs);
 	}
 	
-	private void agregarDialogs(GwtForm form) {
-		GwtHorizontalPanel panel=new GwtHorizontalPanel("Dialogs (Panel horizontal)",true);
-		GwtConfirmDialogAceptar aceptarDialog=new GwtConfirmDialogAceptar(new GwtConfirmAbstractListener() {
-			public void accion(String clickedButton, Object dataObj) {
-			}
-		}, "Dialog Aceptar de prueba", "Te estoy mostrando un mensaje");
-		panel.add(new GwtButton("Dialog Aceptar", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				aceptarDialog.showCentered();
-			}
-		}));
-		GwtConfirmDialogSiNo siNoDialog=new GwtConfirmDialogSiNo(new GwtConfirmAbstractListener() {
-			public void accion(String clickedButton, Object dataObj) {
-			}
-		}, "Dialog Si/No de prueba", "¿Te estoy mostrando un mensaje?");
-		panel.add(new GwtButton("Dialog Si/No", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				siNoDialog.showCentered();
-			}
-		}));
-		
-		GwtConfirmDialogSiNoCancelar siNoCancelarDialog=new GwtConfirmDialogSiNoCancelar(new GwtConfirmAbstractListener() {
-			public void accion(String clickedButton, Object dataObj) {
-			}
-		}, "Dialog Si/No/Cancelar de prueba", "¿Te estoy mostrando un mensaje?");
-		panel.add(new GwtButton("Dialog Si/No/Cancelar", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				siNoCancelarDialog.showCentered();
-			}
-		}));
-		
-		GwtMaterialFileViewer fileViewer=new GwtMaterialFileViewer();
-		panel.add(new GwtButton("Ver PDF", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				fileViewer.open();
-			}
-		}));
-		
-		form.addElement(panel);
-	}
 
 	protected void onVisible() {
 		server.getTextoInicial(new GwtRespuestAsyncCallback<SimpleRespuestRPC>(this) {

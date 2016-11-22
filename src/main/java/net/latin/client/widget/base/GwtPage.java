@@ -8,7 +8,7 @@ import net.latin.client.rpc.GwtCallbackErrorHandler;
 import net.latin.client.widget.base.listener.GwtBeforeUseCaseExitListener;
 import net.latin.client.widget.base.listener.GwtOnVisibleListener;
 import net.latin.client.widget.base.listener.GwtUploadPanelManager;
-import net.latin.client.widget.msg.GwtMensajesListener;
+import net.latin.client.widget.msg.GwtMensajesHandler;
 import net.latin.client.widget.msg.GwtMsg;
 import net.latin.client.widget.msg.GwtMsgTypeEnum;
 
@@ -22,7 +22,7 @@ import net.latin.client.widget.msg.GwtMsgTypeEnum;
  * 
  * 
  */
-public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesListener, GwtCallbackErrorHandler,GwtUploadPanelManager {
+public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesHandler, GwtCallbackErrorHandler,GwtUploadPanelManager {
 
 	private GwtPageGroup controller;
 	private String pageName;

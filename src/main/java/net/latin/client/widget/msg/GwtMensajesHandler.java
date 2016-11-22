@@ -6,10 +6,11 @@ package net.latin.client.widget.msg;
  *
  * @author Matias Leone
  */
-public interface GwtMensajesListener extends GwtMsgListener {
+public interface GwtMensajesHandler extends GwtMsgHandler {
 
 	public void addErrorMessage(String text);
 	public void addAlertMessage(String text);
 	public void addOkMessage(String text);
+	public void addLoadingMessage(String text);
 
 }

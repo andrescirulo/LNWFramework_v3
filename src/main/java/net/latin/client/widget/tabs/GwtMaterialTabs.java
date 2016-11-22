@@ -1,5 +1,6 @@
 package net.latin.client.widget.tabs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -16,11 +17,15 @@ public class GwtMaterialTabs extends MaterialRow{
 	private List<MaterialTabItem> tabs;
 	private MaterialTab tabContainer;
 	private int nextId=1;
+	private Integer tabSize=null;
 	
 	public GwtMaterialTabs() {
 		MaterialColumn tabsColumn = new MaterialColumn();
-		tabsColumn.setGrid("12s");
+		tabs=new ArrayList<MaterialTabItem>();
+		tabsColumn.setGrid("s12");
 		tabContainer = new MaterialTab();
+		tabsColumn.add(tabContainer);
+		this.add(tabsColumn);
 	}
 	
 	public void addTab(String text,Widget tabContent){
@@ -34,9 +39,25 @@ public class GwtMaterialTabs extends MaterialRow{
 		MaterialColumn contentColumn=new MaterialColumn();
 		contentColumn.setId(id);
 		contentColumn.setGrid("s12");
+		contentColumn.add(tabContent);
+		
 		this.add(contentColumn);
+		refreshTabSizes();
 	}
 	
+	private void refreshTabSizes() {
+		int tabSz=0;
+		if (tabSize==null){
+			tabSz=(int) Math.floor(12.0/tabs.size());
+		}
+		else{
+			tabSz=tabSize;
+		}
+		for (MaterialTabItem tab:tabs){
+			tab.setGrid("s" + tabSz);
+		}
+	}
+
 	private String getNextId() {
 		String id="tab_" + nextId;
 		nextId++;
@@ -51,7 +72,6 @@ public class GwtMaterialTabs extends MaterialRow{
 			link.setIconType(icon);
 		}
 		tabItem.add(link);
-		tabItem.setGrid("s1/2");
 		return tabItem;
 	}
 }

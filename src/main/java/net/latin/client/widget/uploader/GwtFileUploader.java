@@ -37,7 +37,7 @@ import net.latin.client.widget.base.LnwWidget;
 import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.fileviewer.GwtMaterialFileViewer;
 import net.latin.client.widget.link.GwtExternalLink;
-import net.latin.client.widget.msg.GwtMensajesListener;
+import net.latin.client.widget.msg.GwtMensajesHandler;
 import net.latin.client.widget.uploader.base.MaterialFileUploader_New;
 import net.latin.client.widget.uploader.rpc.GwtDownloadFileClientAsync;
 import net.latin.client.widget.uploader.rpc.GwtViewFileClientAsync;
@@ -64,11 +64,11 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private GwtDownloadFileClientAsync downloadServer;
 	private GwtViewFileClientAsync viewServer;
 	private GwtUploadFile file;
-	private GwtMensajesListener msgHandler;
+	private GwtMensajesHandler msgHandler;
 	private GwtMaterialFileViewer fileViewPopUp;
 	private int DEFAULT_MAX_FILE_SIZE=5;
 	
-	public GwtFileUploader(GwtMensajesListener msgHandler) {
+	public GwtFileUploader(GwtMensajesHandler msgHandler) {
 		this.msgHandler = msgHandler;
 		setUrl(UPLOAD_URL);
 		label = new MaterialLabel();
