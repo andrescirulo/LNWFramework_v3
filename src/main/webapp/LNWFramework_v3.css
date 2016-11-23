@@ -145,3 +145,19 @@ body{
 .MessageBoxDiv td{
 	padding:0px;
 } 
+
+/****************************/
+/*******GwtMaterialTab*******/
+/****************************/
+
+.material-tab .tab .active{
+	color:white;
+}
+.material-tab-main{
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}
+.material-tab-main .tabs-col{
+	padding-left:0px !important;
+	padding-right:0px !important;
+}

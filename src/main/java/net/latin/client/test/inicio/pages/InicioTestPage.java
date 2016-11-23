@@ -25,6 +25,7 @@ import net.latin.client.widget.base.SimpleRespuestRPC;
 import net.latin.client.widget.button.GwtButton;
 import net.latin.client.widget.button.GwtButtonPopUp;
 import net.latin.client.widget.date.GwtDatePicker;
+import net.latin.client.widget.date.GwtTimePicker;
 import net.latin.client.widget.form.GwtForm;
 import net.latin.client.widget.form.GwtFormSubtitle;
 import net.latin.client.widget.gwtswitch.GwtSwitch;
@@ -141,11 +142,14 @@ public class InicioTestPage extends GwtPage {
 		panelListbox.add(comboBox);
 		form.addElement(panelListbox);
 		
-		GwtVerticalPanel panelFechas = new GwtVerticalPanel("Fecha",true);
+		GwtVerticalPanel panelFechas = new GwtVerticalPanel("Fecha y Hora",true);
 		GwtDatePicker datePicker = new GwtDatePicker();
 		datePicker.setPlaceholder("Date Picker");
 		panelFechas.add(datePicker);
-		//form.addElement(panelFechas);
+		GwtTimePicker timePicker = new GwtTimePicker();
+		timePicker.setPlaceholder("Time Picker");
+		panelFechas.add(timePicker);
+		form.addElement(panelFechas);
 		
 		
 		GwtHorizontalPanel panelSwitch = new GwtHorizontalPanel("Switches",true);
@@ -161,7 +165,7 @@ public class InicioTestPage extends GwtPage {
 		panelSwitch.add(sw2);
 		panelSwitch.add(sw3);
 		panelSwitch.add(sw4);
-		//form.addElement(panelSwitch);
+		form.addElement(panelSwitch);
 		
 		GwtHorizontalPanel panelBotones = new GwtHorizontalPanel("Botones",true);
 		GwtButton btn1=new GwtButton("Boton Rojo");
@@ -184,7 +188,7 @@ public class InicioTestPage extends GwtPage {
 		panelBotones.add(btn4);
 		panelBotones.add(btn5);
 		panelBotones.add(btn6);
-		//form.addElement(panelBotones);
+		form.addElement(panelBotones);
 		
 		GwtVerticalPanel panelVarios=new GwtVerticalPanel("Varios (Panel vertical)",true);
 		panelVarios.add(btnPop);
@@ -200,7 +204,7 @@ public class InicioTestPage extends GwtPage {
 				}, 5000);
 			}
 		}));
-		//form.addElement(panelVarios);
+		form.addElement(panelVarios);
 		
 		form.addButton(new GwtButton("Ver Tablas", new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -208,7 +212,7 @@ public class InicioTestPage extends GwtPage {
 			}
 		}));
 		
-		GwtMaterialTabs tabs=new GwtMaterialTabs();
+		GwtMaterialTabs tabs=new GwtMaterialTabs(true);
 		tabs.addTab("Mensajes",new MensajesTab(this));
 		tabs.addTab("CheckBoxes",new CheckBoxTab(this));
 		tabs.addTab("Radios",new RadioButtonTab(this));

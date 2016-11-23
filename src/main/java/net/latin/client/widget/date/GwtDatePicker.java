@@ -9,13 +9,17 @@ import net.latin.client.widget.base.LnwWidget;
 
 public class GwtDatePicker extends MaterialDatePicker implements LnwWidget {
 
+	private boolean inicializado=false;
 	public GwtDatePicker() {
-//		setI18n(getLocale());
-		
+		inicializado=false;
+		setDetectOrientation(true);
 		addAttachHandler(new Handler() {
 			public void onAttachOrDetach(AttachEvent event) {
-				setLanguage(DatePickerLanguage.ES);
-				reinitialize();
+				if (!inicializado){
+					setLanguage(DatePickerLanguage.ES);
+					reinitialize();
+					inicializado=true;
+				}
 			}
 		});
 	}
