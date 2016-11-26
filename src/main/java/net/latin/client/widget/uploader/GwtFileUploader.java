@@ -52,7 +52,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private Long nextId=1L;
 	private String componentId="";
 	private MaterialProgress progress;
-	private MaterialLabel label;
+	private MaterialLabel labelNombre;
 	private GwtFileUploader cardUploader;
 	private MaterialButton btnUpload;
 	private MaterialButton btnRemove;
@@ -67,12 +67,17 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private GwtMensajesHandler msgHandler;
 	private GwtMaterialFileViewer fileViewPopUp;
 	private int DEFAULT_MAX_FILE_SIZE=5;
+	private MaterialLabel labelProgreso; 
 	
 	public GwtFileUploader(GwtMensajesHandler msgHandler) {
 		this.msgHandler = msgHandler;
 		setUrl(UPLOAD_URL);
-		label = new MaterialLabel();
-		label.setText(DEFAULT_TEXT);
+		labelNombre = new MaterialLabel();
+		labelNombre.setText(DEFAULT_TEXT);
+		
+		labelProgreso = new MaterialLabel();
+		labelProgreso.setVisible(false);
+		
 		componentId="FileUploader_" + nextComponentId;
 		nextComponentId++;
 		MaterialCard card=new MaterialCard();
@@ -139,29 +144,32 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		btnDownload.setVisible(false);
 		
 		card.add(content);
-		content.add(label);
+		content.add(labelNombre);
 		content.add(progress);
 		content.add(btnUpload);
 		content.add(btnUploaded);
 		content.add(btnRemove);
 		content.add(btnView);
 		content.add(btnDownload);
+		content.add(labelProgreso);
 		this.add(card);
 		this.setClickable("cardUpload");
 		
 		this.addTotalUploadProgressHandler(new TotalUploadProgressEvent.TotalUploadProgressHandler() {
 			 public void onTotalUploadProgress(TotalUploadProgressEvent event) {
 				 progress.setPercent(event.getProgress());
+				 setTextoProgreso(event.getProgress());
 			 }
 		});
 		this.addAddedFileHandler(new AddedFileHandler<GwtUploadFile>() {
 			public void onAddedFile(AddedFileEvent<GwtUploadFile> event) {
 				msgHandler.clearMessages();
-				label.setText(event.getTarget().getName());
+				labelNombre.setText(event.getTarget().getName());
 				file=event.getTarget();
 				file.setId(componentId + "_" + nextId);
 				setFileId(file.getId());
 				nextId++;
+				labelProgreso.setVisible(true);
 				progress.setVisible(true);
 			}
 		});
@@ -207,6 +215,11 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 						});
 					}
 				});
+				MaterialAnimator.animate(Transition.FADEOUT,labelProgreso,0,new Func(){
+					public void call() {
+						labelProgreso.setVisible(false);
+					}
+				});
 			}
 		});
 		
@@ -225,6 +238,12 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		setMaxFileSize(DEFAULT_MAX_FILE_SIZE);
 	}
 	
+	protected void setTextoProgreso(double progreso) {
+		String total=((int)(file.getFileSize() * 1024)) + "KBs";
+		String actual=((int)(file.getFileSize()*progreso/100.0 * 1024)) + "KBs";
+		labelProgreso.setText(actual + " / " + total);
+	}
+
 	@Override
 	public void initDropzone() {
 		super.initDropzone();
@@ -306,12 +325,14 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	public void resetWidget() {
 		super.reset();
 		file=null;
-		label.setText(DEFAULT_TEXT);
+		labelNombre.setText(DEFAULT_TEXT);
 		btnUpload.setVisible(true);
 		btnRemove.setVisible(false);
 		btnView.setVisible(false);
 		btnDownload.setVisible(false);
 		progress.setVisible(false);
+		labelProgreso.setText("");
+		labelProgreso.setVisible(false);
 	}
 
 	@Override
