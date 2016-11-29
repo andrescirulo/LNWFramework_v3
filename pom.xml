@@ -187,6 +187,8 @@
 					<!-- Tests patterns -->
 					<includes>**/Test*.java,**/*Test.java,**/*TestCase.java</includes>
 					<noServer>true</noServer>
+					<optimizationLevel>9</optimizationLevel>
+					<style>OBF</style>
 					
 					<port>8080</port>
 					<!-- <encoding>utf8</encoding> -->

@@ -320,7 +320,6 @@ public class MaterialFileUploader_New extends MaterialWidget implements HasFileU
             MaterialToast.fireToast("You have reached the maximum files to be uploaded.");
             MaxFilesExceededEvent.fire(this, convertUploadFile(file));
         });
-        
     }
 
     /**

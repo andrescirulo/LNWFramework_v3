@@ -67,7 +67,8 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private GwtMensajesHandler msgHandler;
 	private GwtMaterialFileViewer fileViewPopUp;
 	private int DEFAULT_MAX_FILE_SIZE=5;
-	private MaterialLabel labelProgreso; 
+	private MaterialLabel labelProgreso;
+	private MaterialButton btnCancelar; 
 	
 	public GwtFileUploader(GwtMensajesHandler msgHandler) {
 		this.msgHandler = msgHandler;
@@ -77,15 +78,20 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		
 		labelProgreso = new MaterialLabel();
 		labelProgreso.setVisible(false);
+		labelProgreso.setLayoutPosition(Position.ABSOLUTE);
+		labelProgreso.setBottom(7);
+		labelProgreso.setFontSize("11px");
+		labelProgreso.setLeft(35);
 		
 		componentId="FileUploader_" + nextComponentId;
 		nextComponentId++;
+		
 		MaterialCard card=new MaterialCard();
 		MaterialCardContent content=new MaterialCardContent();
 		content.setLayoutPosition(Position.RELATIVE);
 		progress = new MaterialProgress();
 		progress.setLayoutPosition(Position.ABSOLUTE);
-		progress.setBottom(0);
+		progress.setBottom(5);
 		progress.setLeft(0);
 		progress.setType(ProgressType.DETERMINATE);
 		progress.setPercent(0);
@@ -93,6 +99,16 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		btnUpload = crearBoton(0,25,IconType.CLOUD_UPLOAD,ButtonSize.LARGE);
 		btnUpload.setId("cardUpload");
 		btnUpload.setTitle("Subir archivo");
+		
+		btnCancelar = crearBoton(0,25,IconType.CLEAR,ButtonSize.LARGE);
+		btnCancelar.setBackgroundColor(Color.RED);
+		btnCancelar.setTitle("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				reset();
+			}
+		});
 		
 		btnUploaded = crearBoton(0,25,IconType.CHECK,ButtonSize.LARGE);
 		btnUploaded.setBackgroundColor(Color.GREEN);
@@ -147,6 +163,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		content.add(labelNombre);
 		content.add(progress);
 		content.add(btnUpload);
+		content.add(btnCancelar);
 		content.add(btnUploaded);
 		content.add(btnRemove);
 		content.add(btnView);
@@ -171,6 +188,21 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 				nextId++;
 				labelProgreso.setVisible(true);
 				progress.setVisible(true);
+				
+				
+				MaterialAnimator.animate(Transition.ROTATEOUT, btnUpload, 0,new Func(){
+					public void call() {
+						btnUpload.setVisible(false);
+					}
+					
+				});
+				btnCancelar.setOpacity(0);
+				btnCancelar.setVisible(true);
+				MaterialAnimator.animate(Transition.ROTATEIN, btnCancelar, 0,new Func(){
+					public void call() {
+						btnCancelar.setOpacity(1);
+					}
+				});
 			}
 		});
 		this.setPreview(false);
@@ -195,9 +227,9 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 						progress.setVisible(false);
 					}
 				});
-				MaterialAnimator.animate(Transition.ROTATEOUT, btnUpload, 0,new Func(){
+				MaterialAnimator.animate(Transition.ROTATEOUT, btnCancelar, 0,new Func(){
 					public void call() {
-						btnUpload.setVisible(false);
+						btnCancelar.setVisible(false);
 					}
 					
 				});
