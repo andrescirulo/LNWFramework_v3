@@ -27,7 +27,7 @@
   
   <!-- Specify the app entry point class.                         -->
 <!--   <entry-point class='net.latin.client.LNWFramework_v3'/> -->
-  <entry-point class='net.latin.client.widget.base.TestController'/>
+<!--   <entry-point class='net.latin.client.widget.base.TestController'/> -->
 
   <set-configuration-property name="CssResource.enableGss" value="true"/>
   

@@ -37,6 +37,6 @@ public class GwtMaterialWindow extends MaterialWindow implements ResizeHandler{
 	 * SACA EL BOTON MAXIMIZAR
 	 */
 	public void setNotMaximize(){
-		getToolbar().remove(2);
+//		getToolbar().remove(getIconMaximize());
 	}
 }

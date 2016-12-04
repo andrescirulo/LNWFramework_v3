@@ -40,9 +40,9 @@ public class GwtDialogBox extends GwtMaterialWindow implements ResizeHandler {
 		this.mainPanel.setStyleName( CSS_BODY );
 		this.mainPanel.setWidth( "100%" );
 		
-		getWindowContainer().getElement().getStyle().setProperty("width", "auto");
-		getWindowContainer().getElement().getStyle().setProperty("left", "initial");
-		getWindowContainer().getElement().getStyle().setProperty("right", "initial");
+		this.getElement().getStyle().setProperty("width", "auto");
+		this.getElement().getStyle().setProperty("left", "initial");
+		this.getElement().getStyle().setProperty("right", "initial");
 		Window.addResizeHandler(this);
 		
 		setNotMaximize();
@@ -50,13 +50,13 @@ public class GwtDialogBox extends GwtMaterialWindow implements ResizeHandler {
 	}
 
 	protected void centrarHorizontal() {
-		getWindowContainer().getElement().getStyle().setProperty("left", "initial");
-		getWindowContainer().getElement().getStyle().setProperty("right", "initial");
-		int modalWidth = getWindowContainer().getOffsetWidth();
+		this.getElement().getStyle().setProperty("left", "initial");
+		this.getElement().getStyle().setProperty("right", "initial");
+		int modalWidth = this.getOffsetWidth();
 		float clientWidth = Window.getClientWidth();
 		int left=(int) ((clientWidth-modalWidth)/2);
-		getWindowContainer().getElement().getStyle().setLeft(left,Unit.PX);
-		getWindowContainer().getElement().getStyle().setRight(left,Unit.PX);
+		this.getElement().getStyle().setLeft(left,Unit.PX);
+		this.getElement().getStyle().setRight(left,Unit.PX);
 	}
 
 	//CUANDO CAMBIA EL TAMAÑO DE LA VENTANA
