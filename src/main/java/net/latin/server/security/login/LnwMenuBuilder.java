@@ -50,32 +50,59 @@ public class LnwMenuBuilder {
 	 */
 	public static MenuItem buildGwtMenu(LnwMenuDataGetter dataGetter) {
 		LnwUser user = UserContext.getInstance().getUser();
-		List<LnwMenuGroup> groups = LnwGeneralConfig.getInstance().getGroups();
-
-		/**
-		 * recorremos todos los casos de uso que hay y creamos el
-		 * menu solo con los que el usuario puede ver
-		 */
+		List<LnwMenuGroup> groups = null;
 		CompositeMenuItem root = new CompositeMenuItem();
-		for (LnwMenuGroup group : groups) {
-			CompositeMenuItem compItem = new CompositeMenuItem();
-			if(dataGetter != null) {
-				compItem.setName( dataGetter.getTitle(group) );
+		if (user!=null){
+			groups = LnwGeneralConfig.getInstance().getGroups();
+
+			/**
+			 * recorremos todos los casos de uso que hay y creamos el
+			 * menu solo con los que el usuario puede ver
+			 */
+			for (LnwMenuGroup group : groups) {
+				CompositeMenuItem compItem = new CompositeMenuItem();
+				if(dataGetter != null) {
+					compItem.setName( dataGetter.getTitle(group) );
+				}
+				else{
+					compItem.setName( group.getTitle() );
+				}
+				for (LnwMenuItem item : group.getMenuItems()) {
+					if( user.hasAccess( item.getId() ) ) {
+						MenuItem menuItem = item.buildGwtMenu();
+						if(dataGetter != null) {
+							menuItem.setName(dataGetter.getTitle(item));
+						}
+						compItem.addChild( menuItem );
+					}
+				}
+				if ( compItem.getChilds().size() > 0 ) {
+					root.addChild( compItem );
+				}
 			}
-			else{
-				compItem.setName( group.getTitle() );
-			}
-			for (LnwMenuItem item : group.getMenuItems()) {
-				if( user.hasAccess( item.getId() ) ) {
+		
+		}
+		else{
+			groups = LnwGeneralConfig.getInstance().getPublicGroups();
+			
+			for (LnwMenuGroup group : groups) {
+				CompositeMenuItem compItem = new CompositeMenuItem();
+				if(dataGetter != null) {
+					compItem.setName( dataGetter.getTitle(group) );
+				}
+				else{
+					compItem.setName( group.getTitle() );
+				}
+				for (LnwMenuItem item : group.getMenuItems()) {
 					MenuItem menuItem = item.buildGwtMenu();
 					if(dataGetter != null) {
 						menuItem.setName(dataGetter.getTitle(item));
 					}
 					compItem.addChild( menuItem );
 				}
-			}
-			if ( compItem.getChilds().size() > 0 ) {
-				root.addChild( compItem );
+				if ( compItem.getChilds().size() > 0 ) {
+					root.addChild( compItem );
+				}
 			}
 		}
 		return root;

@@ -53,25 +53,32 @@ public class CommonUseCase extends GwtUseCase implements CommonUseCaseClient {
 			info.setMenu(impl.getGwtMenu());
 		}
 		else{
-			CompositeMenuItem gwtMenu = new CompositeMenuItem();
-			LeafMenuItem menuItem1 = new LeafMenuItem();
-			menuItem1.setName("Inicio");
-			menuItem1.setUrl("InicioCase");
-			
-			CompositeMenuItem cmenu1=new CompositeMenuItem();
-			cmenu1.setName("Menu compuesto");
-			
-			LeafMenuItem menuItem2 = new LeafMenuItem();
-			menuItem2.setName("Link hijo 1");
-			LeafMenuItem menuItem3 = new LeafMenuItem();
-			menuItem3.setName("Link hijo 2");
-			
-			cmenu1.addChild(menuItem2);
-			cmenu1.addChild(menuItem3);
-			
-			gwtMenu.addChild(menuItem1);
-			gwtMenu.addChild(cmenu1);
-			info.setMenu(gwtMenu);
+			if (LnwGeneralConfig.getInstance().hasPublicGroups()){
+				info.setMenu(impl.getGwtMenu());
+			}
+			else{
+				//QUE HACER SI NO HAY MENU
+			}
+//			LnwGeneralConfig.getInstance().getPublicGroups();
+//			CompositeMenuItem gwtMenu = new CompositeMenuItem();
+//			LeafMenuItem menuItem1 = new LeafMenuItem();
+//			menuItem1.setName("Inicio");
+//			menuItem1.setUrl("InicioCase");
+//			
+//			CompositeMenuItem cmenu1=new CompositeMenuItem();
+//			cmenu1.setName("Menu compuesto");
+//			
+//			LeafMenuItem menuItem2 = new LeafMenuItem();
+//			menuItem2.setName("Link hijo 1");
+//			LeafMenuItem menuItem3 = new LeafMenuItem();
+//			menuItem3.setName("Link hijo 2");
+//			
+//			cmenu1.addChild(menuItem2);
+//			cmenu1.addChild(menuItem3);
+//			
+//			gwtMenu.addChild(menuItem1);
+//			gwtMenu.addChild(cmenu1);
+//			info.setMenu(gwtMenu);
 		}
 		return info;
 	}

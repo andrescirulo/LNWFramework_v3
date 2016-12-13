@@ -30,6 +30,7 @@ public class LnwGeneralConfig {
 	public final static String APPLICATION_USER_TAG = "ApplicationUser";
 	public final static String APPLICATION_TAG = "Application";
 	public final static String GROUPS_TAG = "Groups";
+	public final static String PUBLIC_GROUPS_TAG = "PublicGroups";
 	public final static String USE_CASE_TAG = "UseCase";
 	public final static String EXTERNAL_TAG = "External";
 	public final static String NAME_ATTR = "name";
@@ -56,6 +57,7 @@ public class LnwGeneralConfig {
 
 	private String applicationName;
 	private List<LnwMenuGroup> groups = new ArrayList<LnwMenuGroup>();
+	private List<LnwMenuGroup> publicGroups = new ArrayList<LnwMenuGroup>();
 	private String applicationUser;
 	private String applicationDescription;
 	private static LnwGeneralConfig instance = null;
@@ -160,6 +162,15 @@ public class LnwGeneralConfig {
 			for (Element element : groupsEl) {
 				groups.add( new LnwMenuGroup( element ) );
 			}
+			
+			//read public groups
+			Element publicGroupsMain = root.getChild( PUBLIC_GROUPS_TAG );
+			if (publicGroupsMain!=null){
+				List<Element> publicGroupsEl = publicGroupsMain.getChildren( GROUP_TAG );
+				for (Element element : publicGroupsEl) {
+					publicGroups.add( new LnwMenuGroup( element ) );
+				}
+			}
 
 			//read commons
 			Element commonsMain = root.getChild(COMMONS_TAG);
@@ -194,6 +205,9 @@ public class LnwGeneralConfig {
 
 	public List<LnwMenuGroup> getGroups() {
 		return groups;
+	}
+	public List<LnwMenuGroup> getPublicGroups() {
+		return publicGroups;
 	}
 
 	/**
@@ -362,6 +376,11 @@ public class LnwGeneralConfig {
 
 	public void setFiltros(List<LnwFilterRule> filtros) {
 		this.filtros = filtros;
+	}
+
+
+	public boolean hasPublicGroups() {
+		return publicGroups!=null && publicGroups.size()>0;
 	}
 	
 
