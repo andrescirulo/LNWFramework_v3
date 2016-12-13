@@ -56,7 +56,7 @@ public class CommonUseCase extends GwtUseCase implements CommonUseCaseClient {
 			CompositeMenuItem gwtMenu = new CompositeMenuItem();
 			LeafMenuItem menuItem1 = new LeafMenuItem();
 			menuItem1.setName("Inicio");
-			menuItem1.setUrl("InicioTestCase");
+			menuItem1.setUrl("InicioCase");
 			
 			CompositeMenuItem cmenu1=new CompositeMenuItem();
 			cmenu1.setName("Menu compuesto");
