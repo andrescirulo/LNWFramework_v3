@@ -1,0 +1,8 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.FileUploadElement">
+
+		<variableName>fileUpload</variableName>
+		<extensions>false</extensions>
+
+	</generator>
+</PageDesign>

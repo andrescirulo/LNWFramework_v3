@@ -1,0 +1,8 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.FormToDateElement">
+
+		<variableName>formToDate</variableName>
+		<activateAutoFocus>false</activateAutoFocus>
+
+	</generator>
+</PageDesign>

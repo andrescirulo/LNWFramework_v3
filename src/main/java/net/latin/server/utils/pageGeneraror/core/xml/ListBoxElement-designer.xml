@@ -1,0 +1,15 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.ListBoxElement">
+
+		<variableName>comboBox</variableName>
+		<adapterPropertyKey>textBox</adapterPropertyKey>
+		<withEnterListener>false</withEnterListener>
+		<withChangeListener>false</withChangeListener>
+		<visibleItems>textBox</visibleItems>
+		<multipleSelection>false</multipleSelection>
+		<checkBoxEnableComparator>false</checkBoxEnableComparator>
+		<comparatorPropertyKey>textBox</comparatorPropertyKey>
+		<comparatorPropertyType>textBox</comparatorPropertyType>
+
+	</generator>
+</PageDesign>

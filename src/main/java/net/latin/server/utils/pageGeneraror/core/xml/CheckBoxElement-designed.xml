@@ -1,0 +1,8 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.CheckBoxElement">
+
+		<variableName>checkBox</variableName>
+		<checked>false</checked>
+
+	</generator>
+</PageDesign>

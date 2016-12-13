@@ -1,0 +1,12 @@
+<PageDesign>
+	<generator class='net.latin.server.utils.pageGeneraror.core.widget.TextBoxElement'>
+		<variableName>textBox</variableName>
+		<maxLength>50</maxLength>
+		<text>soy_un_textoBox_feo</text>
+		<visibleLength>50</visibleLength>
+		<width>15</width>
+		<checkDisabled>false</checkDisabled>
+		<checkKeyListener>true</checkKeyListener>
+
+	</generator>
+</PageDesign>

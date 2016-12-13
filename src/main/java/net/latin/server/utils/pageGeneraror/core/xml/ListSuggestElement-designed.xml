@@ -1,0 +1,12 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.ListSuggestElement">
+
+		<name>listSuggest</name>
+		<maxLeng></maxLeng>
+		<visibleLeng></visibleLeng>
+		<adapterPropertyKey></adapterPropertyKey>
+		<validate>false</validate>
+
+
+	</generator>
+</PageDesign>

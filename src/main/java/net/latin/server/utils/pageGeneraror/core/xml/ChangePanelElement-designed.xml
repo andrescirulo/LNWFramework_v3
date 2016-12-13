@@ -1,0 +1,12 @@
+<PageDesign>
+	<generator class="net.latin.server.utils.pageGeneraror.core.widget.ChangePanelElement">
+
+		<name>changePanelElement</name>
+		<property></property>
+		<search></search>
+		<change></change>
+		<txtLength></txtLength>
+		<txtMaxLength></txtMaxLength>
+
+	</generator>
+</PageDesign>

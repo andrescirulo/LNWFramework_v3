@@ -1,0 +1,19 @@
+<PageDesign>
+	<generator class='net.latin.server.utils.pageGeneraror.core.widget.PasswordTextBoxElement'>
+		<variableName>PasswordText</variableName>
+		<maxLength>6</maxLength>
+		<visibleLength>6</visibleLength>
+		<width>15</width>
+		<checkKeyListener>true</checkKeyListener>
+
+		<elements>
+			<generator class='net.latin.server.utils.pageGeneraror.core.widget.PasswordTextBoxElement'>
+			</generator>
+			<generator class='net.latin.server.utils.pageGeneraror.core.widget.TextBoxElement'>
+			</generator>
+		</elements>
+
+
+
+	</generator>
+</PageDesign>
