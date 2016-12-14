@@ -11,6 +11,7 @@ public class GwtMaterialWindow extends MaterialWindow implements ResizeHandler{
 
 	
 	public GwtMaterialWindow() {
+		setOverlay(true);
 		Window.addResizeHandler(this);
 	}
 	
