@@ -7,8 +7,6 @@ import javax.servlet.http.HttpSession;
 import net.latin.client.rpc.commonUseCase.CommonUseCaseClient;
 import net.latin.client.rpc.commonUseCase.InitialInfo;
 import net.latin.client.rpc.commonUseCase.LnwTableDocumentData;
-import net.latin.client.widget.menu.data.CompositeMenuItem;
-import net.latin.client.widget.menu.data.LeafMenuItem;
 import net.latin.server.GwtUseCase;
 import net.latin.server.persistence.UserContext;
 import net.latin.server.persistence.user.LnwUser;

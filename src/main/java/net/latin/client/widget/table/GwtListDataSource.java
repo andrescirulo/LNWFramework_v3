@@ -1,5 +1,10 @@
 package net.latin.client.widget.table;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import gwt.material.design.client.data.DataSource;
 
 /*
@@ -25,11 +30,6 @@ import gwt.material.design.client.data.DataSource;
 import gwt.material.design.client.data.loader.LoadCallback;
 import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GwtListDataSource<T> implements DataSource<T> {
 
