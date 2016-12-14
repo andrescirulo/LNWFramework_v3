@@ -810,6 +810,8 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	 */
 	private void checkAccess(String pageGroup) {
 		this.currentAccess = pageGroup;
+		//TENDRIA QUE BLOQUEAR LA PANTALLA ACA
+		GwtModal.blockScreen();
 		this.commonUseCaseServer.checkAccess(pageGroup, new GwtAsyncCallback(errorHandler) {
 			public void onSuccess(Object result) {
 				checkAccessCallback((Boolean) result);
