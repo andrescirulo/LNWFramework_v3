@@ -8,6 +8,7 @@ import net.latin.client.widget.msg.GwtMensajesHandler;
 public class GwtMaterialTab extends MaterialPanel implements GwtMensajesHandler {
 
 	private GwtMensajesHandler msgHandler;
+	
 	public GwtMaterialTab() {
 	}
 	
@@ -17,6 +18,12 @@ public class GwtMaterialTab extends MaterialPanel implements GwtMensajesHandler 
 	
 	public void addAllErrorMessages(List<String> messagesList) {
 		msgHandler.addAllErrorMessages(messagesList);
+	}
+	public void addAllAlertMessages(List<String> messagesList) {
+		msgHandler.addAllAlertMessages(messagesList);
+	}
+	public void addAllOkMessages(List<String> messagesList) {
+		msgHandler.addAllOkMessages(messagesList);
 	}
 	public void clearMessages() {
 		msgHandler.clearMessages();

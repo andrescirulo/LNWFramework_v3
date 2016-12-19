@@ -135,6 +135,12 @@ public class GwtMaterialTabs extends MaterialRow implements GwtMensajesHandler{
 	public void addAllErrorMessages(List<String> messagesList) {
 		msg.addAllErrorMessages(messagesList);
 	}
+	public void addAllAlertMessages(List<String> messagesList) {
+		msg.addAllAlertMessages(messagesList);
+	}
+	public void addAllOkMessages(List<String> messagesList) {
+		msg.addAllOkMessages(messagesList);
+	}
 	
 	public void clearMessages() {
 		msg.clear();

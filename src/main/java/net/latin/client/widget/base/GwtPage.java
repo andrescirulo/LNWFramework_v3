@@ -3,11 +3,14 @@ package net.latin.client.widget.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import gwt.material.design.client.ui.MaterialToast;
 import net.latin.client.rpc.DefaultGwtCallbackErrorHandler;
 import net.latin.client.rpc.GwtCallbackErrorHandler;
 import net.latin.client.widget.base.listener.GwtBeforeUseCaseExitListener;
 import net.latin.client.widget.base.listener.GwtOnVisibleListener;
 import net.latin.client.widget.base.listener.GwtUploadPanelManager;
+import net.latin.client.widget.base.mensajes.DefaultPageMensajesHandler;
+import net.latin.client.widget.base.mensajes.ToastPageMensajesHandler;
 import net.latin.client.widget.msg.GwtMensajesHandler;
 import net.latin.client.widget.msg.GwtMsg;
 import net.latin.client.widget.msg.GwtMsgTypeEnum;
@@ -25,6 +28,7 @@ import net.latin.client.widget.msg.GwtMsgTypeEnum;
 public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesHandler, GwtCallbackErrorHandler,GwtUploadPanelManager {
 
 	private GwtPageGroup controller;
+	private GwtMensajesHandler msgHandler;
 	private String pageName;
 	private final DefaultGwtCallbackErrorHandler errorHandler = new DefaultGwtCallbackErrorHandler();
 	private List<GwtOnVisibleListener> onVisibleListeners;
@@ -37,6 +41,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 		this.setStyleName("page-style");
 		onVisibleListeners = new ArrayList<GwtOnVisibleListener>();
 		onExitListeners = new ArrayList<GwtBeforeUseCaseExitListener>();
+		msgHandler=new DefaultPageMensajesHandler();
 	}
 
 	/**
@@ -95,7 +100,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 	 * Add an alert message to the message bar
 	 */
 	public void addAlertMessage(String text) {
-		controller.addAlertMessage(text);
+		msgHandler.addAlertMessage(text);
 	}
 
 	/**
@@ -103,35 +108,35 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 	 */
 	public void addNewAlertMessage(String text) {
 		this.clearMessages();
-		controller.addAlertMessage(text);
+		this.addAlertMessage(text);
 	}
 
 	/**
 	 * Adds many alert messages
 	 */
 	public void addAllAlertMessages(List<String> messagesList) {
-		controller.addAllAlertMessages(messagesList);
+		msgHandler.addAllAlertMessages(messagesList);
 	}
 
 	/**
 	 * Adds many error messages
 	 */
 	public void addAllErrorMessages(List<String> messagesList) {
-		controller.addAllErrorMessages(messagesList);
+		msgHandler.addAllErrorMessages(messagesList);
 	}
 
 	/**
 	 * Adds many ok messages
 	 */
 	public void addAllOkMessages(List<String> messagesList) {
-		controller.addAllOkMessages(messagesList);
+		msgHandler.addAllOkMessages(messagesList);
 	}
 
 	/**
 	 * Add an error message to the message bar
 	 */
 	public void addErrorMessage(String text) {
-		controller.addErrorMessage(text);
+		msgHandler.addErrorMessage(text);
 	}
 
 	/**
@@ -146,7 +151,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 	 * Add a loading message to the message bar
 	 */
 	public void addLoadingMessage(String text) {
-		controller.addLoadingMessage(text);
+		msgHandler.addLoadingMessage(text);
 	}
 
 	/**
@@ -161,7 +166,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 	 * Add an ok message to the message bar
 	 */
 	public void addOkMessage(String text) {
-		controller.addOkMessage(text);
+		msgHandler.addOkMessage(text);
 	}
 
 	/**
@@ -247,7 +252,7 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 	 * Clears all the messages of the message bar
 	 */
 	public void clearMessages() {
-		controller.clearMessages();
+		msgHandler.clearMessages();
 	}
 
 	/**
@@ -395,5 +400,9 @@ public abstract class GwtPage extends GwtVisualComponent implements GwtMensajesH
 
 	public void addOnUseCaseExitListener(GwtBeforeUseCaseExitListener listener) {
 		onExitListeners.add(listener);
+	}
+
+	public void setMessageStrategy(GwtMensajesHandler mensajesHandler) {
+		msgHandler=mensajesHandler;
 	}
 }
