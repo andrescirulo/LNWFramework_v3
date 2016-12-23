@@ -8,6 +8,7 @@ import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -120,7 +121,7 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			public void execute() {
-				GwtWidgetUtils.setFocus(buttons.get(indice));
+				GwtWidgetUtils.setFocus((Focusable)buttons.get(indice));
 			}
 		});
 	}
@@ -170,10 +171,10 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 
 
 	public void setFocusBotonSi() {
-		GwtWidgetUtils.setFocus(this.buttons.get(0));
+		GwtWidgetUtils.setFocus((Focusable)this.buttons.get(0));
 		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			public void execute() {
-				GwtWidgetUtils.setFocus(buttons.get(0));
+				GwtWidgetUtils.setFocus((Focusable)buttons.get(0));
 			}
 		});
 
@@ -181,10 +182,10 @@ public abstract class GwtConfirmDialogAbstract extends GwtDialogBox implements C
 	public void setFocusButton(String button) {
 		for(final GwtButton b:buttons) {
 			if(button.equalsIgnoreCase(b.getText())){
-				GwtWidgetUtils.setFocus(b);
+				GwtWidgetUtils.setFocus((Focusable)b);
 				Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 					public void execute() {
-						GwtWidgetUtils.setFocus(b);
+						GwtWidgetUtils.setFocus((Focusable)b);
 					}
 				});
 			}

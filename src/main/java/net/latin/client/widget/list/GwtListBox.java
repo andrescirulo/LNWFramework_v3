@@ -11,6 +11,7 @@ import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Focusable;
 
 import gwt.material.design.client.ui.MaterialListBox;
 import net.latin.client.widget.GwtWidgetUtils;
@@ -55,7 +56,6 @@ public class GwtListBox<T> extends MaterialListBox implements LnwWidget {
 		this.modelList.add(itemModel);
 		super.addItem(itemText);
 	}
-	
 	
 	
 	/**
@@ -168,7 +168,7 @@ public class GwtListBox<T> extends MaterialListBox implements LnwWidget {
 	 * @param index
 	 * @return the object related with the text in the position specified
 	 */
-	public T getElement(int index) {
+	public T getItem(int index) {
 		if (index < 0 || index >= this.modelList.size()) {
 			throw new RuntimeException("No hay items en la posicion: " + index);
 		}
@@ -179,8 +179,8 @@ public class GwtListBox<T> extends MaterialListBox implements LnwWidget {
 	/**
 	 * @return the selected object in the list
 	 */
-	public T getSelectedElement() {
-		return this.getElement(getSelectedIndex());
+	public T getSelectedItem() {
+		return this.getItem(getSelectedIndex());
 	}
 	
 	
@@ -313,7 +313,7 @@ public class GwtListBox<T> extends MaterialListBox implements LnwWidget {
 	}
 	
 	public void setFocus() {
-		GwtWidgetUtils.setFocus(this);
+		GwtWidgetUtils.setFocus((Focusable)this);
 	}
 	
 	/**

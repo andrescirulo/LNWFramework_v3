@@ -28,7 +28,7 @@ import gwt.material.design.client.ui.MaterialCard;
 import gwt.material.design.client.ui.MaterialCardContent;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialProgress;
-import gwt.material.design.client.ui.animate.MaterialAnimator;
+import gwt.material.design.client.ui.animate.MaterialAnimation;
 import gwt.material.design.client.ui.animate.Transition;
 import gwt.material.design.jquery.client.api.Functions.Func;
 import net.latin.client.rpc.GwtRespuestAsyncCallback;
@@ -69,9 +69,15 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private int DEFAULT_MAX_FILE_SIZE=5;
 	private MaterialLabel labelProgreso;
 	private MaterialButton btnCancelar; 
+	private Boolean allowDownload;
+	private Boolean allowView;
+	private Boolean isUploading;
 	
 	public GwtFileUploader(GwtMensajesHandler msgHandler) {
 		this.msgHandler = msgHandler;
+		allowDownload=true;
+		allowView=true;
+		isUploading=false;
 		setUrl(UPLOAD_URL);
 		labelNombre = new MaterialLabel();
 		labelNombre.setText(DEFAULT_TEXT);
@@ -106,6 +112,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		btnCancelar.setVisible(false);
 		btnCancelar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				isUploading=false;
 				reset();
 			}
 		});
@@ -181,6 +188,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		this.addAddedFileHandler(new AddedFileHandler<GwtUploadFile>() {
 			public void onAddedFile(AddedFileEvent<GwtUploadFile> event) {
 				msgHandler.clearMessages();
+				isUploading=true;
 				labelNombre.setText(event.getTarget().getName());
 				file=event.getTarget();
 				file.setId(componentId + "_" + nextId);
@@ -189,8 +197,10 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 				labelProgreso.setVisible(true);
 				progress.setVisible(true);
 				
-				
-				MaterialAnimator.animate(Transition.ROTATEOUT, btnUpload, 0,new Func(){
+				MaterialAnimation buAnim = new MaterialAnimation();
+				buAnim.transition(Transition.ROTATEOUT);
+				buAnim.delayMillis(0);
+				buAnim.animate(btnUpload, new Func(){
 					public void call() {
 						btnUpload.setVisible(false);
 					}
@@ -198,7 +208,10 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 				});
 				btnCancelar.setOpacity(0);
 				btnCancelar.setVisible(true);
-				MaterialAnimator.animate(Transition.ROTATEIN, btnCancelar, 0,new Func(){
+				MaterialAnimation bcAnim = new MaterialAnimation();
+				bcAnim.transition(Transition.ROTATEIN);
+				bcAnim.delayMillis(0);
+				bcAnim.animate(btnCancelar,new Func(){
 					public void call() {
 						btnCancelar.setOpacity(1);
 					}
@@ -217,17 +230,27 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		addDragOverHandler(new DragOverEvent.DragOverHandler() {
 			@Override
 			public void onDragOver(DragOverEvent event) {
-				MaterialAnimator.animate(Transition.RUBBERBAND, cardUploader, 0);
+				MaterialAnimation cuAnim = new MaterialAnimation();
+				cuAnim.transition(Transition.RUBBERBAND);
+				cuAnim.delayMillis(0);
+				cuAnim.animate(cardUploader);
 			}
 		});
 		this.addSuccessHandler(new SuccessHandler<GwtUploadFile>() {
 			public void onSuccess(SuccessEvent<GwtUploadFile> event) {
-				MaterialAnimator.animate(Transition.FADEOUT,progress,500,new Func() {
+				isUploading=false;
+				MaterialAnimation pAnim = new MaterialAnimation();
+				pAnim.transition(Transition.FADEOUT);
+				pAnim.delayMillis(500);
+				pAnim.animate(progress,new Func() {
 					public void call() {
 						progress.setVisible(false);
 					}
 				});
-				MaterialAnimator.animate(Transition.ROTATEOUT, btnCancelar, 0,new Func(){
+				MaterialAnimation bcAnim = new MaterialAnimation();
+				bcAnim.transition(Transition.ROTATEOUT);
+				bcAnim.delayMillis(0);
+				bcAnim.animate(btnCancelar,new Func(){
 					public void call() {
 						btnCancelar.setVisible(false);
 					}
@@ -235,7 +258,10 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 				});
 				btnUploaded.setOpacity(0);
 				btnUploaded.setVisible(true);
-				MaterialAnimator.animate(Transition.ROTATEIN, btnUploaded, 0,new Func(){
+				MaterialAnimation buAnim = new MaterialAnimation();
+				buAnim.transition(Transition.ROTATEIN);
+				buAnim.delayMillis(0);
+				buAnim.animate(btnUploaded,new Func(){
 					public void call() {
 						btnUploaded.setOpacity(1);
 						//LO HAGO DEFERRED PARA QUE LA NUEVA ANIMACION 
@@ -247,7 +273,10 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 						});
 					}
 				});
-				MaterialAnimator.animate(Transition.FADEOUT,labelProgreso,0,new Func(){
+				MaterialAnimation lpAnim = new MaterialAnimation();
+				lpAnim.transition(Transition.FADEOUT);
+				lpAnim.delayMillis(0);
+				lpAnim.animate(labelProgreso,new Func(){
 					public void call() {
 						labelProgreso.setVisible(false);
 					}
@@ -263,6 +292,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		addErrorHandler(new ErrorHandler<GwtUploadFile>() {
 			public void onError(ErrorEvent<GwtUploadFile> event) {
 				msgHandler.addErrorMessage(event.getResponse().getBody());
+				isUploading=false;
 				resetWidget();
 			}
 		});
@@ -309,30 +339,46 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 
 
 	private void showButtons(){
-		MaterialAnimator.animate(Transition.FADEOUT,btnUploaded,300,new Func() {
+		MaterialAnimation buAnim = new MaterialAnimation();
+		buAnim.transition(Transition.FADEOUT);
+		buAnim.delayMillis(300);
+		buAnim.animate(btnUploaded,new Func() {
 			public void call() {
 				btnUploaded.setVisible(false);
 				btnRemove.setOpacity(0);
 				btnView.setOpacity(0);
 				btnDownload.setOpacity(0);
 				btnRemove.setVisible(true);
-				btnView.setVisible(true);
-				btnDownload.setVisible(true);
-				MaterialAnimator.animate(Transition.FADEIN,btnRemove,0,new Func() {
+				MaterialAnimation brAnim = new MaterialAnimation();
+				brAnim.transition(Transition.FADEIN);
+				brAnim.delayMillis(0);
+				brAnim.animate(btnRemove,new Func() {
 					public void call() {
 						btnRemove.setOpacity(1);
 					}
 				});
-				MaterialAnimator.animate(Transition.FADEIN,btnView,100,new Func() {
-					public void call() {
-						btnView.setOpacity(1);
-					}
-				});
-				MaterialAnimator.animate(Transition.FADEIN,btnDownload,200,new Func() {
-					public void call() {
-						btnDownload.setOpacity(1);
-					}
-				});
+				if (allowView){
+					btnView.setVisible(true);
+					MaterialAnimation bvAnim = new MaterialAnimation();
+					bvAnim.transition(Transition.FADEIN);
+					bvAnim.delayMillis(100);
+					bvAnim.animate(btnView,new Func() {
+						public void call() {
+							btnView.setOpacity(1);
+						}
+					});
+				}
+				if (allowDownload){
+					btnDownload.setVisible(true);
+					MaterialAnimation bdAnim = new MaterialAnimation();
+					bdAnim.transition(Transition.FADEIN);
+					bdAnim.delayMillis(200);
+					bdAnim.animate(btnDownload,new Func() {
+						public void call() {
+							btnDownload.setOpacity(1);
+						}
+					});
+				}
 			}
 		});
 	}
@@ -397,6 +443,34 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	@Deprecated
 	public void setMaxFiles(int maxFiles) {
 		super.setMaxFiles(1);
+	}
+
+	public Boolean getAllowDownload() {
+		return allowDownload;
+	}
+
+	public void setAllowDownload(Boolean allowDownload) {
+		this.allowDownload = allowDownload;
+	}
+
+	public Boolean getAllowView() {
+		return allowView;
+	}
+
+	public void setAllowView(Boolean allowView) {
+		this.allowView = allowView;
+	}
+
+	public GwtUploadFile getFile() {
+		return file;
+	}
+
+	public void setFile(GwtUploadFile file) {
+		this.file = file;
+	}
+
+	public Boolean isUploading() {
+		return isUploading;
 	}
 	
 }

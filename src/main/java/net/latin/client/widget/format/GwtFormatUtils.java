@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.latin.client.widget.validation.GwtValidationUtils;
+import net.latin.client.validation.GwtValidationUtils;
 
 public class GwtFormatUtils {
 

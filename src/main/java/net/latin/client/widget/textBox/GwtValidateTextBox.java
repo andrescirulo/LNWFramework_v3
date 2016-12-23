@@ -13,6 +13,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 
+import net.latin.client.validation.GwtValidationUtils;
 import net.latin.client.widget.base.LnwWidget;
 import net.latin.client.widget.textBox.rules.GwtTextBoxAlphaNumericValidation;
 import net.latin.client.widget.textBox.rules.GwtTextBoxAlphabeticValidation;
@@ -30,7 +31,6 @@ import net.latin.client.widget.textBox.rules.GwtTextBoxRequiredValidation;
 import net.latin.client.widget.textBox.rules.GwtTextBoxTrimValidation;
 import net.latin.client.widget.textBox.rules.GwtTextBoxUpperCaseValidation;
 import net.latin.client.widget.textBox.rules.GwtTextBoxValidationRule;
-import net.latin.client.widget.validation.GwtValidationUtils;
 
 /**
  * TextBox que posee validaciones sobre los datos que carga el usuario.

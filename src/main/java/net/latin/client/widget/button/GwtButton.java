@@ -1,5 +1,6 @@
 package net.latin.client.widget.button;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 import gwt.material.design.client.constants.ButtonType;
@@ -55,5 +56,12 @@ public class GwtButton extends MaterialButton implements LnwWidget {
 	public void setText(String html) {
 		this.getElement().setInnerHTML(html);
 	}
+	
+	public void click(){
+		buttonClick(this.getElement());
+	}
+	private native void buttonClick(Element button) /*-{
+	    button.click();
+	}-*/;
 
 }

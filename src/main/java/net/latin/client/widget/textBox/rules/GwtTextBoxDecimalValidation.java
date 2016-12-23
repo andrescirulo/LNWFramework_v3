@@ -3,7 +3,7 @@ package net.latin.client.widget.textBox.rules;
 import com.google.gwt.event.dom.client.KeyEvent;
 import com.google.gwt.i18n.client.NumberFormat;
 
-import net.latin.client.widget.validation.GwtValidationUtils;
+import net.latin.client.validation.GwtValidationUtils;
 
 /**
  * El texto ingresado deber ser un numero decimal que se formatea con el patron

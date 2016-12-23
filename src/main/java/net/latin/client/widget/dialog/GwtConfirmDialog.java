@@ -2,6 +2,7 @@ package net.latin.client.widget.dialog;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.ui.Focusable;
 
 import net.latin.client.widget.GwtWidgetUtils;
 import net.latin.client.widget.confirm.GwtConfirm;
@@ -24,7 +25,7 @@ public class GwtConfirmDialog extends GwtConfirm {
 
 	    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			public void execute() {
-				GwtWidgetUtils.setFocus(buttonSi);
+				GwtWidgetUtils.setFocus((Focusable)buttonSi);
 			}
 		});
 	}

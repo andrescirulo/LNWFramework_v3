@@ -3,11 +3,11 @@ package net.latin.client.widget.base.errorPage;
 import java.util.Date;
 
 import net.latin.client.i18n.LnwI18n;
+import net.latin.client.validation.GwtValidationUtils;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.GwtPage;
 import net.latin.client.widget.label.GwtLabel;
 import net.latin.client.widget.separator.GwtSpace;
-import net.latin.client.widget.validation.GwtValidationUtils;
 
 /**
  * Default error page

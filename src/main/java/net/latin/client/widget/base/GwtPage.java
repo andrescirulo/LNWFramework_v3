@@ -3,14 +3,12 @@ package net.latin.client.widget.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import gwt.material.design.client.ui.MaterialToast;
 import net.latin.client.rpc.DefaultGwtCallbackErrorHandler;
 import net.latin.client.rpc.GwtCallbackErrorHandler;
 import net.latin.client.widget.base.listener.GwtBeforeUseCaseExitListener;
 import net.latin.client.widget.base.listener.GwtOnVisibleListener;
 import net.latin.client.widget.base.listener.GwtUploadPanelManager;
 import net.latin.client.widget.base.mensajes.DefaultPageMensajesHandler;
-import net.latin.client.widget.base.mensajes.ToastPageMensajesHandler;
 import net.latin.client.widget.msg.GwtMensajesHandler;
 import net.latin.client.widget.msg.GwtMsg;
 import net.latin.client.widget.msg.GwtMsgTypeEnum;

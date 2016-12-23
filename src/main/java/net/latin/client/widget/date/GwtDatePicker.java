@@ -9,6 +9,7 @@ import net.latin.client.widget.base.LnwWidget;
 
 public class GwtDatePicker extends MaterialDatePicker implements LnwWidget {
 
+	public static final String SEPARATOR = "/";
 	private boolean inicializado=false;
 	public GwtDatePicker() {
 		inicializado=false;

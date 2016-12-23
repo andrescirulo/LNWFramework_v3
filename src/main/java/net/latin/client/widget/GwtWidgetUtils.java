@@ -5,7 +5,7 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.Widget;
 
 import net.latin.client.widget.base.LnwWidget;
@@ -18,7 +18,7 @@ public class GwtWidgetUtils {
 	 * Hace focus muchas veces, porque a veces IE no te da pelota
 	 * @param widget
 	 */
-	public static final void  setFocus( FocusWidget widget ) {
+	public static final void  setFocus( Focusable widget ) {
 		widget.setFocus( true );
 		widget.setFocus( true );
 		widget.setFocus( true );

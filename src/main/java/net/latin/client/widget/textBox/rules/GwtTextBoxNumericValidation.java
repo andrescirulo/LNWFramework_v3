@@ -2,7 +2,7 @@ package net.latin.client.widget.textBox.rules;
 
 import com.google.gwt.event.dom.client.KeyEvent;
 
-import net.latin.client.widget.validation.GwtValidationUtils;
+import net.latin.client.validation.GwtValidationUtils;
 
 /**
  * Solo permite numeros (de cualquier tipo)

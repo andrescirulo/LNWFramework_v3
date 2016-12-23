@@ -1,6 +1,6 @@
 package net.latin.client.widget.textBox.rules;
 
-import net.latin.client.widget.validation.GwtValidationUtils;
+import net.latin.client.validation.GwtValidationUtils;
 
 /**
  * El valor ingresado debe estar dentro del rango especificado, inclusive

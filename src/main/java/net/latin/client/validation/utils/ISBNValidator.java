@@ -1,4 +1,4 @@
-package net.latin.client.widget.validation.utils;
+package net.latin.client.validation.utils;
 
 
 
@@ -8,7 +8,7 @@ package net.latin.client.widget.validation.utils;
  * <a href="http://www.isbn.org/standards/home/isbn/international/html/usm4.htm">
  * algorithm</a>
  *
- * @version $Revision: 1.1 $ $Date: 2015/03/02 16:00:44 $
+ * @version $Revision$ $Date$
  * @since Validator 1.2.0
  *
  * tuneada por FedeT
