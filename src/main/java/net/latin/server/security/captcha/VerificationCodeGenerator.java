@@ -27,7 +27,7 @@ public class VerificationCodeGenerator {
 	private static final int TRANSLATE_X = 6;
 	private static final int SHADOW_TRANSLATE_X = 5;
 	private static final int SHADOW_TRANSLATE_Y = 5;
-	private static final int FONT_SIZE = 36;
+	private static final int FONT_SIZE = 42;
 	private static final int MIN_TRANSLATE_CHAR_Y = 29; 
 	private static final int MAX_TRANSLATE_CHAR_Y = 35;
 	private String verificationCode;

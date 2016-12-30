@@ -1,11 +1,10 @@
 package net.latin.client.widget.form;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.client.base.HasPlaceholder;
 import net.latin.client.widget.base.LnwWidget;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
 
 public class GwtSimpleFormElement implements GwtFormElement {
 
@@ -26,7 +25,7 @@ public class GwtSimpleFormElement implements GwtFormElement {
 	/**
 	 * HorizontalPanel que envuelve a todo el elemento
 	 */
-	protected HorizontalPanel elementPanel;
+	protected GwtHorizontalPanel elementPanel;
 
 	public void buildElement(GwtForm form) {
 		
@@ -39,7 +38,7 @@ public class GwtSimpleFormElement implements GwtFormElement {
 			vPanel.add(footerLabel);
 		}
 		
-		elementPanel = new HorizontalPanel();
+		elementPanel = new GwtHorizontalPanel();
 		elementPanel.setWidth( "100%" );
 		elementPanel.add( vPanel );
 	}
@@ -50,7 +49,7 @@ public class GwtSimpleFormElement implements GwtFormElement {
 	}
 
 
-	public HorizontalPanel getElementPanel() {
+	public GwtHorizontalPanel getElementPanel() {
 		return elementPanel;
 	}
 

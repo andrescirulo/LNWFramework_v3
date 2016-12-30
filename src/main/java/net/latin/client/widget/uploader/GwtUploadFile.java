@@ -15,7 +15,7 @@ public class GwtUploadFile extends UploadFile {
 	public GwtUploadFile(String name, Date lastModified, Double fileSize, String type) {
 		setName(name);
 		setLastModified(lastModified);
-		setFileSize(fileSize);
+		setFileSize(fileSize==null?-1:fileSize);
 		setType(type);
     }
 	

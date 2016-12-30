@@ -1,8 +1,7 @@
 package net.latin.client.widget.form;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-
 import net.latin.client.widget.base.LnwWidget;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
 
 /**
  * Representa un elemento para ser agregado al GwtForm
@@ -13,7 +12,7 @@ public interface GwtFormElement extends LnwWidget {
 	/**
 	 * @return Panel que engloba a todo el elemento
 	 */
-	public HorizontalPanel getElementPanel();
+	public GwtHorizontalPanel getElementPanel();
 
 	/**
 	 * @return ID única del elemento

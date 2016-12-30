@@ -3,10 +3,10 @@ package net.latin.client.widget.buttonPanel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-
+import gwt.material.design.client.constants.TextAlign;
 import net.latin.client.widget.base.GwtVisualComponent;
 import net.latin.client.widget.button.GwtButton;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
 import net.latin.client.widget.separator.GwtHorizontalSpace;
 
 /**
@@ -23,7 +23,7 @@ public class GwtHorizontalButtonPanel extends GwtVisualComponent {
 	 * CSS, tiene el mismo que el formulario
 	 */
 	private static final String BUTTONS_CSS = "GwtFormButtonsPanel";
-	private HorizontalPanel auxPanel;
+	private GwtHorizontalPanel auxPanel;
 
 	/**
 	 * Crea un nuevo GwtHorizontalButtonPanel
@@ -55,38 +55,31 @@ public class GwtHorizontalButtonPanel extends GwtVisualComponent {
 	 * como se hayan agregado
 	 */
 	public GwtVisualComponent render(){
-		HorizontalPanel panel = new HorizontalPanel();
-		panel.setHorizontalAlignment( HorizontalPanel.ALIGN_CENTER );
+		GwtHorizontalPanel panel = new GwtHorizontalPanel();
+		panel.setTextAlign(TextAlign.CENTER);
 		panel.setWidth( "100%" );
-		auxPanel = new HorizontalPanel();
+		auxPanel = new GwtHorizontalPanel();
 		auxPanel.setWidth( "90%" );
 
-		HorizontalPanel leftPanel = new HorizontalPanel();
-		leftPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_LEFT );
-		leftPanel.setWidth( "100%" );
-		HorizontalPanel auxLeftPanel = new HorizontalPanel();
-		auxLeftPanel.setWidth( NO_WIDTH );
+		GwtHorizontalPanel leftPanel = new GwtHorizontalPanel();
+		leftPanel.setTextAlign(TextAlign.LEFT);
+		leftPanel.setWidth( "50%" );
 		for (int i = 0; i < leftButtons.size(); i++) {
-			auxLeftPanel.add( (GwtButton)leftButtons.get(i) );
+			leftPanel.add( (GwtButton)leftButtons.get(i) );
 
 			if ( i + 1 != leftButtons.size() )
-				auxLeftPanel.add( new GwtHorizontalSpace( SPACING_BETWEEN_ELEMENTS ) );
+				leftPanel.add( new GwtHorizontalSpace( SPACING_BETWEEN_ELEMENTS ) );
 		}
 
-		HorizontalPanel rightPanel = new HorizontalPanel();
-		rightPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_RIGHT );
-		rightPanel.setWidth( "100%" );
-		HorizontalPanel auxRightPanel = new HorizontalPanel();
-		auxRightPanel.setWidth( NO_WIDTH );
+		GwtHorizontalPanel rightPanel = new GwtHorizontalPanel();
+		rightPanel.setTextAlign(TextAlign.RIGHT);
+		rightPanel.setWidth( "50%" );
 		for (int i = 0; i < rightButtons.size(); i++) {
-			auxRightPanel.add( (GwtButton)rightButtons.get(i) );
+			rightPanel.add( (GwtButton)rightButtons.get(i) );
 
 			if ( i + 1 != rightButtons.size() )
-				auxRightPanel.add( new GwtHorizontalSpace( SPACING_BETWEEN_ELEMENTS ) );
+				rightPanel.add( new GwtHorizontalSpace( SPACING_BETWEEN_ELEMENTS ) );
 		}
-
-		rightPanel.add( auxRightPanel );
-		leftPanel.add( auxLeftPanel );
 
 		auxPanel.add( leftPanel );
 		auxPanel.add( rightPanel );

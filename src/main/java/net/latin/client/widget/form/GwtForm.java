@@ -6,11 +6,9 @@ import java.util.List;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -18,8 +16,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.client.constants.TextAlign;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.GwtVisualComponent;
+import net.latin.client.widget.label.GwtLabel;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
 
 /**
  * Formulario compuesto por elemtos del tipo [texto, widget]
@@ -48,9 +49,9 @@ public class GwtForm<T> extends GwtVisualComponent {
 	private final Label labelTitulo;
 	private final FlowPanel mainPanel;
 	protected final VerticalPanel elementsPanel;
-	private final HorizontalPanel mainButtonsPanel;
-	private final HorizontalPanel buttonsPanel;
-	private final HorizontalPanel leftButtonsPanel;
+	private final GwtHorizontalPanel mainButtonsPanel;
+	private final GwtHorizontalPanel buttonsPanel;
+	private final GwtHorizontalPanel leftButtonsPanel;
 	protected final List<GwtFormElement> elementList;
 	private final HorizontalPanel messagePanel;
 	private final Label labelMsg;
@@ -90,9 +91,9 @@ public class GwtForm<T> extends GwtVisualComponent {
 		
 		messagePanel = new HorizontalPanel();
 		elementsPanel = new VerticalPanel();
-		mainButtonsPanel = new HorizontalPanel();
-		buttonsPanel = new HorizontalPanel();
-		leftButtonsPanel = new HorizontalPanel();
+		mainButtonsPanel = new GwtHorizontalPanel();
+		buttonsPanel = new GwtHorizontalPanel();
+		leftButtonsPanel = new GwtHorizontalPanel();
 		labelMsg = new Label();
 
 		rightPanel = new VerticalPanel();
@@ -218,23 +219,20 @@ public class GwtForm<T> extends GwtVisualComponent {
 
 		//Panel para botones
 		//En el mainButtonsPanel metemos dos paneles para botones, uno para la derecha y otro para la izq
-		mainButtonsPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_CENTER );
+//		mainButtonsPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_CENTER );
+		mainButtonsPanel.setTextAlign(TextAlign.CENTER);
 		mainButtonsPanel.setWidth( "100%" );
 
 		//panel para botones que estan del lado izquierdo
 		//necesitamos un panel aux para poder formatear hacia la izquierda
-		HorizontalPanel auxLeftButtonsPanel = new HorizontalPanel();
-		auxLeftButtonsPanel.setStyleName( BUTTONS_CSS );
-		auxLeftButtonsPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_LEFT );
-		auxLeftButtonsPanel.add( leftButtonsPanel );
-		mainButtonsPanel.add( auxLeftButtonsPanel );
+		leftButtonsPanel.setTextAlign(TextAlign.LEFT);
+		leftButtonsPanel.setWidth("50%");
+		mainButtonsPanel.add( leftButtonsPanel );
 
 		//panel de la derecha, necesitamos un panel aux para poder formatear hacia la derecha
-		HorizontalPanel auxButtonsPanel = new HorizontalPanel();
-		auxButtonsPanel.setStyleName( BUTTONS_CSS );
-		auxButtonsPanel.setHorizontalAlignment( HorizontalPanel.ALIGN_RIGHT );
-		auxButtonsPanel.add( buttonsPanel );
-		mainButtonsPanel.add( auxButtonsPanel );
+		buttonsPanel.setTextAlign(TextAlign.RIGHT);
+		buttonsPanel.setWidth("50%");
+		mainButtonsPanel.add( buttonsPanel );
 
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(elementsPanel);
@@ -287,6 +285,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		element.setWidget(widget);
 		element.buildElement( this );
 		widgets.add(widget);
+		ajustarEstilo(widget);
 
 		//agregarlo logicamente
 		if ( autoFocusElement == null ) { autoFocusElement = element; };
@@ -319,6 +318,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		vpWidget.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 		vpWidget.add( widget );
 		widgets.add(widget);
+		ajustarEstilo(widget);
 
 		element.setFooterText(footerText);
 		element.setWidget(vpWidget);
@@ -349,6 +349,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		element.setRequired(true);
 		element.buildElement( this );
 		widgets.add(widget);
+		ajustarEstilo(widget);
 		//agregarlo logicamente
 		if ( autoFocusElement == null ) { autoFocusElement = element; };
 		elementList.add( element );
@@ -370,6 +371,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		element.setWidget(widget);
 		element.buildElement( this );
 		widgets.add(widget);
+		ajustarEstilo(widget);
 		//agregarlo logicamente
 		if ( autoFocusElement == null ) { autoFocusElement = element; };
 		elementList.add( element );
@@ -396,6 +398,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		element.buildElement( this );
 		
 		widgets.add(widget);
+		ajustarEstilo(widget);
 		//agregarlo logicamente
 		if ( autoFocusElement == null ) { autoFocusElement = element; };
 		elementList.add( element );
@@ -428,6 +431,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 		element.buildElement( this );
 		if (element.getElementPanel().getWidgetCount()>0){
 			widgets.add(element.getElementPanel().getWidget(0));
+			ajustarEstilo(element.getElementPanel().getWidget(0));
 		}
 		
 		//agregarlo logicamente
@@ -497,7 +501,6 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 */
 	public void addButton( Widget button ) {
 		this.buttonsPanel.add( button );
-		button.getElement().getParentElement().getStyle().setTextAlign(TextAlign.RIGHT);
 	}
 
 	/**
@@ -677,6 +680,11 @@ public class GwtForm<T> extends GwtVisualComponent {
 			}
 		}
 		catch (Exception e){
+		}
+	}
+	protected void ajustarEstilo(Widget widget){
+		if (widget instanceof GwtLabel){
+			widget.addStyleName("form-element-gwt-label");
 		}
 	}
 }

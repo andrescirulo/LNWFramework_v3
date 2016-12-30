@@ -13,20 +13,20 @@ import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
+import gwt.material.design.client.ui.MaterialPanel;
 import net.latin.client.widget.base.LnwWidget;
 
-public class GwtHorizontalPanel extends FlowPanel implements LnwWidget {
+public class GwtHorizontalPanel extends MaterialPanel implements LnwWidget {
 	
-	private FlowPanel mainPanel=new FlowPanel();
+	private MaterialPanel mainPanel=new MaterialPanel();
 	private Label titlePanel;
 	
 	public GwtHorizontalPanel() {
-		mainPanel=new FlowPanel();
+		mainPanel=new MaterialPanel();
 		this.getElement().getStyle().setPosition(Position.RELATIVE);
 		this.getElement().getStyle().setPadding(5, Unit.PX);
 		super.add(mainPanel);
@@ -93,5 +93,9 @@ public class GwtHorizontalPanel extends FlowPanel implements LnwWidget {
 		else{
 			this.getElement().getStyle().setBorderStyle(BorderStyle.NONE);
 		}
+	}
+	
+	public void alignVertically(){
+		mainPanel.addStyleName("valign-wrapper");
 	}
 }

@@ -653,9 +653,8 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		sauUrl = initialInfo.getSauUrl();
 		sauSession=initialInfo.getSessionIdSau();
 		this.menu.resetWidget();
-//		this.menu.build(initialInfo, registerGeneralInfoPanelBuilder(), registerMenuBarToolBar());
 		this.menu.build(initialInfo);
-		//showFirstPageGroup();
+		showFirstPageGroup();
 		List<CustomBean> errorList = initialInfo.getAdditionalInfo().getList(ERRORS_KEY);
 		if (errorList != null && !errorList.isEmpty()) {
 			errorOnInitialInfo(errorList);

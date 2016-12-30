@@ -1,14 +1,15 @@
 package net.latin.client.widget.form;
 
 import com.google.gwt.user.client.ui.CellPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.FlexAlignContent;
 import gwt.material.design.client.ui.MaterialLabel;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.LnwWidget;
+import net.latin.client.widget.panels.GwtHorizontalPanel;
 
 /**
  * Elemento default del GwtForm que tiene la forma [texto, widget]
@@ -50,7 +51,7 @@ public class GwtDefaultFormElement implements GwtFormElement {
 	/**
 	 * HorizontalPanel que envuelve a todo el elemento
 	 */
-	protected HorizontalPanel elementPanel;
+	protected GwtHorizontalPanel elementPanel;
 
 	/**
 	 * Indica si se usa el requiredLabel
@@ -85,7 +86,7 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		descriptionLabel.setText(text);
 	}
 
-	public HorizontalPanel getElementPanel() {
+	public GwtHorizontalPanel getElementPanel() {
 		return elementPanel;
 	}
 
@@ -105,8 +106,6 @@ public class GwtDefaultFormElement implements GwtFormElement {
 
 	
 	public void buildElement(GwtForm form) {
-		// int horSeparation =
-		// GwtController.defaultI18n.GwtForm_horizontal_separation;
 
 		// creamos label de required
 		int requiredWidth = 0;
@@ -124,9 +123,6 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		descriptionLabel = new MaterialLabel(id);
 		descriptionLabel.setStyleName(TEXT_CSS);
 		descriptionLabel.setTextColor(Color.BLUE_ACCENT_2);
-//		descriptionLabel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		// descriptionLabel.setWidth(descriptionLabel.getOffsetWidth() +
-		// horSeparation+ "px");
 		descriptionLabel.setHeight("auto");
 		descriptionLabel.setWidth(GwtController.defaultI18n.GwtForm_max_label_width - requiredWidth + "px");
 		
@@ -146,19 +142,20 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		}
 
 		// creamos el panel para englobar todo
-		elementPanel = new HorizontalPanel();
-		elementPanel.setVerticalAlignment(VerticalPanel.ALIGN_TOP);
-		elementPanel.setSpacing(GwtController.defaultI18n.GwtForm_title_element_spacing_vertical);
+		elementPanel = new GwtHorizontalPanel();
+//		elementPanel.setVerticalAlignment(VerticalPanel.ALIGN_TOP);
+		elementPanel.setFlexAlignContent(FlexAlignContent.START);
+//		elementPanel.setSpacing(GwtController.defaultI18n.GwtForm_title_element_spacing_vertical);
 
 		// Agregamos el label y el vpWidget
 		elementPanel.add(descriptionLabel);
 		if (required){
 			elementPanel.add(requiredLabel);
-			elementPanel.setCellWidth(requiredLabel, "20px");
+//			requiredLabel.setWidth("20px");
+//			elementPanel.setCellWidth(requiredLabel, "20px");
 		}
 		elementPanel.add(vpWidget);
-		
-		elementPanel.setCellWidth(descriptionLabel,GwtController.defaultI18n.GwtForm_max_label_width - requiredWidth + "px");
+//		elementPanel.setCellWidth(descriptionLabel,GwtController.defaultI18n.GwtForm_max_label_width - requiredWidth + "px");
 	}
 
 	/**

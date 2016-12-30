@@ -2,6 +2,7 @@ package net.latin.client.widget.uploader;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -84,6 +85,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		setUrl(UPLOAD_URL);
 		labelNombre = new MaterialLabel();
 		labelNombre.setText(DEFAULT_TEXT);
+		labelNombre.getElement().getStyle().setCursor(Cursor.DEFAULT);
 		
 		labelProgreso = new MaterialLabel();
 		labelProgreso.setVisible(false);
@@ -107,11 +109,11 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		
 		btnUpload = crearBoton(0,25,IconType.CLOUD_UPLOAD,ButtonSize.LARGE);
 		btnUpload.setId("cardUpload");
-		btnUpload.setTitle("Subir archivo");
+		btnUpload.setTooltip("Subir archivo");
 		
 		btnCancelar = crearBoton(0,25,IconType.CLEAR,ButtonSize.LARGE);
 		btnCancelar.setBackgroundColor(Color.RED);
-		btnCancelar.setTitle("Cancelar");
+		btnCancelar.setTooltip("Cancelar");
 		btnCancelar.setVisible(false);
 		btnCancelar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -127,7 +129,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		
 		btnRemove = crearBoton(10,25, IconType.DELETE,ButtonSize.MEDIUM);
 		btnRemove.setBackgroundColor(Color.RED);
-		btnRemove.setTitle("Eliminar archivo");
+		btnRemove.setTooltip("Eliminar archivo");
 		btnRemove.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				accionEliminar();
@@ -135,7 +137,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		});
 		
 		btnView = crearBoton(10,75,IconType.VISIBILITY,ButtonSize.MEDIUM);
-		btnView.setTitle("Ver archivo");
+		btnView.setTooltip("Ver archivo");
 		btnView.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (viewServer!=null){
@@ -151,7 +153,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		
 		btnDownload = crearBoton(10,125,IconType.CLOUD_DOWNLOAD,ButtonSize.MEDIUM);
 		btnDownload.setBackgroundColor(Color.GREEN);
-		btnDownload.setTitle("Descargar archivo");
+		btnDownload.setTooltip("Descargar archivo");
 		btnDownload.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if (viewServer!=null){

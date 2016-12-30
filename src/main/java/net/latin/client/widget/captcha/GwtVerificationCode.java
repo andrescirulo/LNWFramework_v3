@@ -52,12 +52,13 @@ public class GwtVerificationCode extends GwtVisualComponent {
 	public GwtVerificationCode(GwtVerificationCodeTypeEnum tipo) {
 		audioManager = new AudioManager();
 		verificationCode = new GwtTextBox();
+		verificationCode.setWidth("200px");
 		this.add(verificationCode);
 		hPanel = new HorizontalPanel();
 
 		verifyImage = new Image();
 		hPanel.add(verifyImage);
-		hPanel.setCellWidth(verifyImage, "110px");
+		hPanel.setCellWidth(verifyImage, "150px");
 		verifyImage.getElement().getParentElement().getStyle().setProperty("border", "1px solid #42a5f5");
 		this.add(hPanel);
 		label = new GwtLabel();
