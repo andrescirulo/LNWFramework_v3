@@ -1,5 +1,6 @@
 package net.latin.client.widget.documentoValidante.requisito.tomoFolio;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
@@ -7,9 +8,11 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.client.constants.TextAlign;
 import net.latin.client.widget.documentoValidante.requisito.display.TomoFolioDisplay;
 import net.latin.client.widget.listener.EnterKeyUpHandler;
 import net.latin.client.widget.separator.GwtHorizontalSpace;
@@ -30,7 +33,7 @@ public class TomoFolioView extends Composite implements TomoFolioDisplay, BlurHa
 	public TomoFolioView() {
 		tomo.setWidth(TEXTBOX_WIDTH);
 		tomo.setMaxLength(TOMO_MAX_LENGTH);
-		
+		tomo.addStyleName("tomo-field");
 		tomo.addKeyUpHandler(new EnterKeyUpHandler() {
 			protected void accionEnter(KeyUpEvent event) {
 				folio.setFocus();
@@ -45,12 +48,19 @@ public class TomoFolioView extends Composite implements TomoFolioDisplay, BlurHa
 		
 		HorizontalPanel panel = new HorizontalPanel();
 		
+		panel.setWidth("120px");
 		panel.add(tomo);
-				panel.add(new GwtTextSpacer("/", 10));
+		GwtTextSpacer spacer = new GwtTextSpacer("/", 10);
+		spacer.getLabelText().getElement().getStyle().setFontSize(1.4, Unit.EM);
+		panel.add(spacer);
 		panel.add(folio);
+		panel.setCellWidth(tomo, TEXTBOX_WIDTH);
+		panel.setCellWidth(folio, TEXTBOX_WIDTH);
+		panel.setCellVerticalAlignment(spacer, HasVerticalAlignment.ALIGN_MIDDLE);
 		panel.add(new GwtHorizontalSpace(20));
 		// panel.add(boton);
 		initWidget(panel);
+		this.setWidth("130px");
 	}
 	
 	public Widget asWidget() {
@@ -96,5 +106,10 @@ public class TomoFolioView extends Composite implements TomoFolioDisplay, BlurHa
 		}
 		catch (Exception e){
 		}
+	}
+
+	@Override
+	public String getWidth() {
+		return "130px";
 	}
 }

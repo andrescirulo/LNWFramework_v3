@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.client.base.HasPlaceholder;
 import net.latin.client.widget.base.LnwWidget;
 
 public class GwtSimpleFormElement implements GwtFormElement {

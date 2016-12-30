@@ -68,7 +68,7 @@ public class DocumentoValidante extends WidgetPresenter<DocumentoValidante.Docum
 	public interface DocumentoValidanteDisplay extends WidgetDisplay {
 		HasClickHandlers getButton();
 		
-		void setDocumentoValidante(Widget widget);
+		void setDocumentoValidante(Widget widget,String width);
 		
 		void setBotonEnabled(boolean b);
 		
@@ -269,7 +269,8 @@ public class DocumentoValidante extends WidgetPresenter<DocumentoValidante.Docum
 			default:
 				throw new RuntimeException("Tipo de documento validante no reconocido: " + doc);
 		}
-		display.setDocumentoValidante(((WidgetDisplay) currentPresenter.getDisplay()).asWidget());
+		WidgetDisplay widgetDisplay = (WidgetDisplay) currentPresenter.getDisplay();
+		display.setDocumentoValidante(widgetDisplay.asWidget(),widgetDisplay.getWidth());
 		((RequisitoValidanteDisplay)currentPresenter.getDisplay()).getWidgetForNextFocus().addKeyUpHandler(new EnterKeyUpHandler() {
 			protected void accionEnter(KeyUpEvent event) {
 				((GwtButton)display.getButton()).click();

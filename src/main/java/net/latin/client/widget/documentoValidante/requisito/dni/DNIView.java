@@ -50,4 +50,7 @@ public class DNIView extends Composite implements DNIDisplay{
 		return dni;
 	}
 
+	public String getWidth() {
+		return "130px";
+	}
 }

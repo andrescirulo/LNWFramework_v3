@@ -2,6 +2,8 @@ package net.latin.client.widget.documentoValidante;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,9 +23,12 @@ public class DocumentoValidanteView extends Composite implements DocumentoValida
 		container = new HorizontalPanel();
 		panel.add(container);
 		container.add(new Label("Cargando componente..."));
-		panel.add(new GwtHorizontalSpace(20));
+		GwtHorizontalSpace space = new GwtHorizontalSpace(20);
+		panel.add(space);
+		panel.setCellWidth(space, "20px");
 		boton = new GwtButton();
 		panel.add(boton);
+		panel.setCellVerticalAlignment(boton, HasVerticalAlignment.ALIGN_MIDDLE);
 		boton.setVisible(false);
 		initWidget(panel);
 	}
@@ -36,9 +41,15 @@ public class DocumentoValidanteView extends Composite implements DocumentoValida
 		return boton;
 	}
 	
-	public void setDocumentoValidante(Widget widget) {
+	public void setDocumentoValidante(Widget widget,String width) {
+		
 		container.clear();
 		container.add(widget);
+		if (width!=null){
+			container.setWidth(width);
+			container.setCellWidth(widget,width);
+			container.getParent().setWidth(width);
+		}
 		boton.setVisible(true);
 	}
 	
@@ -50,4 +61,7 @@ public class DocumentoValidanteView extends Composite implements DocumentoValida
 		this.boton.setText(texto);
 	}
 	
+	public String getWidth() {
+		return "130px";
+	}
 }

@@ -15,12 +15,12 @@ import net.latin.client.widget.base.LnwWidget;
  */
 public class GwtIconButton extends MaterialButton implements LnwWidget {
 
-	public static final String BUTTON_CSS = "GwtIconButton";
+	public static final String BUTTON_CSS = "gwt-icon-button";
 
 	
 	public GwtIconButton() {
-		super();
-		setStyleName(BUTTON_CSS);
+		super(ButtonType.RAISED);
+		addStyleName(BUTTON_CSS);
 		addStyleName("waves-effect");
 	}
 
@@ -28,14 +28,14 @@ public class GwtIconButton extends MaterialButton implements LnwWidget {
 		super(ButtonType.RAISED);
 		setIconType(icon);
 		addClickHandler(handler);
-		setStyleName(BUTTON_CSS);
+		addStyleName(BUTTON_CSS);
 		addStyleName("waves-effect");
 	}
 
 	public GwtIconButton(IconType icon) {
 		super(ButtonType.RAISED);
 		setIconType(icon);
-		setStyleName(BUTTON_CSS);
+		addStyleName(BUTTON_CSS);
 		addStyleName("waves-effect");
 	}
 	

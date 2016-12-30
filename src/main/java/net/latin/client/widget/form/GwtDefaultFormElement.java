@@ -2,10 +2,11 @@ package net.latin.client.widget.form;
 
 import com.google.gwt.user.client.ui.CellPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.ui.MaterialLabel;
 import net.latin.client.widget.base.GwtController;
 import net.latin.client.widget.base.LnwWidget;
 
@@ -19,7 +20,7 @@ import net.latin.client.widget.base.LnwWidget;
 public class GwtDefaultFormElement implements GwtFormElement {
 
 	public static final String TEXT_CSS = "form-element-label-text";
-	public static final String REQUIRED_TEXT_CSS = "GwtFormElementRequiredText";
+	public static final String REQUIRED_TEXT_CSS = "form-required-element-label";
 
 	/**
 	 * ID del Elemento Es el texto de la descripcion Debe ser único
@@ -29,12 +30,12 @@ public class GwtDefaultFormElement implements GwtFormElement {
 	/**
 	 * Label con la descripcion
 	 */
-	protected Label descriptionLabel;
+	protected MaterialLabel descriptionLabel;
 
 	/**
 	 * Label que indica que el campo es requerido
 	 */
-	protected Label requiredLabel;
+	protected MaterialLabel requiredLabel;
 
 	/**
 	 * Widget del elemento
@@ -111,17 +112,19 @@ public class GwtDefaultFormElement implements GwtFormElement {
 		int requiredWidth = 0;
 		if (required) {
 			requiredWidth = GwtController.defaultI18n.GwtForm_requiredField_width_separation;
-			requiredLabel = new Label();
+			requiredLabel = new MaterialLabel();
 			requiredLabel.setStyleName(REQUIRED_TEXT_CSS);
+			requiredLabel.setTextColor(Color.BLUE_ACCENT_2);
 			requiredLabel.setText(GwtController.defaultI18n.GwtForm_requiredField_string);
 			requiredLabel.setWidth(GwtController.defaultI18n.GwtForm_requiredField_width + "px");
 		}
 
 		
 		// creamos un label con el texto
-		descriptionLabel = new Label(id);
+		descriptionLabel = new MaterialLabel(id);
 		descriptionLabel.setStyleName(TEXT_CSS);
-		descriptionLabel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+		descriptionLabel.setTextColor(Color.BLUE_ACCENT_2);
+//		descriptionLabel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 		// descriptionLabel.setWidth(descriptionLabel.getOffsetWidth() +
 		// horSeparation+ "px");
 		descriptionLabel.setHeight("auto");
@@ -149,8 +152,10 @@ public class GwtDefaultFormElement implements GwtFormElement {
 
 		// Agregamos el label y el vpWidget
 		elementPanel.add(descriptionLabel);
-		if (required)
+		if (required){
 			elementPanel.add(requiredLabel);
+			elementPanel.setCellWidth(requiredLabel, "20px");
+		}
 		elementPanel.add(vpWidget);
 		
 		elementPanel.setCellWidth(descriptionLabel,GwtController.defaultI18n.GwtForm_max_label_width - requiredWidth + "px");
@@ -174,7 +179,7 @@ public class GwtDefaultFormElement implements GwtFormElement {
 	/**
 	 * @return the descriptionLabel
 	 */
-	public Label getDescriptionLabel() {
+	public MaterialLabel getDescriptionLabel() {
 		return descriptionLabel;
 	}
 
@@ -188,7 +193,7 @@ public class GwtDefaultFormElement implements GwtFormElement {
 	/**
 	 * @return the requiredLabel
 	 */
-	public Label getRequiredLabel() {
+	public MaterialLabel getRequiredLabel() {
 		return requiredLabel;
 	}
 

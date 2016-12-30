@@ -57,6 +57,8 @@ public class GwtVerificationCode extends GwtVisualComponent {
 
 		verifyImage = new Image();
 		hPanel.add(verifyImage);
+		hPanel.setCellWidth(verifyImage, "110px");
+		verifyImage.getElement().getParentElement().getStyle().setProperty("border", "1px solid #42a5f5");
 		this.add(hPanel);
 		label = new GwtLabel();
 		label.setText(DESCRIPCIION);

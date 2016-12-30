@@ -26,8 +26,8 @@ import net.latin.server.security.config.LnwMenuItem;
 /**
  * <p>
  * Filtro principal del Framework.
- * La mayoría de los pedidos HTTP pasan por acá.
- * Todos los pedidos RPC de las interfaces Client pasan por acá
+ * La mayorÃ­a de los pedidos HTTP pasan por acÃ¡.
+ * Todos los pedidos RPC de las interfaces Client pasan por acÃ¡
  *
  * <p>
  * Crea el usuario que se agrega a la session
@@ -57,7 +57,7 @@ public class LnwApplicationFilter implements Filter{
 		 */
 		Object user = httpRequest.getSession(true).getAttribute(APPLICATION_USER_KEY);
 
-		//si existe, lo metemos en el ThreadLocal para poder usarlo fácilmente después
+		//si existe, lo metemos en el ThreadLocal para poder usarlo fï¿½cilmente despuï¿½s
 		if (user != null) {
 			userContext.setUser((LnwUser) user);
 

@@ -31,8 +31,13 @@ public class ToastPageMensajesHandler implements GwtMensajesHandler {
 	public void clearMessages() {
 		//MaterialToast.fireToast(msg);
 		JQueryElement container = $("#toast-container");
-		while (container.firstChild()!=null){
-			container.removeChild(container.firstChild());
+		try{
+			while (container.firstChild()!=null){
+				container.removeChild(container.firstChild());
+			}
+		}
+		catch (Exception e){
+			//Simplemente no tiro error
 		}
 	}
 

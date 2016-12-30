@@ -48,4 +48,8 @@ public class CUILView extends Composite implements CUILDisplay{
 	public Focusable getFirtsFocusWidget() {
 		return cuil;
 	}
+	
+	public String getWidth() {
+		return "130px";
+	}
 }

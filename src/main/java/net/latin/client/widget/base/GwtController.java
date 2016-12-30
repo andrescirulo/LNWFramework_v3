@@ -431,6 +431,10 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 		}
 	}
 
+	public void doRelogin(){
+		relogin();
+	}
+	
 	protected void relogin() {
 		Hidden hiddenSessionId;
 		FormPanel postForm = new FormPanel("_self");
@@ -470,19 +474,6 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 	}
 
 	public void onModuleLoad() {
-//		Polymer.importHref("iron-icons/iron-icons.html", new Function() {
-//	        public Object call(Object arg) {
-//	            // The app is executed when all imports succeed.
-//	            startApplication();
-//	            return null;
-//	        }
-//	    });
-		startApplication();
-	}
-	
-	protected void startApplication() {
-//		RootPanel.get(GWT_APPLICATION_PANEL).add(mainComponent);
-//		RootPanel.get().add(toolbar);
 		RootPanel.get().add(mainComponent);
 
 		initUncaughtExceptionHandler();
@@ -500,6 +491,7 @@ public abstract class GwtController implements EntryPoint, HistoryListener, Clos
 			initAppWithUserLogged();
 		}
 	}
+	
 
 	/**
 	 * Inicializa un manejador de excepciones que no fueron tratadas y pueden

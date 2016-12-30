@@ -12,7 +12,7 @@ public class GwtUploadFile extends UploadFile {
 	private static final long serialVersionUID = -5875068400632275366L;
 	private String id;
 
-	public GwtUploadFile(String name, Date lastModified, double fileSize, String type) {
+	public GwtUploadFile(String name, Date lastModified, Double fileSize, String type) {
 		setName(name);
 		setLastModified(lastModified);
 		setFileSize(fileSize);

@@ -6,9 +6,11 @@ import java.util.List;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -495,6 +497,7 @@ public class GwtForm<T> extends GwtVisualComponent {
 	 */
 	public void addButton( Widget button ) {
 		this.buttonsPanel.add( button );
+		button.getElement().getParentElement().getStyle().setTextAlign(TextAlign.RIGHT);
 	}
 
 	/**

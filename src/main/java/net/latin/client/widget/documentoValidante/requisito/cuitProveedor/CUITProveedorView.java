@@ -48,4 +48,8 @@ public class CUITProveedorView extends Composite implements CUITProveedorDisplay
 	public Focusable getFirtsFocusWidget() {
 		return cuit;
 	}
+	
+	public String getWidth() {
+		return "130px";
+	}
 }

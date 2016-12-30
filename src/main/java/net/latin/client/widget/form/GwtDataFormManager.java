@@ -12,19 +12,19 @@ public interface GwtDataFormManager<T> {
 	 * en el objeto de datos
 	 * @param dataObj
 	 */
-	public void loadDataObject( GwtForm form, T dataObj );
+	public void loadDataObject( GwtForm<T> form, T dataObj );
 
 	/**
 	 * Toma los valores del objeto de datos y los carga
 	 * en el formulario visual
 	 * @param dataObj
 	 */
-	public void loadForm( GwtForm form, T dataObj );
+	public void loadForm( GwtForm<T> form, T dataObj );
 
 	/**
 	 * Carga solamente el formulario, con valores por default
 	 * @param dataObj
 	 */
-	public void loadVisualDefaultForm( GwtForm form );
+	public void loadVisualDefaultForm( GwtForm<T> form );
 
 }

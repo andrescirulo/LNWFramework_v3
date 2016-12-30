@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import net.latin.server.persistence.UserContext;
 import net.latin.server.utils.exceptions.LnwException;
+import net.latin.server.utils.fileTypes.FileToShowOnClient;
 
 /**
  * Implementacion de un servlet que se encarga de descargar un archivo,

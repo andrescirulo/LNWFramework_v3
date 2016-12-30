@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.latin.server.persistence.UserContext;
+import net.latin.server.utils.fileTypes.FileToShowOnClient;
 
 
 public class FileContainer {
@@ -33,7 +34,7 @@ public class FileContainer {
 					.getId());
 			for (FileUploaded flashFileUploaded : files) {
 				if (flashFileUploaded.getId().equals(fileId)) {
-					FileToShowOnClient flashFileToShowOnClient = new FileToShowOnClient(flashFileUploaded
+					FileToShowOnClient flashFileToShowOnClient = new FileToShowOnClientImpl(flashFileUploaded
 							.getFile().getName(), flashFileUploaded.getFile().get());
 					return flashFileToShowOnClient;
 				}

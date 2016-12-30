@@ -3,10 +3,15 @@ package net.latin.client.widget.msg;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.ui.TextBox;
 
+import gwt.material.design.client.base.Waves;
 import gwt.material.design.client.constants.FlexAlignItems;
 import gwt.material.design.client.constants.FlexDirection;
+import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialPanel;
 import net.latin.client.widget.base.GwtVisualComponent;
@@ -72,6 +77,8 @@ public class GwtMsgNotification extends GwtVisualComponent {
 		panel.add(lbl);
 		panel.setMarginTop(5);
 		panel.setMarginBottom(5);
+		panel.setPaddingTop(5);
+		panel.setPaddingBottom(5);
 		panel.setFlexAlignItems(FlexAlignItems.CENTER);
 		panel.setBackgroundColor(msg.getType().getBgColor());
 		mainPanel.add(panel);

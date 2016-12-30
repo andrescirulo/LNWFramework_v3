@@ -21,13 +21,13 @@ public class VerificationCodeGenerator {
 											"n","m","o","p","q","r","s","t","u","v","w","x",
 											"y","z","1","2","3","4","5","6","7","8","9","0","1","2","3","4","5","6","7","8","9","0"};
 	
-	private static final int WIDTH = 25;
-	private static final int HEIGHT = 46;
+	private static final int WIDTH = 35;
+	private static final int HEIGHT = 64;
 	
 	private static final int TRANSLATE_X = 6;
 	private static final int SHADOW_TRANSLATE_X = 5;
 	private static final int SHADOW_TRANSLATE_Y = 5;
-	private static final int FONT_SIZE = 30;
+	private static final int FONT_SIZE = 36;
 	private static final int MIN_TRANSLATE_CHAR_Y = 29; 
 	private static final int MAX_TRANSLATE_CHAR_Y = 35;
 	private String verificationCode;

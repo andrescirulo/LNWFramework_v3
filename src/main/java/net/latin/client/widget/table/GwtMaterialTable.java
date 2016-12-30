@@ -73,4 +73,14 @@ public class GwtMaterialTable<T> extends MaterialDataTable<T> implements Handler
 	public GwtMaterialTablePager<T> getPager(){
 		return pager;
 	}
+	
+	public void setStretchVisible(boolean visible){
+		getStretchIcon().setVisible(visible);
+	}
+	public void setTableIconVisible(boolean visible){
+		getTableIcon().setVisible(visible);
+	}
+	public void setColumnMenuIconVisible(boolean visible){
+		getColumnMenuIcon().setVisible(visible);
+	}
 }

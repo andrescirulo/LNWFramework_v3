@@ -96,4 +96,8 @@ public class MatriculaProvincialView extends Composite implements TomoFolioDispl
 		catch (Exception e){
 		}
 	}
+	
+	public String getWidth() {
+		return "130px";
+	}
 }

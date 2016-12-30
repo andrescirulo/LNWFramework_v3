@@ -10,4 +10,6 @@ public interface WidgetDisplay extends Display {
      * @return The widget.
      */
     Widget asWidget();
+
+	String getWidth();
 }

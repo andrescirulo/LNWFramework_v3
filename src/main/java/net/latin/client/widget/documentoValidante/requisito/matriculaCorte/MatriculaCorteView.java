@@ -50,4 +50,7 @@ public class MatriculaCorteView extends Composite implements MatriculaCorteDispl
 		return matriculaCorte;
 	}
 
+	public String getWidth() {
+		return "130px";
+	}
 }

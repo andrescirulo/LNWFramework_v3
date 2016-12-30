@@ -8,6 +8,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent;
 import gwt.material.design.addins.client.fileuploader.events.AddedFileEvent.AddedFileHandler;
+import gwt.material.design.addins.client.fileuploader.events.CanceledEvent;
+import gwt.material.design.addins.client.fileuploader.events.CanceledEvent.CanceledHandler;
 import gwt.material.design.addins.client.fileuploader.events.ErrorEvent;
 import gwt.material.design.addins.client.fileuploader.events.ErrorEvent.ErrorHandler;
 import gwt.material.design.addins.client.fileuploader.events.MaxFilesReachedEvent;
@@ -72,6 +74,7 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 	private Boolean allowDownload;
 	private Boolean allowView;
 	private Boolean isUploading;
+	private GwtFileUploaderHandler handler;
 	
 	public GwtFileUploader(GwtMensajesHandler msgHandler) {
 		this.msgHandler = msgHandler;
@@ -281,6 +284,9 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 						labelProgreso.setVisible(false);
 					}
 				});
+				if (handler!=null){
+					handler.onUploadComplete(file.getId(), file.getName());
+				}
 			}
 		});
 		
@@ -294,6 +300,15 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 				msgHandler.addErrorMessage(event.getResponse().getBody());
 				isUploading=false;
 				resetWidget();
+			}
+		});
+		
+		addCancelHandler(new CanceledHandler<GwtUploadFile>() {
+			public void onCanceled(CanceledEvent<GwtUploadFile> event) {
+				if (handler!=null){
+					handler.onFileCanceled(file.getId(), file.getName(),componentId);
+				}
+				file=null;
 			}
 		});
 		fileViewPopUp= new GwtMaterialFileViewer();
@@ -473,4 +488,27 @@ public class GwtFileUploader extends MaterialFileUploader_New implements LnwWidg
 		return isUploading;
 	}
 	
+	public void addUpload(String fileId, String fileName) {
+		file = new GwtUploadFile(fileName, null, null, "pdf");
+		file.setId(fileId);
+		labelNombre.setText(file.getName());
+		labelProgreso.setVisible(false);
+		progress.setVisible(false);
+		btnUpload.setVisible(false);
+		btnRemove.setVisible(true);
+		btnView.setVisible(true);
+		btnDownload.setVisible(true);
+		btnUploaded.setVisible(false);
+		labelProgreso.setVisible(false);
+		btnCancelar.setVisible(false); 
+	}
+	
+	public void addFileHandler(GwtFileUploaderHandler handler){
+		this.handler = handler;
+	}
+	
+
+	public void setComponentKey(String key) {
+		componentId=key;
+	}
 }

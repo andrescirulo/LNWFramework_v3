@@ -95,4 +95,8 @@ public class MatriculaFederalView extends Composite implements TomoFolioDisplay,
 		catch (Exception e){
 		}
 	}
+	
+	public String getWidth() {
+		return "130px";
+	}
 }

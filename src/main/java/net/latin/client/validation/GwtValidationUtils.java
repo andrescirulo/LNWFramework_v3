@@ -374,6 +374,35 @@ public class GwtValidationUtils {
 		}
 		return text.split( separator );
 	}
+	
+	public static String[] getDateArray( Date date, String separator ) {
+		if (date==null){
+			return null;
+		}
+		int dayInt = date.getDate();
+		int monthInt = date.getMonth() + 1;
+		String day;
+		String month;
+
+		//format day
+		if( dayInt < 10 ) {
+			day = "0" + dayInt;
+		} else {
+			day = dayInt + "";
+		}
+
+		//format month
+		if( monthInt < 10 ) {
+			month = "0" + monthInt;
+		} else {
+			month = monthInt + "";
+		}
+		String[] arrayFecha={"","",""};
+		arrayFecha[0]=day;
+		arrayFecha[1]=month;
+		arrayFecha[2]=(date.getYear() + 1900)+"";
+		return arrayFecha;
+	}
 
 	public static Date getDate( String text, String separator ) {
 		String[] splitArray = getDateArray( text, separator );

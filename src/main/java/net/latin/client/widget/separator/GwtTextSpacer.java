@@ -10,11 +10,12 @@ import com.google.gwt.user.client.ui.Label;
  */
 public class GwtTextSpacer extends HorizontalPanel {
 
+	private Label labelText;
 	public GwtTextSpacer( String text, int spacing ) {
 		Label label1 = new Label();
 		label1.setWidth( spacing + "px" );
 
-		Label labelText = new Label( text );
+		labelText = new Label( text );
 
 		Label label2 = new Label();
 		label2.setWidth( spacing + "px" );
@@ -37,6 +38,12 @@ public class GwtTextSpacer extends HorizontalPanel {
 		this.add( label1 );
 		this.add( labelText );
 		this.add( label2 );
+	}
+	public Label getLabelText() {
+		return labelText;
+	}
+	public void setLabelText(Label labelText) {
+		this.labelText = labelText;
 	}
 	
 
