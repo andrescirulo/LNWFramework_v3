@@ -26,7 +26,6 @@ public class GwtMsgNotification extends GwtVisualComponent {
 
 	private MaterialPanel mainPanel;
 	private TextBox focusInput;
-	private GwtSpace spacer;
 
 	/**
 	 * Collection of messages
@@ -43,14 +42,7 @@ public class GwtMsgNotification extends GwtVisualComponent {
 		mainPanel.setVisible( false );
 		this.createMsgTable();
 		super.add( mainPanel );
-		createSpacer();
 		return super.render();
-	}
-
-	private void createSpacer() {
-		this.spacer = new GwtSpace();
-		this.spacer.setVisible( false );
-		super.add( this.spacer );
 	}
 
 
@@ -61,7 +53,6 @@ public class GwtMsgNotification extends GwtVisualComponent {
 		this.focusInput.setMaxLength( 1 );
 		this.focusInput.setWidth( "1px" );
 		this.mainPanel.add( this.focusInput );
-
 	}
 
 
@@ -178,7 +169,6 @@ public class GwtMsgNotification extends GwtVisualComponent {
 	private void checkVisibility() {
 		boolean question = this.getTotalMsg() > 0;
 		mainPanel.setVisible( question );
-		this.spacer.setVisible(question);
 	}
 
 
