@@ -10,7 +10,7 @@ import net.latin.client.widget.base.LnwWidget;
  */
 public class GwtTitle extends Label implements LnwWidget {
 
-	public final static String CCS_TITLE = "GwtTitle";
+	public final static String CCS_TITLE = "gwt-title";
 
 	public GwtTitle( String title ) {
 		super( title );
