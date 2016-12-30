@@ -27,7 +27,6 @@ public class GwtButton extends MaterialButton implements LnwWidget {
 		addClickHandler(handler);
 		setType(ButtonType.RAISED);
 		setWaves(WavesType.DEFAULT);
-		setColor(Color.WHITE,Color.BLACK);
 	}
 
 	public void setColor(Color backColor, Color textColor) {
